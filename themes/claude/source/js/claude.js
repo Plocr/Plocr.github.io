@@ -322,6 +322,33 @@
     });
   }
 
+  // ===== Cursor Glow =====
+  function initCursorGlow() {
+    var glow = document.querySelector('.cursor-glow');
+    if (!glow || isTouchDevice()) return;
+
+    var mouseX = 0, mouseY = 0;
+    var currentX = 0, currentY = 0;
+
+    document.addEventListener('mousemove', function(e) {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    });
+
+    function animate() {
+      currentX += (mouseX - currentX) * 0.08;
+      currentY += (mouseY - currentY) * 0.08;
+      glow.style.left = currentX + 'px';
+      glow.style.top = currentY + 'px';
+      requestAnimationFrame(animate);
+    }
+    animate();
+
+    // Show/hide on window enter/leave
+    document.addEventListener('mouseenter', function() { glow.style.opacity = '1'; });
+    document.addEventListener('mouseleave', function() { glow.style.opacity = '0'; });
+  }
+
   // ===== Hitokoto Quote =====
   function initHitokoto() {
     const textEl = document.getElementById('hitokoto-text');
@@ -351,6 +378,7 @@
     initMobileMenu();
     initMobileThemeToggle();
     initDefaultCovers();
+    initCursorGlow();
     initHitokoto();
     initCardImageParallax();
   });
