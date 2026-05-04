@@ -17,8 +17,34 @@
       <h1 class="hero__title" id="hero-title">
         <span class="hero__title-line"><%= theme.home_title || config.title %></span>
       </h1>
-      <p class="hero__subtitle"><%= theme.home_subtitle || '思考 · 创造 · 记录' %></p>
-      <p class="hero__description"><%= theme.home_description || '' %></p>
+      <p class="hero__description"><%= theme.home_description || '个人博客，记录技术与生活的点滴' %></p>
+
+      <!-- Social -->
+      <div class="hero__social">
+        <% if (theme.social) { %>
+          <% for (const [name, url] of Object.entries(theme.social)) { %>
+            <a href="<%= url %>" target="_blank" rel="noopener" class="hero__social-link"><%= name %></a>
+          <% } %>
+        <% } %>
+      </div>
+
+      <!-- Stats integrated into hero -->
+      <div class="hero__stats">
+        <div class="hero-stat">
+          <span class="hero-stat__value"><%= site.posts.length %></span>
+          <span class="hero-stat__label">文章</span>
+        </div>
+        <div class="hero-stat">
+          <span class="hero-stat__value">2023</span>
+          <span class="hero-stat__label">始于</span>
+        </div>
+        <div class="hero-stat">
+          <span class="hero-stat__value"><%= config.author %></span>
+          <span class="hero-stat__label">作者</span>
+        </div>
+      </div>
+
+      <!-- Actions -->
       <div class="hero__actions">
         <a class="btn btn--primary" href="/archives/">
           浏览文章
@@ -84,45 +110,5 @@
     <% } else { %>
       <p class="empty-state">还没有文章</p>
     <% } %>
-  </div>
-</section>
-
-<!-- ===== Stats Divider ===== -->
-<section class="section stats-divider reveal">
-  <div class="container">
-    <div class="stats-grid">
-      <div class="stat-item reveal-item">
-        <span class="stat-value"><%= site.posts.length %></span>
-        <span class="stat-label">文章</span>
-      </div>
-      <div class="stat-item reveal-item">
-        <span class="stat-value">2023</span>
-        <span class="stat-label">始于</span>
-      </div>
-      <div class="stat-item reveal-item">
-        <span class="stat-value"><%= config.author %></span>
-        <span class="stat-label">作者</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== About Mini ===== -->
-<section class="section about-mini reveal">
-  <div class="container">
-    <div class="about-mini__inner">
-      <div class="about-mini__content reveal-item">
-        <span class="section-label">关于</span>
-        <h2 class="about-mini__name"><%= config.author %></h2>
-        <p><%= theme.home_description || '个人博客，记录技术与生活的点滴' %></p>
-        <a class="btn btn--primary" href="/about/">
-          了解更多
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-            <path d="M5 2L10 7L5 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </a>
-      </div>
-      <div class="about-mini__illustration reveal-item" id="about-illustration"></div>
-    </div>
   </div>
 </section>
