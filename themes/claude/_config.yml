@@ -10,8 +10,8 @@ home_description: '个人博客，记录技术与生活的点滴'
 menu:
   首页: /
   文章: /archives/
+  AI: /ai/
   关于: /about/
-  友链: /link/
 
 # Avatar
 avatar: /img/TX.gif
