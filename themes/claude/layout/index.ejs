@@ -54,11 +54,13 @@
       <div class="posts-grid">
         <% site.posts.sort('date', -1).each(function(post) { %>
           <article class="post-card reveal-item" onclick="window.location='<%= url_for(post.path) %>'">
-            <% if (post.cover) { %>
               <div class="post-card__thumb">
-                <img src="<%= post.cover %>" alt="<%= post.title %>" loading="lazy">
+                <% if (post.cover) { %>
+                  <img src="<%= post.cover %>" alt="<%= post.title %>" loading="lazy">
+                <% } else { %>
+                  <div class="post-card__cover-placeholder" data-title="<%= post.title %>" data-index="<%= post.__index || post._id || Math.floor(Math.random() * 1000) %>"></div>
+                <% } %>
               </div>
-            <% } %>
             <div class="post-card__body">
               <div class="post-card__meta">
                 <time datetime="<%= date_xml(post.date) %>"><%= date(post.date, 'YYYY-MM-DD') %></time>

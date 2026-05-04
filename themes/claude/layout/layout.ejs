@@ -51,17 +51,49 @@
       </button>
     </div>
   </div>
-  <!-- Mobile Menu Drawer -->
-  <div class="mobile-menu" id="mobileMenu">
-    <div class="mobile-menu__inner">
+</nav>
+
+<!-- Mobile Menu Drawer (outside nav for correct stacking) -->
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu__overlay"></div>
+  <div class="mobile-menu__panel">
+    <div class="mobile-menu__header">
+      <span class="nav__logo">
+        <span class="nav__logo-dot"></span>
+        <%= config.title %>
+      </span>
+      <button class="menu-close" id="menuClose" aria-label="关闭菜单">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+          <path d="M4 4L14 14M14 4L4 14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+    <div class="mobile-menu__body">
       <% if (theme.menu) { %>
         <% for (const [label, url] of Object.entries(theme.menu)) { %>
-          <a href="<%= url %>" class="mobile-menu__link"><%= label %></a>
+          <a href="<%= url %>" class="mobile-menu__link">
+            <span class="mobile-menu__link-text"><%= label %></span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
         <% } %>
       <% } %>
     </div>
+    <div class="mobile-menu__footer">
+      <button class="theme-toggle mobile-theme-toggle" id="mobileThemeToggle" aria-label="切换主题">
+        <svg class="sun-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <circle cx="8" cy="8" r="3.5" stroke="currentColor" stroke-width="1.3"/>
+          <path d="M8 1V3M8 13V15M1 8H3M13 8H15M3.05 3.05L4.46 4.46M11.54 11.54L12.95 12.95M12.95 3.05L11.54 4.46M4.46 11.54L3.05 12.95" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+        </svg>
+        <svg class="moon-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" style="display:none">
+          <path d="M13.5 9.5C12.5 12 9.5 13.5 6.5 12.5C3.5 11.5 2 8.5 3 5.5C3.5 4 4.5 3 5.5 2.5C3 3.5 1.5 6.5 2.5 9.5C3.5 12.5 6.5 14 9.5 13C11 12.5 12.5 11 13.5 9.5Z" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>切换主题</span>
+      </button>
+    </div>
   </div>
-</nav>
+</div>
 
 <main class="main">
   <%- body %>
