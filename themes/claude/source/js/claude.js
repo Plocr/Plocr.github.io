@@ -112,8 +112,37 @@
     });
   }
 
-  // ===== Image Hover Parallax on Cards =====
+  // ===== Mobile Menu Toggle =====
+  function initMobileMenu() {
+    const toggle = document.getElementById('menuToggle');
+    const menu = document.getElementById('mobileMenu');
+    if (!toggle || !menu) return;
+
+    toggle.addEventListener('click', function() {
+      const isOpen = menu.classList.toggle('open');
+      toggle.classList.toggle('active', isOpen);
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    });
+
+    // Close on link click
+    menu.querySelectorAll('.mobile-menu__link').forEach(link => {
+      link.addEventListener('click', function() {
+        menu.classList.remove('open');
+        toggle.classList.remove('active');
+        document.body.style.overflow = '';
+      });
+    });
+  }
+
+  // ===== Touch device detection for parallax =====
+  function isTouchDevice() {
+    return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+  }
+
+  // ===== Image Hover Parallax on Cards (desktop only) =====
   function initCardImageParallax() {
+    if (isTouchDevice()) return; // skip parallax on touch devices
+
     const cards = document.querySelectorAll('.post-card');
     cards.forEach(card => {
       card.addEventListener('mousemove', function(e) {
@@ -200,6 +229,7 @@
     initHeroParallax();
     initNavScroll();
     initScrollIndicator();
+    initMobileMenu();
     initCardImageParallax();
   });
 
