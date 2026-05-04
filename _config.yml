@@ -82,7 +82,7 @@ exclude:
 ignore:
 
 # Extensions
-theme: butterfly
+theme: claude
 
 # Deployment
 deploy:

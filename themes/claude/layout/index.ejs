@@ -1,0 +1,65 @@
+<!-- Hero Section -->
+<section class="hero">
+  <div class="container">
+    <div class="hero__inner">
+      <div class="hero__content">
+        <h1 class="hero__title"><%= theme.home_title || config.title %></h1>
+        <p class="hero__subtitle"><%= theme.home_subtitle || '' %></p>
+        <p class="hero__description"><%= theme.home_description || '' %></p>
+        <a class="btn btn--outline" href="/archives/">浏览文章</a>
+      </div>
+      <div class="hero__illustration" id="hero-illustration"></div>
+    </div>
+  </div>
+</section>
+
+<!-- Recent Posts -->
+<section class="featured">
+  <div class="container">
+    <div class="section-label">最新文章</div>
+    <% if (site.posts && site.posts.length > 0) { %>
+      <div class="posts-grid">
+        <% site.posts.sort('date', -1).each(function(post) { %>
+          <article class="post-card" onclick="window.location='<%= url_for(post.path) %>'">
+            <div class="post-card__body">
+              <div class="post-card__meta">
+                <time datetime="<%= date_xml(post.date) %>"><%= date(post.date, 'YYYY-MM-DD') %></time>
+                <% if (post.readTime) { %>
+                  <span class="post-card__readtime"><%= post.readTime %> min read</span>
+                <% } %>
+              </div>
+              <h2 class="post-card__title"><%= post.title %></h2>
+              <% if (post.excerpt) { %>
+                <p class="post-card__excerpt"><%= strip_html(post.excerpt).substring(0, 150) %></p>
+              <% } %>
+              <div class="post-card__tags">
+                <% if (post.tags && post.tags.length > 0) { %>
+                  <% post.tags.each(function(tag) { %>
+                    <span class="tag"><%= tag.name %></span>
+                  <% }) %>
+                <% } %>
+              </div>
+            </div>
+          </article>
+        <% }) %>
+      </div>
+    <% } else { %>
+      <p class="empty-state">还没有文章</p>
+    <% } %>
+  </div>
+</section>
+
+<!-- About Section -->
+<section class="about-mini">
+  <div class="container">
+    <div class="about-mini__inner">
+      <div class="about-mini__content">
+        <div class="section-label">关于</div>
+        <h2><%= config.author %></h2>
+        <p><%= theme.home_description || '' %></p>
+        <a class="btn btn--primary" href="/about/">了解更多</a>
+      </div>
+      <div class="about-mini__illustration" id="about-illustration"></div>
+    </div>
+  </div>
+</section>

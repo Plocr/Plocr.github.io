@@ -1,0 +1,54 @@
+<article class="post-article">
+  <div class="container--narrow">
+    <div class="post-article__back">
+      <a href="/archives/">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path d="M9 2L4 7L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        返回文章列表
+      </a>
+    </div>
+
+    <header class="post-article__header">
+      <h1 class="post-article__title"><%= page.title %></h1>
+      <div class="post-article__meta">
+        <time datetime="<%= date_xml(page.date) %>"><%= date(page.date, 'YYYY-MM-DD') %></time>
+        <% if (page.updated && page.updated > page.date) { %>
+          <span class="meta-sep">·</span>
+          <span>更新于 <%= date(page.updated, 'YYYY-MM-DD') %></span>
+        <% } %>
+      </div>
+    </header>
+
+    <% if (page.tags && page.tags.length > 0) { %>
+      <div class="post-article__tags">
+        <% page.tags.each(function(tag) { %>
+          <span class="tag"><%= tag.name %></span>
+        <% }) %>
+      </div>
+    <% } %>
+
+    <div class="post-article__body">
+      <%- page.content %>
+    </div>
+
+    <nav class="post-article__nav">
+      <div class="post-nav__prev">
+        <% if (page.prev) { %>
+          <a href="<%= url_for(page.prev.path) %>">
+            <span class="post-nav__label">← 上一篇</span>
+            <span class="post-nav__title"><%= page.prev.title %></span>
+          </a>
+        <% } %>
+      </div>
+      <div class="post-nav__next">
+        <% if (page.next) { %>
+          <a href="<%= url_for(page.next.path) %>">
+            <span class="post-nav__label">下一篇 →</span>
+            <span class="post-nav__title"><%= page.next.title %></span>
+          </a>
+        <% } %>
+      </div>
+    </nav>
+  </div>
+</article>

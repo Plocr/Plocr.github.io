@@ -1,0 +1,34 @@
+# Claude Theme Configuration
+# Inspired by Claude's official design language
+
+# Main settings
+home_title: 'Plocrの小窝'
+home_subtitle: '思考、创造、记录'
+home_description: '个人博客，记录技术与生活的点滴'
+
+# Navigation
+menu:
+  首页: /
+  文章: /archives/
+  关于: /about/
+  友链: /link/
+
+# Avatar
+avatar: /img/TX.gif
+
+# Social links
+social:
+  GitHub: https://github.com/Plocr
+
+# Footer
+footer_since: 2020
+
+# Dark mode
+darkmode: true
+
+# Comments (Valine config)
+valine:
+  enable: false
+  appId:
+  appKey:
+  avatar: monsterid
