@@ -55,7 +55,26 @@
         <a class="btn btn--outline" href="/about/">关于我</a>
       </div>
     </div>
-    <div class="hero__illustration" id="hero-illustration"></div>
+
+    <!-- Right side: Navigation + Info -->
+    <div class="hero__aside">
+      <div class="hero__card">
+        <h3 class="hero__card-title">导航</h3>
+        <div class="hero__nav-links">
+          <% if (theme.menu) { %>
+            <% for (const [label, url] of Object.entries(theme.menu)) { %>
+              <a href="<%= url %>" class="hero__nav-link"><%= label %></a>
+            <% } %>
+          <% } %>
+        </div>
+      </div>
+      <div class="hero__card">
+        <h3 class="hero__card-title">信息</h3>
+        <div class="hero__info-list">
+          <a href="/archives/" class="hero__info-item">归档（<%= site.posts.length %>）</a>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- Scroll down indicator -->
