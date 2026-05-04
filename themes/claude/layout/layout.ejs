@@ -103,12 +103,36 @@
 <footer class="footer">
   <div class="container">
     <div class="footer__inner">
-      <div class="footer__logo">
-        <span class="nav__logo-dot"></span> <%= config.title %>
+      <div class="footer__brand">
+        <div class="footer__logo">
+          <span class="nav__logo-dot"></span> <%= config.title %>
+        </div>
+        <p><%= theme.home_description || '个人博客' %></p>
+        <div class="footer__social">
+          <% if (theme.social) { %>
+            <% for (const [name, url] of Object.entries(theme.social)) { %>
+              <a href="<%= url %>" target="_blank" rel="noopener"><%= name %></a>
+            <% } %>
+          <% } %>
+        </div>
       </div>
-      <div class="footer__copyright">
-        &copy; <%= theme.footer_since || '2020' %> - <%= new Date().getFullYear() %> By <%= config.author %>
+      <div class="footer__nav">
+        <h4>导航</h4>
+        <div class="footer__nav-links">
+          <% if (theme.menu) { %>
+            <% for (const [label, url] of Object.entries(theme.menu)) { %>
+              <a href="<%= url %>"><%= label %></a>
+            <% } %>
+          <% } %>
+        </div>
       </div>
+      <div class="footer__meta">
+        <h4>信息</h4>
+        <a href="/archives/">归档 (<%= site.posts.length %>)</a>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      &copy; <%= theme.footer_since || '2020' %> - <%= new Date().getFullYear() %> By <%= config.author %>
     </div>
   </div>
 </footer>
