@@ -322,6 +322,26 @@
     });
   }
 
+  // ===== Hitokoto Quote =====
+  function initHitokoto() {
+    const textEl = document.getElementById('hitokoto-text');
+    const fromEl = document.getElementById('hitokoto-from');
+    if (!textEl) return;
+
+    fetch('https://v1.hitokoto.cn?c=d&c=f&c=i&c=k')
+      .then(function(res) { return res.json(); })
+      .then(function(data) {
+        textEl.textContent = data.hitokoto || '获取失败';
+        if (data.from) {
+          fromEl.textContent = '—— ' + data.from;
+        }
+      })
+      .catch(function() {
+        textEl.textContent = '生活不是缺少美，而是缺少发现美的眼睛。';
+        fromEl.textContent = '—— 罗丹';
+      });
+  }
+
   // ===== Init All =====
   document.addEventListener('DOMContentLoaded', function() {
     initScrollReveal();
@@ -331,6 +351,7 @@
     initMobileMenu();
     initMobileThemeToggle();
     initDefaultCovers();
+    initHitokoto();
     initCardImageParallax();
   });
 

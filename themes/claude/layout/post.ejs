@@ -17,6 +17,15 @@
           <span class="meta-sep">·</span>
           <span>更新于 <%= date(page.updated, 'YYYY-MM-DD') %></span>
         <% } %>
+        <% if (page.content) { %>
+          <% var words = strip_html(page.content).length; %>
+          <span class="meta-sep">·</span>
+          <span><%= words %> 字</span>
+          <span class="meta-sep">·</span>
+          <span><%= Math.max(1, Math.round(words / 500)) %> 分钟阅读</span>
+        <% } %>
+        <span class="meta-sep">·</span>
+        <span><i class="far fa-eye"></i> <span id="busuanzi_value_page_pv"></span> 阅读</span>
       </div>
     </header>
 
