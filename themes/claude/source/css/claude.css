@@ -120,6 +120,12 @@ body {
   padding: 0 var(--space-6);
 }
 
+/* Inner content wrapper for text-heavy pages - aligns with footer container */
+.content-narrow {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
 /* ===== Typography ===== */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-display);
