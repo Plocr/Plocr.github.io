@@ -1,57 +1,29 @@
 ---
 title: Hello PlocrのBlog
 date: 2023-05-11 12:17:00
-updated: 2023-05-10 20:39:34
+updated: 2025-05-04
 cover: https://images.pexels.com/photos/1292241/pexels-photo-1292241.jpeg
+tags: [博客, 生活]
 ---
 
-## 欢迎来到PlocrのBlog，这是我第一个博客，也是第一个基于[GitHub](https://github.com/)+[Hexo](https://hexo.io/)+[butterfly](https://butterfly.js.org/)建立的博客
+欢迎来到我的小窝。
 
-![壁纸](https://images.pexels.com/photos/1292241/pexels-photo-1292241.jpeg)
+这是我的第一个博客，基于 Hexo 搭建，折腾了一段时间，总算把雏形弄出来了。
 
-## 快速入门
+## 为什么写博客
 
-### 建立一个新帖子
+记录一些想法、学到的技术、看过的书和电影，偶尔也写点生活感悟。比起发在社交媒体上，在自己的地方写东西更自在一些。
 
-```bash
-$ hexo new "Hello World"
-```
+## 这个博客用什么
 
-更多信息: [Writing](https://hexo.io/docs/writing.html)
+- **框架**：[Hexo](https://hexo.io/) — 快速、简洁的静态博客生成器
+- **主题**：Claude 风格自定义主题
+- **部署**：GitHub Pages + GitHub Actions 自动构建
 
-### 运行服务器
+写文章用 Markdown，推送即部署，省心。
 
-```bash
-$ hexo server
-```
+## 关于我
 
-更多信息: [Server](https://hexo.io/docs/server.html)
+一个喜欢折腾的开发者，偶尔写写代码，偶尔拍拍照片，偶尔胡思乱想。
 
-### 生成静态文件
-
-```bash
-$ hexo generate
-```
-
-更多信息: [Generating](https://hexo.io/docs/generating.html)
-
-### 部署到远程站点
-
-```bash
-$ hexo deploy
-```
-
-更多信息: [Deployment](https://hexo.io/docs/one-command-deployment.html)
-
-### 常见的写博客命令
-
-```bash
-新建：hexo n ""
-更新博客状态：
-hexo clean
-hexo g
-hexo d
-本地运行看效果：hexo s
-```
-
-更多信息：[Commands](https://hexo.io/docs/commands.html)
+以后会在这里陆续更新技术笔记和生活记录，欢迎常来看看。
