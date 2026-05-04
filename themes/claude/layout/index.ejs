@@ -13,13 +13,13 @@
   </div>
 
   <div class="hero__inner">
-    <div class="hero__content">
+    <!-- 01: Brand + Stats -->
+    <div class="hero__col hero__col--brand">
       <h1 class="hero__title" id="hero-title">
         <span class="hero__title-line"><%= theme.home_title || config.title %></span>
       </h1>
       <p class="hero__description"><%= theme.home_description || '个人博客，记录技术与生活的点滴' %></p>
 
-      <!-- Social -->
       <div class="hero__social">
         <% if (theme.social) { %>
           <% for (const [name, url] of Object.entries(theme.social)) { %>
@@ -28,7 +28,7 @@
         <% } %>
       </div>
 
-      <!-- Stats integrated into hero -->
+      <!-- Stats below 01 -->
       <div class="hero__stats">
         <div class="hero-stat">
           <span class="hero-stat__value"><%= site.posts.length %></span>
@@ -44,7 +44,6 @@
         </div>
       </div>
 
-      <!-- Actions -->
       <div class="hero__actions">
         <a class="btn btn--primary" href="/archives/">
           浏览文章
@@ -55,7 +54,30 @@
         <a class="btn btn--outline" href="/about/">关于我</a>
       </div>
     </div>
-    <div class="hero__illustration" id="hero-illustration"></div>
+
+    <!-- 02: Navigation -->
+    <div class="hero__col hero__col--nav">
+      <div class="hero__card">
+        <h3 class="hero__card-title">导航</h3>
+        <div class="hero__nav-links">
+          <% if (theme.menu) { %>
+            <% for (const [label, url] of Object.entries(theme.menu)) { %>
+              <a href="<%= url %>" class="hero__nav-link"><%= label %></a>
+            <% } %>
+          <% } %>
+        </div>
+      </div>
+    </div>
+
+    <!-- 03: Info -->
+    <div class="hero__col hero__col--info">
+      <div class="hero__card">
+        <h3 class="hero__card-title">信息</h3>
+        <div class="hero__info-list">
+          <a href="/archives/" class="hero__info-item">归档（<%= site.posts.length %>）</a>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- Scroll down indicator -->
