@@ -103,11 +103,12 @@
 <footer class="footer">
   <div class="container">
     <div class="footer__inner">
-      <div class="footer__brand">
+      <!-- 01: Brand + Stats -->
+      <div class="footer__col footer__col--brand">
         <div class="footer__logo">
           <span class="nav__logo-dot"></span> <%= config.title %>
         </div>
-        <p><%= theme.home_description || '个人博客' %></p>
+        <p class="footer__desc"><%= theme.home_description || '个人博客' %></p>
         <div class="footer__social">
           <% if (theme.social) { %>
             <% for (const [name, url] of Object.entries(theme.social)) { %>
@@ -115,23 +116,39 @@
             <% } %>
           <% } %>
         </div>
-      </div>
-      <div class="footer__nav">
-        <h4>导航</h4>
-        <div class="footer__nav-links">
-          <% if (theme.menu) { %>
-            <% for (const [label, url] of Object.entries(theme.menu)) { %>
-              <a href="<%= url %>"><%= label %></a>
-            <% } %>
-          <% } %>
+        <div class="footer__stats">
+          <div class="footer-stat">
+            <span class="footer-stat__value"><%= site.posts.length %></span>
+            <span class="footer-stat__label">文章</span>
+          </div>
+          <div class="footer-stat">
+            <span class="footer-stat__value">2023</span>
+            <span class="footer-stat__label">始于</span>
+          </div>
+          <div class="footer-stat">
+            <span class="footer-stat__value"><%= config.author %></span>
+            <span class="footer-stat__label">作者</span>
+          </div>
         </div>
       </div>
-      <div class="footer__meta">
-        <h4>信息</h4>
-        <a href="/archives/">归档 (<%= site.posts.length %>)</a>
+
+      <!-- 02: Navigation -->
+      <div class="footer__col footer__col--nav">
+        <h4 class="footer__col-title">导航</h4>
+        <% if (theme.menu) { %>
+          <% for (const [label, url] of Object.entries(theme.menu)) { %>
+            <a href="<%= url %>" class="footer__link"><%= label %></a>
+          <% } %>
+        <% } %>
+      </div>
+
+      <!-- 03: Info -->
+      <div class="footer__col footer__col--info">
+        <h4 class="footer__col-title">信息</h4>
+        <a href="/archives/" class="footer__link">归档（<%= site.posts.length %>）</a>
       </div>
     </div>
-    <div class="footer__bottom">
+    <div class="footer__copyright">
       &copy; <%= theme.footer_since || '2020' %> - <%= new Date().getFullYear() %> By <%= config.author %>
     </div>
   </div>

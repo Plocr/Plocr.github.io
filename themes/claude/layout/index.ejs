@@ -13,8 +13,7 @@
   </div>
 
   <div class="hero__inner">
-    <!-- 01: Brand + Stats -->
-    <div class="hero__col hero__col--brand">
+    <div class="hero__content">
       <h1 class="hero__title" id="hero-title">
         <span class="hero__title-line"><%= theme.home_title || config.title %></span>
       </h1>
@@ -28,22 +27,6 @@
         <% } %>
       </div>
 
-      <!-- Stats below 01 -->
-      <div class="hero__stats">
-        <div class="hero-stat">
-          <span class="hero-stat__value"><%= site.posts.length %></span>
-          <span class="hero-stat__label">文章</span>
-        </div>
-        <div class="hero-stat">
-          <span class="hero-stat__value">2023</span>
-          <span class="hero-stat__label">始于</span>
-        </div>
-        <div class="hero-stat">
-          <span class="hero-stat__value"><%= config.author %></span>
-          <span class="hero-stat__label">作者</span>
-        </div>
-      </div>
-
       <div class="hero__actions">
         <a class="btn btn--primary" href="/archives/">
           浏览文章
@@ -54,30 +37,7 @@
         <a class="btn btn--outline" href="/about/">关于我</a>
       </div>
     </div>
-
-    <!-- 02: Navigation -->
-    <div class="hero__col hero__col--nav">
-      <div class="hero__card">
-        <h3 class="hero__card-title">导航</h3>
-        <div class="hero__nav-links">
-          <% if (theme.menu) { %>
-            <% for (const [label, url] of Object.entries(theme.menu)) { %>
-              <a href="<%= url %>" class="hero__nav-link"><%= label %></a>
-            <% } %>
-          <% } %>
-        </div>
-      </div>
-    </div>
-
-    <!-- 03: Info -->
-    <div class="hero__col hero__col--info">
-      <div class="hero__card">
-        <h3 class="hero__card-title">信息</h3>
-        <div class="hero__info-list">
-          <a href="/archives/" class="hero__info-item">归档（<%= site.posts.length %>）</a>
-        </div>
-      </div>
-    </div>
+    <div class="hero__illustration" id="hero-illustration"></div>
   </div>
 
   <!-- Scroll down indicator -->
