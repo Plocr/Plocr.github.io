@@ -806,9 +806,9 @@ hr {
 }
 
 .footer__inner {
-  display: grid;
-  grid-template-columns: 1.5fr 1fr 1fr;
-  gap: var(--space-10);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
   padding-bottom: var(--space-8);
   border-bottom: 1px solid var(--border);
   margin-bottom: var(--space-6);
@@ -827,15 +827,14 @@ hr {
 .footer__brand p {
   font-size: 0.875rem;
   color: var(--text-muted);
-  margin-top: var(--space-3);
+  margin-top: var(--space-2);
   line-height: 1.6;
-  max-width: 260px;
 }
 
 .footer__social {
   display: flex;
   gap: var(--space-3);
-  margin-top: var(--space-5);
+  margin-top: var(--space-3);
 }
 
 .footer__social a {
@@ -854,25 +853,31 @@ hr {
   background: var(--accent-subtle);
 }
 
-.footer__col h4 {
-  font-family: var(--font-ui);
+.footer__nav h4,
+.footer__meta h4 {
+  font-family: var(--font-display);
   font-size: 0.8125rem;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--text-primary);
-  margin-bottom: var(--space-5);
-  letter-spacing: 0.02em;
+  margin-bottom: var(--space-3);
 }
 
-.footer__col a {
-  display: block;
+.footer__nav-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+}
+
+.footer__nav-links a,
+.footer__meta a {
   font-family: var(--font-ui);
   font-size: 0.875rem;
   color: var(--text-muted);
-  margin-bottom: var(--space-3);
   transition: color var(--transition);
 }
 
-.footer__col a:hover {
+.footer__nav-links a:hover,
+.footer__meta a:hover {
   color: var(--accent);
 }
 
@@ -1684,15 +1689,6 @@ hr {
     padding: var(--space-4);
   }
 
-  .footer__inner {
-    grid-template-columns: 1fr 1fr;
-    gap: var(--space-8);
-  }
-
-  .footer__brand {
-    grid-column: 1 / -1;
-  }
-
   .footer__bottom {
     text-align: center;
   }
@@ -1781,17 +1777,13 @@ hr {
     -webkit-line-clamp: 2;
   }
 
-  .footer__inner {
-    grid-template-columns: 1fr;
-    text-align: center;
-  }
-
-  .footer__brand p {
-    max-width: 100%;
-  }
-
-  .footer__social {
+  .footer__nav-links {
     justify-content: center;
+  }
+
+  .footer__nav,
+  .footer__meta {
+    text-align: center;
   }
 
   .archive-item {
