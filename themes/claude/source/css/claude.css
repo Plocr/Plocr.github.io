@@ -1360,6 +1360,7 @@ hr {
   inset: 0;
   z-index: 200;
   display: flex;
+  justify-content: flex-end;
   opacity: 0;
   pointer-events: none;
   transition: opacity var(--transition-slow);
@@ -1386,9 +1387,9 @@ hr {
   background: var(--bg);
   display: flex;
   flex-direction: column;
-  transform: translateX(-100%);
+  transform: translateX(100%);
   transition: transform var(--transition-slow);
-  box-shadow: 4px 0 30px rgba(0,0,0,0.1);
+  box-shadow: -4px 0 30px rgba(0,0,0,0.1);
 }
 
 .mobile-menu.open .mobile-menu__panel {
