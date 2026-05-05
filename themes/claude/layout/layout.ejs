@@ -30,11 +30,21 @@
       <%= config.title %>
     </a>
     <div class="nav__links">
-      <% if (theme.menu) { %>
-        <% for (const [label, url] of Object.entries(theme.menu)) { %>
-          <a href="<%= url %>" class="<%= (url === '/' && is_home()) || (url !== '/' && page.path && page.path.startsWith(url.replace(/^\//, ''))) ? 'active' : '' %>"><%= label %></a>
-        <% } %>
-      <% } %>
+      <a href="/" class="<%= is_home() ? 'active' : '' %>">首页</a>
+      <div class="nav__dropdown">
+        <a href="/archives/" class="<%= page.path && (page.path.startsWith('archives') || page.path.startsWith('2023')) ? 'active' : '' %>">
+          文章
+          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" class="nav__dropdown-arrow"><path d="M2 3.5L5 6.5L8 3.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+        </a>
+        <div class="nav__dropdown-menu">
+          <a href="/tags/电影/">电影推荐</a>
+          <a href="/tags/影评/">影评</a>
+          <a href="/tags/随笔/">随笔</a>
+          <a href="/archives/">全部文章</a>
+        </div>
+      </div>
+      <a href="/ai/" class="<%= page.path && page.path.startsWith('ai') ? 'active' : '' %>">AI</a>
+      <a href="/about/" class="<%= page.path && page.path.startsWith('about') ? 'active' : '' %>">关于</a>
     </div>
     <div class="nav__actions">
       <button class="theme-toggle" id="themeToggle" aria-label="切换主题">
