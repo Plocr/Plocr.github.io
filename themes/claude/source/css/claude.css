@@ -26,9 +26,10 @@
   --shadow-hover: 0 12px 36px rgba(0,0,0,0.1);
 
   /* Fonts */
-  --font-display: 'Ubuntu Mono', 'Courier New', monospace;
+  --font-display: 'Xiaolai Mono SC', 'Kose', 'Courier New', monospace;
   --font-body: 'Anthropic Serif', 'PT Serif', Georgia, 'Times New Roman', serif;
-  --font-ui: 'Ubuntu Mono', 'Courier New', monospace;
+  --font-ui: 'Xiaolai Mono SC', 'Kose', 'Courier New', monospace;
+  --font-code: 'Fantasque Sans Mono', 'Courier New', monospace;
 
   /* Spacing (4px base) */
   --space-1: 4px;
@@ -220,8 +221,8 @@ blockquote {
 }
 
 code {
-  font-family: var(--font-display);
-  font-size: 0.9em;
+  font-family: var(--font-code);
+  font-size: 0.85em;
   background: var(--border-light);
   padding: 0.15em 0.4em;
   border-radius: 4px;
@@ -235,6 +236,13 @@ pre {
   overflow-x: auto;
   margin: var(--space-6) 0;
   font-size: 0.85rem;
+}
+
+pre code {
+  font-family: var(--font-code);
+  background: none;
+  padding: 0;
+  border-radius: 0;
 }
 
 pre code {
@@ -495,10 +503,15 @@ hr {
   z-index: 301;
 }
 
-.nav__dropdown:hover .nav__dropdown-menu {
+.nav__dropdown:hover .nav__dropdown-menu,
+.nav__dropdown.open .nav__dropdown-menu {
   opacity: 1;
   pointer-events: auto;
   transform: translateY(10px);
+}
+
+.nav__dropdown.open .nav__dropdown-arrow {
+  transform: rotate(180deg);
 }
 
 .nav__dropdown-menu a {

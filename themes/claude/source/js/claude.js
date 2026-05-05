@@ -163,6 +163,26 @@
     });
   }
 
+  // ===== Dropdown Click Toggle =====
+  function initDropdownClick() {
+    if (isTouchDevice()) return; // hover works on desktop, click on touch
+    const trigger = document.querySelector('.nav__dropdown-trigger');
+    const dropdown = document.querySelector('.nav__dropdown');
+    if (!trigger || !dropdown) return;
+
+    trigger.addEventListener('click', function(e) {
+      e.preventDefault();
+      dropdown.classList.toggle('open');
+    });
+
+    // Close on click outside
+    document.addEventListener('click', function(e) {
+      if (!dropdown.contains(e.target)) {
+        dropdown.classList.remove('open');
+      }
+    });
+  }
+
   // ===== Touch device detection for parallax =====
   function isTouchDevice() {
     return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
@@ -430,6 +450,7 @@
     initScrollIndicator();
     initMobileMenu();
     initMobileThemeToggle();
+    initDropdownClick();
     initDefaultCovers();
     initCursorGlow();
     initHitokoto();
