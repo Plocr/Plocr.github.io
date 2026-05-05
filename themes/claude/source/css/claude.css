@@ -422,7 +422,7 @@ hr {
   padding: 0.25rem 0;
 }
 
-.nav__links a::after {
+.nav__links > a::after {
   content: '';
   position: absolute;
   bottom: -2px;
@@ -432,6 +432,10 @@ hr {
   background: var(--accent);
   transition: width var(--transition);
   border-radius: 1px;
+}
+
+.nav__dropdown > a::after {
+  display: none;
 }
 
 .nav__links > a:hover,
@@ -466,24 +470,35 @@ hr {
 .nav__dropdown-menu {
   position: absolute;
   top: 100%;
-  left: 50%;
-  transform: translateX(-50%) translateY(4px);
-  min-width: 120px;
+  left: 0;
+  min-width: 130px;
   background: var(--bg-card);
   border: 1.5px solid var(--border);
   border-radius: var(--radius-sm);
   padding: var(--space-2);
   opacity: 0;
   pointer-events: none;
-  transition: all var(--transition);
+  transform: translateY(6px);
+  transition: opacity 0.2s ease, transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: var(--shadow-md);
-  z-index: 200;
+  z-index: 300;
+}
+
+/* Hover bridge - invisible gap filler between trigger and menu */
+.nav__dropdown::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  height: 8px;
+  z-index: 301;
 }
 
 .nav__dropdown:hover .nav__dropdown-menu {
   opacity: 1;
   pointer-events: auto;
-  transform: translateX(-50%) translateY(8px);
+  transform: translateY(10px);
 }
 
 .nav__dropdown-menu a {
@@ -495,12 +510,21 @@ hr {
   border-radius: var(--radius-sm);
   transition: all var(--transition);
   white-space: nowrap;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 .nav__dropdown-menu a:hover {
   background: var(--accent-subtle);
   color: var(--accent);
+  padding-left: var(--space-4);
 }
+
+/* Entrance stagger for menu items */
+.nav__dropdown-menu a:nth-child(1) { transition-delay: 0s; }
+.nav__dropdown-menu a:nth-child(2) { transition-delay: 0.03s; }
+.nav__dropdown-menu a:nth-child(3) { transition-delay: 0.06s; }
+.nav__dropdown-menu a:nth-child(4) { transition-delay: 0.09s; }
 
 /* Mobile hide dropdown */
 @media (max-width: 768px) {

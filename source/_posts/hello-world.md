@@ -2,7 +2,6 @@
 title: Hello PlocrのBlog
 date: 2023-05-11 12:17:00
 updated: 2025-05-04
-cover: https://images.pexels.com/photos/1292241/pexels-photo-1292241.jpeg
 tags: [博客, 生活]
 ---
 

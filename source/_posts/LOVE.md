@@ -2,7 +2,6 @@
 title: LOVE
 date: 2023-05-10 01:02:19
 updated: 2025-05-04
-cover: https://pic1.zhimg.com/v2-ce6eaf6c456a1df02313be90a19d28b0_r.jpg
 tags: [随笔, 情感]
 ---
 
