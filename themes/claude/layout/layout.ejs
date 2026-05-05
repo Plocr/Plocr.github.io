@@ -10,7 +10,7 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
 
   <link rel="shortcut icon" href="/img/WZTB.png">
   <link rel="stylesheet" href="/css/claude.css"/>
@@ -32,15 +32,15 @@
     <div class="nav__links">
       <a href="/" class="<%= is_home() ? 'active' : '' %>">首页</a>
       <div class="nav__dropdown">
-        <a href="/archives/" class="<%= page.path && (page.path.startsWith('archives') || page.path.startsWith('2023')) ? 'active' : '' %>">
+        <a href="/archives/" class="<%= page.path && (page.path.startsWith('archives') || page.path.startsWith('2023') || page.path.startsWith('2025')) ? 'active' : '' %>">
           文章
           <svg width="10" height="10" viewBox="0 0 10 10" fill="none" class="nav__dropdown-arrow"><path d="M2 3.5L5 6.5L8 3.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
         </a>
         <div class="nav__dropdown-menu">
-          <a href="/tags/电影/">电影推荐</a>
-          <a href="/tags/影评/">影评</a>
-          <a href="/tags/随笔/">随笔</a>
-          <a href="/archives/">全部文章</a>
+          <a href="/tags/项目日志/">01 项目日志</a>
+          <a href="/tags/工作流分享/">02 工作流分享</a>
+          <a href="/tags/随笔/">03 说些乱七八糟的</a>
+          <a href="/tags/影音推荐/">04 影音推荐</a>
         </div>
       </div>
       <a href="/ai/" class="<%= page.path && page.path.startsWith('ai') ? 'active' : '' %>">AI</a>

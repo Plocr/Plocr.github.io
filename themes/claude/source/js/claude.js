@@ -359,8 +359,21 @@
       const index = parseInt(el.getAttribute('data-index') || '0', 10);
       const svg = getCoverForPost(title, index);
       el.innerHTML = svg;
+      // If it's hidden (image fallback mode), keep hidden until onerror triggers
+      if (el.style.display === 'none') {
+        // It will be shown by the onerror handler on the img
+      }
     });
   }
+
+  // Also handle onerror for first-image covers in article detail
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.post-article__body img').forEach(function(img) {
+      img.addEventListener('error', function() {
+        this.style.display = 'none';
+      });
+    });
+  });
 
   // ===== Cursor Glow =====
   function initCursorGlow() {

@@ -63,8 +63,17 @@
         <% site.posts.sort('date', -1).each(function(post) { %>
           <article class="post-card reveal-item" onclick="window.location='<%= url_for(post.path) %>'">
               <div class="post-card__thumb">
-                <% if (post.cover) { %>
-                  <img src="<%= post.cover %>" alt="<%= post.title %>" loading="lazy">
+                <%
+                  // Try to extract first image from post content
+                  var firstImg = '';
+                  if (post.content) {
+                    var imgMatch = post.content.match(/<img\s+[^>]*src=["']([^"']+)["']/i);
+                    if (imgMatch) firstImg = imgMatch[1];
+                  }
+                %>
+                <% if (firstImg) { %>
+                  <img src="<%= firstImg %>" alt="<%= post.title %>" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+                  <div class="post-card__cover-placeholder" data-title="<%= post.title %>" data-index="<%= post.__index || post._id || Math.floor(Math.random() * 1000) %>" style="display:none"></div>
                 <% } else { %>
                   <div class="post-card__cover-placeholder" data-title="<%= post.title %>" data-index="<%= post.__index || post._id || Math.floor(Math.random() * 1000) %>"></div>
                 <% } %>

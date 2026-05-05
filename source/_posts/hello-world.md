@@ -2,7 +2,7 @@
 title: Hello PlocrのBlog
 date: 2023-05-11 12:17:00
 updated: 2025-05-04
-tags: [博客, 生活]
+tags: [项目日志]
 ---
 
 欢迎来到我的小窝。
