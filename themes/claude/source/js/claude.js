@@ -214,22 +214,48 @@
   }
 
   const heroIllustration = `
-    <svg viewBox="0 0 400 320" xmlns="http://www.w3.org/2000/svg" class="illustration">
+    <svg viewBox="0 0 480 360" xmlns="http://www.w3.org/2000/svg" class="illustration">
       ${roughFilter('hero-rough')}
-      <circle cx="280" cy="110" r="65" fill="${COLORS.clay}" opacity="0.85" filter="url(#hero-rough)"/>
-      <path d="M310 60 C330 58 355 75 358 100 C362 128 348 155 335 170 C320 186 298 195 280 200 C268 203 252 205 245 212 C238 219 236 230 230 238" fill="none" stroke="${COLORS.charcoal}" stroke-width="2.2" stroke-linecap="round" filter="url(#hero-rough)"/>
-      <path d="M210 58 C190 56 165 73 162 98 C158 126 172 153 185 168 C200 184 222 193 240 198 C252 201 268 203 275 210 C282 217 284 228 290 236" fill="none" stroke="${COLORS.charcoal}" stroke-width="2.2" stroke-linecap="round" filter="url(#hero-rough)"/>
-      <path d="M80 220 C90 215 105 210 120 212 C135 214 148 218 155 225 C162 232 164 245 158 255 C150 268 135 272 120 274 C105 276 88 270 75 262 C60 252 58 237 68 228 Z" fill="none" stroke="${COLORS.charcoal}" stroke-width="2" stroke-linecap="round" filter="url(#hero-rough)"/>
-      <path d="M88 222 C84 208 80 195 82 182" fill="none" stroke="${COLORS.charcoal}" stroke-width="1.8" stroke-linecap="round" filter="url(#hero-rough)"/>
-      <path d="M104 215 C102 198 100 182 103 168" fill="none" stroke="${COLORS.charcoal}" stroke-width="1.8" stroke-linecap="round" filter="url(#hero-rough)"/>
-      <path d="M120 212 C120 194 121 176 124 162" fill="none" stroke="${COLORS.charcoal}" stroke-width="1.8" stroke-linecap="round" filter="url(#hero-rough)"/>
-      <path d="M136 215 C138 198 142 180 148 168" fill="none" stroke="${COLORS.charcoal}" stroke-width="1.8" stroke-linecap="round" filter="url(#hero-rough)"/>
-      <path d="M148 225 C156 212 165 200 172 190" fill="none" stroke="${COLORS.charcoal}" stroke-width="1.8" stroke-linecap="round" filter="url(#hero-rough)"/>
-      <path d="M68 250 C55 262 42 278 35 295" fill="none" stroke="${COLORS.charcoal}" stroke-width="2" stroke-linecap="round" filter="url(#hero-rough)"/>
-      <rect x="48" y="80" width="22" height="22" fill="${COLORS.sage}" opacity="0.7" transform="rotate(-12 48 80)" filter="url(#hero-rough)"/>
-      <polygon points="340,200 355,230 325,230" fill="none" stroke="${COLORS.stone}" stroke-width="2" filter="url(#hero-rough)"/>
-      <path d="M20 300 Q100 292 180 298 Q260 304 340 296 Q380 292 410 298" fill="none" stroke="${COLORS.stone}" stroke-width="1.5" stroke-linecap="round" filter="url(#hero-rough)"/>
-      <path d="M20 308 Q80 302 160 306 Q240 310 320 304 Q370 300 410 306" fill="none" stroke="${COLORS.stone}" stroke-width="1" stroke-linecap="round" opacity="0.5" filter="url(#hero-rough)"/>
+      <!-- Large background circle -->
+      <circle cx="320" cy="130" r="80" fill="${COLORS.clay}" opacity="0.75" filter="url(#hero-rough)"/>
+      <circle cx="320" cy="130" r="60" fill="${COLORS.clay}" opacity="0.3" filter="url(#hero-rough)"/>
+      <!-- Face profiles -->
+      <path d="M350 70 C370 68 395 85 398 110 C402 138 388 165 375 180 C360 196 338 205 320 210 C308 213 292 215 285 222 C278 229 276 240 270 248" fill="none" stroke="${COLORS.charcoal}" stroke-width="2.2" stroke-linecap="round" filter="url(#hero-rough)"/>
+      <path d="M250 68 C230 66 205 83 202 108 C198 136 212 163 225 178 C240 194 262 203 280 208 C292 211 308 213 315 220 C322 227 324 238 330 246" fill="none" stroke="${COLORS.charcoal}" stroke-width="2.2" stroke-linecap="round" filter="url(#hero-rough)"/>
+      <!-- Reaching hand -->
+      <path d="M100 240 C110 235 125 230 140 232 C155 234 168 238 175 245 C182 252 184 265 178 275 C170 288 155 292 140 294 C125 296 108 290 95 282 C80 272 78 257 88 248 Z" fill="none" stroke="${COLORS.charcoal}" stroke-width="2" stroke-linecap="round" filter="url(#hero-rough)"/>
+      <path d="M108 242 C104 228 100 215 102 202" fill="none" stroke="${COLORS.charcoal}" stroke-width="1.8" stroke-linecap="round" filter="url(#hero-rough)"/>
+      <path d="M124 235 C122 218 120 202 123 188" fill="none" stroke="${COLORS.charcoal}" stroke-width="1.8" stroke-linecap="round" filter="url(#hero-rough)"/>
+      <path d="M140 232 C140 214 141 196 144 182" fill="none" stroke="${COLORS.charcoal}" stroke-width="1.8" stroke-linecap="round" filter="url(#hero-rough)"/>
+      <path d="M156 235 C158 218 162 200 168 188" fill="none" stroke="${COLORS.charcoal}" stroke-width="1.8" stroke-linecap="round" filter="url(#hero-rough)"/>
+      <path d="M168 245 C176 232 185 220 192 210" fill="none" stroke="${COLORS.charcoal}" stroke-width="1.8" stroke-linecap="round" filter="url(#hero-rough)"/>
+      <path d="M88 270 C75 282 62 298 55 315" fill="none" stroke="${COLORS.charcoal}" stroke-width="2" stroke-linecap="round" filter="url(#hero-rough)"/>
+      <!-- Small plant on left -->
+      <ellipse cx="55" cy="335" rx="20" ry="8" fill="${COLORS.bark}" opacity="0.3" filter="url(#hero-rough)"/>
+      <path d="M55 335 L55 290" fill="none" stroke="${COLORS.charcoal}" stroke-width="2" stroke-linecap="round" filter="url(#hero-rough)"/>
+      <path d="M55 320 Q40 310 32 300" fill="none" stroke="${COLORS.sage}" stroke-width="2.5" stroke-linecap="round" filter="url(#hero-rough)"/>
+      <circle cx="30" cy="295" r="8" fill="${COLORS.clay}" opacity="0.5" filter="url(#hero-rough)"/>
+      <path d="M55 308 Q70 298 80 290" fill="none" stroke="${COLORS.sage}" stroke-width="2.5" stroke-linecap="round" filter="url(#hero-rough)"/>
+      <circle cx="82" cy="285" r="6" fill="${COLORS.sage}" opacity="0.5" filter="url(#hero-rough)"/>
+      <!-- Floating shapes -->
+      <rect x="55" y="80" width="26" height="26" fill="${COLORS.sage}" opacity="0.6" transform="rotate(-15 55 80)" filter="url(#hero-rough)"/>
+      <polygon points="390,220 408,255 372,255" fill="none" stroke="${COLORS.stone}" stroke-width="2" filter="url(#hero-rough)"/>
+      <circle cx="410" cy="60" r="14" fill="${COLORS.sage}" opacity="0.4" filter="url(#hero-rough)"/>
+      <circle cx="440" cy="100" r="8" fill="${COLORS.stone}" opacity="0.4" filter="url(#hero-rough)"/>
+      <rect x="430" y="150" width="18" height="18" fill="${COLORS.sage}" opacity="0.3" transform="rotate(25 430 150)" filter="url(#hero-rough)"/>
+      <!-- Books/notes floating right -->
+      <rect x="370" y="260" width="32" height="24" rx="2" fill="none" stroke="${COLORS.charcoal}" stroke-width="1.5" filter="url(#hero-rough)"/>
+      <path d="M370 268 L402 268" stroke="${COLORS.stone}" stroke-width="1" filter="url(#hero-rough)"/>
+      <rect x="380" y="240" width="28" height="20" rx="2" fill="none" stroke="${COLORS.charcoal}" stroke-width="1.5" filter="url(#hero-rough)"/>
+      <path d="M380 248 L408 248" stroke="${COLORS.stone}" stroke-width="1" filter="url(#hero-rough)"/>
+      <!-- Wavy ground lines -->
+      <path d="M20 340 Q100 332 180 338 Q260 344 340 336 Q380 332 420 338 Q450 340 480 336" fill="none" stroke="${COLORS.stone}" stroke-width="1.5" stroke-linecap="round" filter="url(#hero-rough)"/>
+      <path d="M20 348 Q80 342 160 346 Q240 350 320 344 Q370 340 420 346 Q450 348 480 344" fill="none" stroke="${COLORS.stone}" stroke-width="1" stroke-linecap="round" opacity="0.5" filter="url(#hero-rough)"/>
+      <!-- Sparkle dots -->
+      <circle cx="60" cy="120" r="3" fill="${COLORS.clay}" opacity="0.6" filter="url(#hero-rough)"/>
+      <circle cx="160" cy="55" r="4" fill="${COLORS.sage}" opacity="0.5" filter="url(#hero-rough)"/>
+      <circle cx="220" cy="230" r="3" fill="${COLORS.clay}" opacity="0.4" filter="url(#hero-rough)"/>
+      <circle cx="350" cy="280" r="4" fill="${COLORS.stone}" opacity="0.5" filter="url(#hero-rough)"/>
     </svg>`;
 
   const aboutIllustration = `
@@ -271,6 +297,14 @@
     `<svg viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg"><defs><filter id="cv7"><feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="3" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2" xChannelSelector="R" yChannelSelector="G"/></filter></defs><rect width="320" height="180" fill="${COLORS.sand}"/><circle cx="160" cy="80" r="50" fill="none" stroke="${COLORS.charcoal}" stroke-width="2" filter="url(#cv7)"/><circle cx="160" cy="80" r="42" fill="none" stroke="${COLORS.stone}" stroke-width="0.8" stroke-dasharray="4 4" filter="url(#cv7)"/><polygon points="160,40 170,75 200,80 170,85 160,120 150,85 120,80 150,75" fill="${COLORS.clay}" opacity="0.7" filter="url(#cv7)"/><circle cx="160" cy="80" r="6" fill="${COLORS.charcoal}" filter="url(#cv7)"/><path d="M260 140 Q280 120 290 100" fill="none" stroke="${COLORS.sage}" stroke-width="2" stroke-linecap="round" filter="url(#cv7)"/><circle cx="290" cy="95" r="5" fill="${COLORS.clay}" opacity="0.5" filter="url(#cv7)"/></svg>`,
     // 8. Paint/palette
     `<svg viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg"><defs><filter id="cv8"><feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="3" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2" xChannelSelector="R" yChannelSelector="G"/></filter></defs><rect width="320" height="180" fill="${COLORS.sand}"/><ellipse cx="150" cy="85" rx="70" ry="55" fill="none" stroke="${COLORS.charcoal}" stroke-width="2" filter="url(#cv8)"/><circle cx="110" cy="65" r="18" fill="${COLORS.clay}" opacity="0.7" filter="url(#cv8)"/><circle cx="180" cy="55" r="14" fill="${COLORS.sage}" opacity="0.6" filter="url(#cv8)"/><circle cx="200" cy="95" r="16" fill="${COLORS.stone}" opacity="0.6" filter="url(#cv8)"/><circle cx="100" cy="105" r="12" fill="${COLORS.clay}" opacity="0.5" filter="url(#cv8)"/><path d="M60 160 L90 130 L120 160" fill="none" stroke="${COLORS.charcoal}" stroke-width="1.5" stroke-linecap="round" filter="url(#cv8)"/><path d="M120 160 L90 145 L60 160" fill="none" stroke="${COLORS.charcoal}" stroke-width="1.5" stroke-linecap="round" filter="url(#cv8)"/></svg>`,
+    // 9. Camera/photography
+    `<svg viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg"><defs><filter id="cv9"><feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="3" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2" xChannelSelector="R" yChannelSelector="G"/></filter></defs><rect width="320" height="180" fill="${COLORS.sand}"/><rect x="80" y="55" width="160" height="95" rx="6" fill="none" stroke="${COLORS.charcoal}" stroke-width="2" filter="url(#cv9)"/><circle cx="160" cy="102" r="28" fill="none" stroke="${COLORS.charcoal}" stroke-width="1.8" filter="url(#cv9)"/><circle cx="160" cy="102" r="16" fill="${COLORS.clay}" opacity="0.5" filter="url(#cv9)"/><rect x="100" y="45" width="50" height="8" rx="2" fill="${COLORS.charcoal}" opacity="0.4" filter="url(#cv9)"/><circle cx="220" cy="70" r="8" fill="${COLORS.sage}" opacity="0.5" filter="url(#cv9)"/><path d="M30 140 Q80 130 130 138" fill="none" stroke="${COLORS.stone}" stroke-width="1.2" filter="url(#cv9)"/></svg>`,
+    // 10. Music/headphones
+    `<svg viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg"><defs><filter id="cv10"><feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="3" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2" xChannelSelector="R" yChannelSelector="G"/></filter></defs><rect width="320" height="180" fill="${COLORS.sand}"/><circle cx="160" cy="75" r="40" fill="none" stroke="${COLORS.charcoal}" stroke-width="2" filter="url(#cv10)"/><path d="M120 75 L120 110 A8 8 0 00128 118 L135 118 A8 8 0 00143 110 L143 75" fill="none" stroke="${COLORS.charcoal}" stroke-width="2" filter="url(#cv10)"/><path d="M195 75 L195 110 A8 8 0 00203 118 L210 118 A8 8 0 00218 110 L218 75" fill="none" stroke="${COLORS.charcoal}" stroke-width="2" filter="url(#cv10)"/><line x1="120" y1="130" x2="120" y2="140" stroke="${COLORS.stone}" stroke-width="1.5" filter="url(#cv10)"/><line x1="128" y1="135" x2="128" y2="145" stroke="${COLORS.stone}" stroke-width="1.5" filter="url(#cv10)"/><line x1="136" y1="130" x2="136" y2="140" stroke="${COLORS.stone}" stroke-width="1.5" filter="url(#cv10)"/><line x1="195" y1="130" x2="195" y2="140" stroke="${COLORS.stone}" stroke-width="1.5" filter="url(#cv10)"/><line x1="203" y1="135" x2="203" y2="145" stroke="${COLORS.stone}" stroke-width="1.5" filter="url(#cv10)"/><line x1="211" y1="130" x2="211" y2="140" stroke="${COLORS.stone}" stroke-width="1.5" filter="url(#cv10)"/><circle cx="260" cy="45" r="12" fill="${COLORS.clay}" opacity="0.5" filter="url(#cv10)"/></svg>`,
+    // 11. Globe/world
+    `<svg viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg"><defs><filter id="cv11"><feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="3" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2" xChannelSelector="R" yChannelSelector="G"/></filter></defs><rect width="320" height="180" fill="${COLORS.sand}"/><circle cx="160" cy="90" r="50" fill="none" stroke="${COLORS.charcoal}" stroke-width="2" filter="url(#cv11)"/><path d="M110 90 Q140 70 160 90 Q180 110 210 90" fill="none" stroke="${COLORS.charcoal}" stroke-width="1.5" filter="url(#cv11)"/><path d="M110 90 Q140 110 160 90 Q180 70 210 90" fill="none" stroke="${COLORS.charcoal}" stroke-width="1.5" filter="url(#cv11)"/><line x1="160" y1="40" x2="160" y2="140" stroke="${COLORS.charcoal}" stroke-width="1.2" stroke-dasharray="3 3" filter="url(#cv11)"/><line x1="120" y1="55" x2="200" y2="55" stroke="${COLORS.stone}" stroke-width="1" stroke-dasharray="2 3" filter="url(#cv11)"/><line x1="115" y1="75" x2="205" y2="75" stroke="${COLORS.stone}" stroke-width="1" stroke-dasharray="2 3" filter="url(#cv11)"/><line x1="115" y1="105" x2="205" y2="105" stroke="${COLORS.stone}" stroke-width="1" stroke-dasharray="2 3" filter="url(#cv11)"/><line x1="120" y1="125" x2="200" y2="125" stroke="${COLORS.stone}" stroke-width="1" stroke-dasharray="2 3" filter="url(#cv11)"/><circle cx="240" cy="50" r="16" fill="${COLORS.clay}" opacity="0.5" filter="url(#cv11)"/></svg>`,
+    // 12. Lightbulb/idea
+    `<svg viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg"><defs><filter id="cv12"><feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="3" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2" xChannelSelector="R" yChannelSelector="G"/></filter></defs><rect width="320" height="180" fill="${COLORS.sand}"/><ellipse cx="160" cy="75" rx="32" ry="38" fill="none" stroke="${COLORS.charcoal}" stroke-width="2" filter="url(#cv12)"/><path d="M145 108 L175 108" stroke="${COLORS.charcoal}" stroke-width="2" filter="url(#cv12)"/><path d="M150 115 L170 115" stroke="${COLORS.charcoal}" stroke-width="2" filter="url(#cv12)"/><path d="M155 122 L165 122" stroke="${COLORS.charcoal}" stroke-width="2" filter="url(#cv12)"/><polygon points="155,125 165,125 162,140 158,140" fill="${COLORS.charcoal}" opacity="0.4" filter="url(#cv12)"/><circle cx="230" cy="40" r="20" fill="${COLORS.clay}" opacity="0.5" filter="url(#cv12)"/><path d="M100 145 Q130 138 160 142 Q190 146 220 140" fill="none" stroke="${COLORS.stone}" stroke-width="1.2" filter="url(#cv12)"/><circle cx="100" cy="50" r="6" fill="${COLORS.sage}" opacity="0.5" filter="url(#cv12)"/></svg>`,
   ];
 
   // Pick a deterministic cover based on string hash

@@ -1436,13 +1436,13 @@ hr {
 }
 
 .post-article__body {
-  font-size: 1rem;
-  line-height: 1.85;
+  font-size: 0.925rem;
+  line-height: 1.7;
   color: var(--text-primary);
 }
 
 .post-article__body p {
-  margin-bottom: 1.5em;
+  margin-bottom: 1.3em;
 }
 
 .post-article__body h2 {

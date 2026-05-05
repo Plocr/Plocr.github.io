@@ -2,7 +2,7 @@
 title: 《升级》（Upgrade）— 如果你今晚想看一部不废话的科幻片
 date: 2025-05-05
 updated: 2025-05-05
-cover: https://m.media-amazon.com/images/M/MV5BMjI0NzcyMjM5MV5BMl5BanBnXkFtZTgwMjk5NzYwNTM@._V1_SX300.jpg
+cover: https://image.tmdb.org/t/p/w600_and_h900_bestv2/4T6YhMBoiYC3uHSeZ9ltpxe7cKt.jpg
 tags: [电影, 影评]
 ---
 
