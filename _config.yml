@@ -11,7 +11,7 @@ language: zh-CN
 timezone: Asia/Shanghai
 
 # URL
-url: https://plocr.github.io
+url: https://www.plocr.online
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:

@@ -165,7 +165,6 @@
 
   // ===== Dropdown Click Toggle =====
   function initDropdownClick() {
-    if (isTouchDevice()) return; // hover works on desktop, click on touch
     const trigger = document.querySelector('.nav__dropdown-trigger');
     const dropdown = document.querySelector('.nav__dropdown');
     if (!trigger || !dropdown) return;

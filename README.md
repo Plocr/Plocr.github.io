@@ -4,14 +4,22 @@
 
 [![Deploy Hexo to GitHub Pages](https://github.com/Plocr/Plocr.github.io/actions/workflows/deploy.yml/badge.svg)](https://github.com/Plocr/Plocr.github.io/actions/workflows/deploy.yml)
 
+## 访问地址
+
+| 入口 | 地址 |
+|------|------|
+| 主站 | [https://www.plocr.online](https://www.plocr.online) |
+| 备用 | [https://plocr.github.io](https://plocr.github.io) |
+
 ## 技术栈
 
 | 层 | 技术 |
 |------|------|
 | 框架 | [Hexo](https://hexo.io/) v8 — 静态博客生成器 |
 | 主题 | `themes/claude/` — 自研 Claude 风格主题 |
-| 部署 | GitHub Pages + GitHub Actions |
-| 字体 | Ubuntu Mono（标题）、PT Serif（正文）、Inter（UI） |
+| 部署 | Vercel（主）+ GitHub Pages（备用） |
+| CI/CD | GitHub Actions + Vercel Auto Deploy |
+| 字体 | 小濑字体（正文/标题）、Fantasque Sans Mono（代码） |
 
 ## 项目结构
 
@@ -38,7 +46,7 @@
 │           ├── css/claude.css  # 全部样式
 │           └── js/claude.js    # 交互逻辑
 ├── .github/workflows/
-│   └── deploy.yml           # GitHub Actions 自动部署
+│   └── deploy.yml           # GitHub Actions 自动部署（备用）
 └── _config.yml              # Hexo 主配置
 ```
 
@@ -68,8 +76,7 @@ npx hexo generate
 title: 文章标题
 date: 2025-05-04
 updated: 2025-05-04
-cover: https://example.com/cover.jpg  # 封面图（可选）
-tags: [标签1, 标签2]                   # 标签（可选）
+tags: [标签1, 标签2]
 ---
 
 文章正文，支持 Markdown 语法。
@@ -83,7 +90,19 @@ git commit -m "新文章"
 git push origin source
 ```
 
-推送 `source` 分支后，GitHub Actions 自动构建并部署到 `master` 分支，更新 [https://plocr.github.io](https://plocr.github.io)。
+推送 `source` 分支后：
+1. **Vercel** 自动检测并构建部署 → [https://www.plocr.online](https://www.plocr.online)
+2. **GitHub Actions** 同步构建到 Pages（备用） → [https://plocr.github.io](https://plocr.github.io)
+
+## Vercel 部署（首次配置）
+
+项目已包含 `vercel.json`，你只需：
+
+1. 前往 [vercel.com](https://vercel.com) 使用 GitHub 登录
+2. 点击 **Add New Project** → 导入 `Plocr/Plocr.github.io`
+3. 框架自动识别为 **Hexo**，无需修改配置
+4. 部署后在项目 Settings → Domains 添加 `plocr.online`
+5. 在阿里云 DNS 添加 CNAME 记录指向 `cname.vercel-dns.com`
 
 ## 主题特性
 
@@ -95,17 +114,17 @@ git push origin source
 - 卡片 hover 上浮 + 图片视差
 - 导航栏滚动隐藏/显示
 - 移动端右侧滑出抽屉菜单
-- 无封面文章自动分配 5 种手绘默认封面（基于标题 hash 确定）
+- 无封面文章自动分配 12 种手绘默认封面
 - AI 导航页面（30+ 主流 AI 工具分类展示）
-- 响应式适配（6 级断点：1200+ / 1024+ / 900+ / 768+ / 480+ / <480）
+- 响应式适配（6 级断点）
 
 ## 页面
 
 | 路径 | 说明 |
 |------|------|
-| `/` | 首页：全屏 Hero + 文章卡片 + 统计 + 关于 |
-| `/archives/` | 文章归档 |
+| `/` | 首页：全屏 Hero + 文章卡片 + 统计 |
+| `/archives/` | 文章归档（分类卡片 + 时间轴） |
 | `/ai/` | AI 工具导航 |
-| `/about/` | 关于 |
+| `/about/` | 关于 + 致谢 |
 | `/music/` | 音乐 |
 | `/movies/` | 电影 |
