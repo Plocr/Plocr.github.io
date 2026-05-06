@@ -1,9 +1,9 @@
-name: Deploy Hexo to GitHub Pages
+name: Deploy Hexo to GitHub Pages (Backup)
 
 on:
   push:
     branches:
-      - source
+      - master
 
 permissions:
   contents: write
@@ -12,10 +12,10 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout source
+      - name: Checkout master
         uses: actions/checkout@v4
         with:
-          ref: source
+          ref: master
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -28,9 +28,9 @@ jobs:
       - name: Build
         run: npx hexo generate
 
-      - name: Deploy to master branch
+      - name: Deploy to pages branch
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
-          publish_branch: master
+          publish_branch: pages
