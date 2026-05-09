@@ -5,7 +5,8 @@
   "installCommand": "npm install",
   "git": {
     "deploymentEnabled": {
-      "master": true
+      "master": true,
+      "pages": false
     }
   }
 }
