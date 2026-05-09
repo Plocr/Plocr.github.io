@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AI 导航 | Plocrの小窝</title>
+  <meta name="description" content="Plocr的个人博客"/>
+  <meta name="author" content="Plocr"/>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fantasque+Sans+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cn-fontsource-xiaolai-mono-sc-regular/font.css">
+
+  <link rel="shortcut icon" href="/img/WZTB.png">
+  <link rel="stylesheet" href="/css/claude.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<meta name="generator" content="Hexo 8.1.1"></head>
+<body>
+
+<!-- Noise texture overlay -->
+<div class="noise-overlay"></div>
+<div class="cursor-glow"></div>
+
+<!-- Navigation -->
+<nav class="nav">
+  <div class="nav__inner">
+    <a class="nav__logo" href="/">
+      <span class="nav__logo-dot"></span>
+      Plocrの小窝
+    </a>
+    <div class="nav__links">
+      <a href="/" class="">首页</a>
+      <div class="nav__dropdown">
+        <a href="javascript:void(0)" class="nav__dropdown-trigger ">
+          文章
+          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" class="nav__dropdown-arrow"><path d="M2 3.5L5 6.5L8 3.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+        </a>
+        <div class="nav__dropdown-menu">
+          <a href="/tags/项目日志/">01 项目日志</a>
+          <a href="/tags/工作流分享/">02 工作流分享</a>
+          <a href="/tags/随笔/">03 说些乱七八糟的</a>
+          <a href="/tags/影音推荐/">04 影音推荐</a>
+          <a href="/archives/">05 全部文章</a>
+        </div>
+      </div>
+      <a href="/ai/" class="active">AI</a>
+      <a href="/about/" class="">关于</a>
+    </div>
+    <div class="nav__actions">
+      <button class="theme-toggle" id="themeToggle" aria-label="切换主题">
+        <svg class="sun-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <circle cx="8" cy="8" r="3.5" stroke="currentColor" stroke-width="1.3"/>
+          <path d="M8 1V3M8 13V15M1 8H3M13 8H15M3.05 3.05L4.46 4.46M11.54 11.54L12.95 12.95M12.95 3.05L11.54 4.46M4.46 11.54L3.05 12.95" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+        </svg>
+        <svg class="moon-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" style="display:none">
+          <path d="M13.5 9.5C12.5 12 9.5 13.5 6.5 12.5C3.5 11.5 2 8.5 3 5.5C3.5 4 4.5 3 5.5 2.5C3 3.5 1.5 6.5 2.5 9.5C3.5 12.5 6.5 14 9.5 13C11 12.5 12.5 11 13.5 9.5Z" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <button class="menu-toggle" id="menuToggle" aria-label="菜单">
+        <span class="menu-toggle__line"></span>
+        <span class="menu-toggle__line"></span>
+        <span class="menu-toggle__line"></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile Menu Drawer (outside nav for correct stacking) -->
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu__overlay"></div>
+  <div class="mobile-menu__panel">
+    <div class="mobile-menu__header">
+      <span class="nav__logo">
+        <span class="nav__logo-dot"></span>
+        Plocrの小窝
+      </span>
+      <button class="menu-close" id="menuClose" aria-label="关闭菜单">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+          <path d="M4 4L14 14M14 4L4 14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+    <div class="mobile-menu__body">
+      
+        
+          <a href="/" class="mobile-menu__link">
+            <span class="mobile-menu__link-text">首页</span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        
+          <a href="/archives/" class="mobile-menu__link">
+            <span class="mobile-menu__link-text">文章</span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        
+          <a href="/ai/" class="mobile-menu__link">
+            <span class="mobile-menu__link-text">AI</span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        
+          <a href="/about/" class="mobile-menu__link">
+            <span class="mobile-menu__link-text">关于</span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        
+      
+    </div>
+    <div class="mobile-menu__footer">
+      <button class="theme-toggle mobile-theme-toggle" id="mobileThemeToggle" aria-label="切换主题">
+        <svg class="sun-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <circle cx="8" cy="8" r="3.5" stroke="currentColor" stroke-width="1.3"/>
+          <path d="M8 1V3M8 13V15M1 8H3M13 8H15M3.05 3.05L4.46 4.46M11.54 11.54L12.95 12.95M12.95 3.05L11.54 4.46M4.46 11.54L3.05 12.95" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+        </svg>
+        <svg class="moon-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" style="display:none">
+          <path d="M13.5 9.5C12.5 12 9.5 13.5 6.5 12.5C3.5 11.5 2 8.5 3 5.5C3.5 4 4.5 3 5.5 2.5C3 3.5 1.5 6.5 2.5 9.5C3.5 12.5 6.5 14 9.5 13C11 12.5 12.5 11 13.5 9.5Z" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>切换主题</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<main class="main">
+  <section class="ai-page">
+  <div class="container">
+      <header class="ai-page__header">
+        <h1 class="ai-page__title">AI 导航</h1>
+        <p class="ai-page__subtitle">精选主流 AI 工具与平台，收录文本、视频、编程、工作流等领域的实用资源。</p>
+      </header>
+
+      <!-- 文本大模型 -->
+    <section class="ai-section">
+      <h2 class="ai-section__title">📝 文本大模型</h2>
+      <div class="ai-grid">
+        <a class="ai-card" href="https://chatgpt.com" target="_blank" rel="noopener">
+          <div class="ai-card__icon" style="background:#74AA9C;">GPT</div>
+          <div class="ai-card__info">
+            <span class="ai-card__name">ChatGPT</span>
+            <span class="ai-card__desc">OpenAI — 最通用的对话式 AI</span>
+          </div>
+        </a>
+        <a class="ai-card" href="https://claude.ai" target="_blank" rel="noopener">
+          <div class="ai-card__icon" style="background:#D97757;">C</div>
+          <div class="ai-card__info">
+            <span class="ai-card__name">Claude</span>
+            <span class="ai-card__desc">Anthropic — 长文本理解与深度推理</span>
+          </div>
+        </a>
+        <a class="ai-card" href="https://chat.deepseek.com" target="_blank" rel="noopener">
+          <div class="ai-card__icon" style="background:#4F6EF7;">DS</div>
+          <div class="ai-card__info">
+            <span class="ai-card__name">DeepSeek</span>
+            <span class="ai-card__desc">深度求索 — 开源大语言模型</span>
+          </div>
+        </a>
+        <a class="ai-card" href="https://gemini.google.com" target="_blank" rel="noopener">
+          <div class="ai-card__icon" style="background:#4285F4;">G</div>
+          <div class="ai-card__info">
+            <span class="ai-card__name">Gemini</span>
+            <span class="ai-card__desc">Google — 多模态 AI 助手</span>
+          </div>
+        </a>
+        <a class="ai-card" href="https://grok.com" target="_blank" rel="noopener">
+          <div class="ai-card__icon" style="background:#1DA1F2;">G</div>
+          <div class="ai-card__info">
+            <span class="ai-card__name">Grok</span>
+            <span class="ai-card__desc">xAI — 实时信息与幽默风格</span>
+          </div>
+        </a>
+        <a class="ai-card" href="https://kimi.moonshot.cn" target="_blank" rel="noopener">
+          <div class="ai-card__icon" style="background:#FF6B35;">K</div>
+          <div class="ai-card__info">
+            <span class="ai-card__name">Kimi</span>
+            <span class="ai-card__desc">月之暗面 — 超长上下文处理</span>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- AI 搜索引擎 -->
+    <section class="ai-section">
+      <h2 class="ai-section__title">🔍 AI 搜索引擎</h2>
+      <div class="ai-grid">
+        <a class="ai-card" href="https://www.perplexity.ai" target="_blank" rel="noopener">
+          <div class="ai-card__icon" style="background:#1E3A5F;">P</div>
+          <div class="ai-card__info">
+            <span class="ai-card__name">Perplexity</span>
+            <span class="ai-card__desc">AI 驱动的搜索引擎，带来源引用</span>
+          </div>
+        </a>
+        <a class="ai-card" href="https://chatgpt.com/?model=gpt-search" target="_blank" rel="noopener">
+          <div class="ai-card__icon" style="background:#10A37F;">GS</div>
+          <div class="ai-card__info">
+            <span class="ai-card__name">GPT Search</span>
+            <span class="ai-card__desc">ChatGPT 内置联网搜索</span>
+          </div>
+        </a>
+        <a class="ai-card" href="https://consensus.app" target="_blank" rel="noopener">
+          <div class="ai-card__icon" style="background:#7C3AED;">C</div>
+          <div class="ai-card__info">
+            <span class="ai-card__name">Consensus</span>
+            <span class="ai-card__desc">学术论文 AI 搜索引擎</span>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- 视频 / 多模态 -->
+    <section class="ai-section">
+      <h2 class="ai-section__title">🎬 视频 & 多模态</h2>
+      <div class="ai-grid">
+        <a class="ai-card" href="https://sora.com" target="_blank" rel="noopener">
+          <div class="ai-card__icon" style="background:#000000;">S</div>
+          <div class="ai-card__info">
+            <span class="ai-card__name">Sora</span>
+            <span class="ai-card__desc">OpenAI — 文本生成视频</span>
+          </div>
+        </a>
+        <a class="ai-card" href="https://runwayml.com" target="_blank" rel="noopener">
+          <div class="ai-card__icon" style="background:#0D0D0D;">R</div>
+          <div class="ai-card__info">
+            <span class="ai-card__name">Runway</span>
+            <span class="ai-card__desc">AI 视频生成与编辑平台</span>
+          </div>
+        </a>
+        <a class="ai-card" href="https://pika.art" target="_blank" rel="noopener">
+          <div class="ai-card__icon" style="background:#FF5A5F;">P</div>
+          <div class="ai-card__info">
+            <span class="ai-card__name">Pika</span>
+            <span class="ai-card__desc">AI 视频生成工具</span>
+          </div>
+        </a>
+        <a class="ai-card" href="https://www.midjourney.com" target="_blank" rel="noopener">
+          <div class="ai-card__icon" style="background:#1A1A2E;">MJ</div>
+          <div class="ai-card__info">
+            <span class="ai-card__name">Midjourney</span>
+            <span class="ai-card__desc">AI 图像生成</span>
+          </div>
+        </a>
+        <a class="ai-card" href="https://stability.ai" target="_blank" rel="noopener">
+          <div class="ai-card__icon" style="background:#8B5CF6;">SD</div>
+          <div class="ai-card__info">
+            <span class="ai-card__name">Stable Diffusion</span>
+            <span class="ai-card__desc">开源图像生成模型</span>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- AI 工作流平台 -->
+    <section class="ai-section">
+      <h2 class="ai-section__title">⚡ AI 工作流平台</h2>
+      <div class="ai-grid">
+        <a class="ai-card" href="https://dify.ai" target="_blank" rel="noopener">
+          <div class="ai-card__icon" style="background:#1C64F2;">D</div>
+          <div class="ai-card__info">
+            <span class="ai-card__name">Dify</span>
+            <span class="ai-card__desc">开源 LLM 应用开发平台</span>
+          </div>
+        </a>
+        <a class="ai-card" href="https://n8n.io" target="_blank" rel="noopener">
+          <div class="ai-card__icon" style="background:#EA4B71;">n</div>
+          <div class="ai-card__info">
+            <span class="ai-card__name">n8n</span>
+            <span class="ai-card__desc">开源自动化工作流平台</span>
+          </div>
+        </a>
+        <a class="ai-card" href="https://www.coze.com" target="_blank" rel="noopener">
+          <div class="ai-card__icon" style="background:#6366F1;">C</div>
+          <div class="ai-card__info">
+            <span class="ai-card__name">Coze</span>
+            <span class="ai-card__desc">字节跳动 — AI Bot 构建平台</span>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- AI 编程工具 -->
+    <section class="ai-section">
+      <h2 class="ai-section__title">💻 AI 编程工具</h2>
+      <div class="ai-grid">
+        <a class="ai-card" href="https://github.com/features/copilot" target="_blank" rel="noopener">
+          <div class="ai-card__icon" style="background:#000000;">GC</div>
+          <div class="ai-card__info">
+            <span class="ai-card__name">GitHub Copilot</span>
+            <span class="ai-card__desc">AI 代码补全与生成</span>
+          </div>
+        </a>
+        <a class="ai-card" href="https://www.cursor.com" target="_blank" rel="noopener">
+          <div class="ai-card__icon" style="background:#6C47FF;">C</div>
+          <div class="ai-card__info">
+            <span class="ai-card__name">Cursor</span>
+            <span class="ai-card__desc">AI-first 代码编辑器</span>
+          </div>
+        </a>
+        <a class="ai-card" href="https://codeium.com/windsurf" target="_blank" rel="noopener">
+          <div class="ai-card__icon" style="background:#3B82F6;">W</div>
+          <div class="ai-card__info">
+            <span class="ai-card__name">Windsurf</span>
+            <span class="ai-card__desc">AI 原生 IDE</span>
+          </div>
+        </a>
+        <a class="ai-card" href="https://replit.com" target="_blank" rel="noopener">
+          <div class="ai-card__icon" style="background:#F26207;">R</div>
+          <div class="ai-card__info">
+            <span class="ai-card__name">Replit Agent</span>
+            <span class="ai-card__desc">AI 驱动的在线开发环境</span>
+          </div>
+        </a>
+        <a class="ai-card" href="https://v0.dev" target="_blank" rel="noopener">
+          <div class="ai-card__icon" style="background:#000000;">v0</div>
+          <div class="ai-card__info">
+            <span class="ai-card__name">v0</span>
+            <span class="ai-card__desc">Vercel — AI UI 生成</span>
+          </div>
+        </a>
+        <a class="ai-card" href="https://bolt.new" target="_blank" rel="noopener">
+          <div class="ai-card__icon" style="background:#8A2BE2;">B</div>
+          <div class="ai-card__info">
+            <span class="ai-card__name">Bolt.new</span>
+            <span class="ai-card__desc">AI 全栈应用生成器</span>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- AI 编程插件 -->
+    <section class="ai-section">
+      <h2 class="ai-section__title">🔌 AI 编程插件</h2>
+      <div class="ai-grid">
+        <a class="ai-card" href="https://www.tabnine.com" target="_blank" rel="noopener">
+          <div class="ai-card__icon" style="background:#FF6C2C;">T</div>
+          <div class="ai-card__info">
+            <span class="ai-card__name">Tabnine</span>
+            <span class="ai-card__desc">AI 代码补全，支持本地模型</span>
+          </div>
+        </a>
+        <a class="ai-card" href="https://codeium.com" target="_blank" rel="noopener">
+          <div class="ai-card__icon" style="background:#6C5CE7;">C</div>
+          <div class="ai-card__info">
+            <span class="ai-card__name">Codeium</span>
+            <span class="ai-card__desc">免费 AI 代码补全插件</span>
+          </div>
+        </a>
+        <a class="ai-card" href="https://www.jetbrains.com/ai/" target="_blank" rel="noopener">
+          <div class="ai-card__icon" style="background:#000000;">JB</div>
+          <div class="ai-card__info">
+            <span class="ai-card__name">JetBrains AI</span>
+            <span class="ai-card__desc">JetBrains IDE 内置 AI</span>
+          </div>
+        </a>
+        <a class="ai-card" href="https://www.codium.ai" target="_blank" rel="noopener">
+          <div class="ai-card__icon" style="background:#00B8A9;">Cd</div>
+          <div class="ai-card__info">
+            <span class="ai-card__name">CodiumAI</span>
+            <span class="ai-card__desc">AI 代码测试与审查</span>
+          </div>
+        </a>
+      </div>
+    </section>
+
+  </div>
+</section>
+
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__inner">
+      <!-- 01: Brand + Stats -->
+      <div class="footer__col footer__col--brand">
+        <div class="footer__logo">
+          <span class="nav__logo-dot"></span> Plocrの小窝
+        </div>
+        <p class="footer__desc">个人博客，记录技术与生活的点滴</p>
+        <div class="footer__social">
+          
+            
+              <a href="https://github.com/Plocr" target="_blank" rel="noopener">GitHub</a>
+            
+          
+        </div>
+        <div class="footer__stats">
+          <div class="footer-stat">
+            <span class="footer-stat__value">3</span>
+            <span class="footer-stat__label">文章</span>
+          </div>
+          <div class="footer-stat">
+            <span class="footer-stat__value">2023</span>
+            <span class="footer-stat__label">始于</span>
+          </div>
+          <div class="footer-stat">
+            <span class="footer-stat__value">Plocr</span>
+            <span class="footer-stat__label">作者</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 02: Navigation -->
+      <div class="footer__col footer__col--nav">
+        <h4 class="footer__col-title">导航</h4>
+        
+          
+            <a href="/" class="footer__link">首页</a>
+          
+            <a href="/archives/" class="footer__link">文章</a>
+          
+            <a href="/ai/" class="footer__link">AI</a>
+          
+            <a href="/about/" class="footer__link">关于</a>
+          
+        
+      </div>
+
+      <!-- 03: Info -->
+      <div class="footer__col footer__col--info">
+        <h4 class="footer__col-title">信息</h4>
+        <a href="/archives/" class="footer__link">归档（3）</a>
+      </div>
+    </div>
+    <div class="footer__copyright">
+      &copy; 2020 - 2026 By Plocr
+    </div>
+  </div>
+</footer>
+
+<script src="/js/claude.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</body>
+</html>

@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>《升级》（Upgrade）— 如果你今晚想看一部不废话的科幻片 | Plocrの小窝</title>
+  <meta name="description" content="Plocr的个人博客"/>
+  <meta name="author" content="Plocr"/>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fantasque+Sans+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cn-fontsource-xiaolai-mono-sc-regular/font.css">
+
+  <link rel="shortcut icon" href="/img/WZTB.png">
+  <link rel="stylesheet" href="/css/claude.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<meta name="generator" content="Hexo 8.1.1"></head>
+<body>
+
+<!-- Noise texture overlay -->
+<div class="noise-overlay"></div>
+<div class="cursor-glow"></div>
+
+<!-- Navigation -->
+<nav class="nav">
+  <div class="nav__inner">
+    <a class="nav__logo" href="/">
+      <span class="nav__logo-dot"></span>
+      Plocrの小窝
+    </a>
+    <div class="nav__links">
+      <a href="/" class="">首页</a>
+      <div class="nav__dropdown">
+        <a href="javascript:void(0)" class="nav__dropdown-trigger ">
+          文章
+          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" class="nav__dropdown-arrow"><path d="M2 3.5L5 6.5L8 3.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+        </a>
+        <div class="nav__dropdown-menu">
+          <a href="/tags/项目日志/">01 项目日志</a>
+          <a href="/tags/工作流分享/">02 工作流分享</a>
+          <a href="/tags/随笔/">03 说些乱七八糟的</a>
+          <a href="/tags/影音推荐/">04 影音推荐</a>
+          <a href="/archives/">05 全部文章</a>
+        </div>
+      </div>
+      <a href="/ai/" class="">AI</a>
+      <a href="/about/" class="">关于</a>
+    </div>
+    <div class="nav__actions">
+      <button class="theme-toggle" id="themeToggle" aria-label="切换主题">
+        <svg class="sun-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <circle cx="8" cy="8" r="3.5" stroke="currentColor" stroke-width="1.3"/>
+          <path d="M8 1V3M8 13V15M1 8H3M13 8H15M3.05 3.05L4.46 4.46M11.54 11.54L12.95 12.95M12.95 3.05L11.54 4.46M4.46 11.54L3.05 12.95" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+        </svg>
+        <svg class="moon-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" style="display:none">
+          <path d="M13.5 9.5C12.5 12 9.5 13.5 6.5 12.5C3.5 11.5 2 8.5 3 5.5C3.5 4 4.5 3 5.5 2.5C3 3.5 1.5 6.5 2.5 9.5C3.5 12.5 6.5 14 9.5 13C11 12.5 12.5 11 13.5 9.5Z" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <button class="menu-toggle" id="menuToggle" aria-label="菜单">
+        <span class="menu-toggle__line"></span>
+        <span class="menu-toggle__line"></span>
+        <span class="menu-toggle__line"></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile Menu Drawer (outside nav for correct stacking) -->
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu__overlay"></div>
+  <div class="mobile-menu__panel">
+    <div class="mobile-menu__header">
+      <span class="nav__logo">
+        <span class="nav__logo-dot"></span>
+        Plocrの小窝
+      </span>
+      <button class="menu-close" id="menuClose" aria-label="关闭菜单">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+          <path d="M4 4L14 14M14 4L4 14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+    <div class="mobile-menu__body">
+      
+        
+          <a href="/" class="mobile-menu__link">
+            <span class="mobile-menu__link-text">首页</span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        
+          <a href="/archives/" class="mobile-menu__link">
+            <span class="mobile-menu__link-text">文章</span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        
+          <a href="/ai/" class="mobile-menu__link">
+            <span class="mobile-menu__link-text">AI</span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        
+          <a href="/about/" class="mobile-menu__link">
+            <span class="mobile-menu__link-text">关于</span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        
+      
+    </div>
+    <div class="mobile-menu__footer">
+      <button class="theme-toggle mobile-theme-toggle" id="mobileThemeToggle" aria-label="切换主题">
+        <svg class="sun-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <circle cx="8" cy="8" r="3.5" stroke="currentColor" stroke-width="1.3"/>
+          <path d="M8 1V3M8 13V15M1 8H3M13 8H15M3.05 3.05L4.46 4.46M11.54 11.54L12.95 12.95M12.95 3.05L11.54 4.46M4.46 11.54L3.05 12.95" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+        </svg>
+        <svg class="moon-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" style="display:none">
+          <path d="M13.5 9.5C12.5 12 9.5 13.5 6.5 12.5C3.5 11.5 2 8.5 3 5.5C3.5 4 4.5 3 5.5 2.5C3 3.5 1.5 6.5 2.5 9.5C3.5 12.5 6.5 14 9.5 13C11 12.5 12.5 11 13.5 9.5Z" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>切换主题</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<main class="main">
+  <article class="post-article">
+  <div class="container">
+    <div class="post-article__back">
+      <a href="/archives/">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path d="M9 2L4 7L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        返回文章列表
+      </a>
+    </div>
+
+    <header class="post-article__header">
+      <h1 class="post-article__title">《升级》（Upgrade）— 如果你今晚想看一部不废话的科幻片</h1>
+      <div class="post-article__meta">
+        <time datetime="2025-05-04T16:00:00.000Z">2025-05-05</time>
+        
+        
+          
+          <span class="meta-sep">·</span>
+          <span>948 字</span>
+          <span class="meta-sep">·</span>
+          <span>2 分钟阅读</span>
+        
+        <span class="meta-sep">·</span>
+        <span><i class="far fa-eye"></i> <span id="busuanzi_value_page_pv"></span> 阅读</span>
+      </div>
+    </header>
+
+    
+      <div class="post-article__tags">
+        
+          <span class="tag">影音推荐</span>
+        
+      </div>
+    
+
+    <div class="post-article__body">
+      
+<div class="post-hero post-hero--movie">
+  <div class="post-hero__meta">
+    <span class="post-tag post-tag--year">2018</span>
+    <span class="post-tag post-tag--dir">雷·沃纳尔</span>
+    <span class="post-tag post-tag--time">100 分钟</span>
+    <span class="post-tag post-tag--rating">豆瓣 8.1</span>
+  </div>
+  <h2>如果你今晚想看一部不废话的科幻片</h2>
+  <p>2018年有一部电影叫《升级》（Upgrade），它什么都没做。没铺世界观，没讲大道理，就安安静静花了100分钟讲了一个故事。看完了，爽了，甚至有点背后发凉。</p>
+</div>
+
+<div class="post-callout">
+  <strong>🎬 一句话</strong>
+  <p>瘫痪男被 AI 芯片控制身体后去找杀妻仇人，结局冷到骨子里。</p>
+</div>
+
+<h3>故事真的很简单</h3>
+
+<p>未来某个时间，男主格雷是个老派的人，开手动挡车，不碰智能设备。一天和妻子出了车祸，妻子被杀，他全身瘫痪。一个科技公司老板找上门，说能让他站起来——往脊椎里植入一枚叫 STEM 的芯片。</p>
+
+<p>效果立竿见影，他不光能走，还能打。重点是：打架的时候不是他想怎么打，是芯片在接管他的身体。他只能看着自己像提线木偶一样把对手揍得血肉横飞。</p>
+
+<div class="post-callout post-callout--warning">
+  <strong>⚡ 名场面</strong>
+  <p>「你好，格雷。需要我做点什么吗？」—— 芯片在他脑子里开口说话了。然后事情就开始失控了。</p>
+</div>
+
+<hr>
+
+<h3>它到底好看在哪</h3>
+
+<div class="post-review-grid">
+  <div class="post-review-card">
+    <div class="post-review-card__num">01</div>
+    <h4>打斗戏真的有点意思</h4>
+    <p>预算只有 600 万美元，没法搞大场面。但导演把省钱这件事玩明白了：当智脑接管男主身体时，镜头锁定在男主视角，动作突然变得机械、精确，有种悚然的节奏感。</p>
+  </div>
+  <div class="post-review-card">
+    <div class="post-review-card__num">02</div>
+    <h4>它很短，不废话</h4>
+    <p>100 分钟，节奏非常紧。从瘫痪到装芯片，到第一次身体被接管、第一次杀人、第一次意识到不对劲——没有一场戏是多余的。</p>
+  </div>
+  <div class="post-review-card">
+    <div class="post-review-card__num">03</div>
+    <h4>结尾是真挺冷的</h4>
+    <p>不剧透。但你看到最后几分钟的时候会明白为什么很多人记了这个结局好多年。很安静、很残酷的收尾。我看完之后原地愣了一会儿。</p>
+  </div>
+</div>
+
+<hr>
+
+<h3>当然，也有不喜欢它的人</h3>
+
+<p>有一部分观众觉得这片子太「B级片」了——血浆给得足，但故事说到底还是个复仇套路，思想深度比不上《机械姬》或者《降临》那种。这个评价也没错，它本来就不是冲着哲学论文去的。它要做的事情很简单：让你 100 分钟里手心出汗，最后给你心口来一拳。它做到了。</p>
+
+<div class="post-ending">
+  <p><strong>适合什么时候看</strong></p>
+  <p>周末晚上，一个人，或者拉一个也喜欢科幻/惊悚的朋友。别当传世经典去看，就当是一个拍得很认真的小故事。这类电影不多了，且看且珍惜。</p>
+</div>
+
+    </div>
+
+    <nav class="post-article__nav">
+      <div class="post-nav__prev">
+        
+      </div>
+      <div class="post-nav__next">
+        
+          <a href="/2023/05/11/hello-world/">
+            <span class="post-nav__label">下一篇 →</span>
+            <span class="post-nav__title">Hello PlocrのBlog</span>
+          </a>
+        
+      </div>
+    </nav>
+  </div>
+</article>
+
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__inner">
+      <!-- 01: Brand + Stats -->
+      <div class="footer__col footer__col--brand">
+        <div class="footer__logo">
+          <span class="nav__logo-dot"></span> Plocrの小窝
+        </div>
+        <p class="footer__desc">个人博客，记录技术与生活的点滴</p>
+        <div class="footer__social">
+          
+            
+              <a href="https://github.com/Plocr" target="_blank" rel="noopener">GitHub</a>
+            
+          
+        </div>
+        <div class="footer__stats">
+          <div class="footer-stat">
+            <span class="footer-stat__value">3</span>
+            <span class="footer-stat__label">文章</span>
+          </div>
+          <div class="footer-stat">
+            <span class="footer-stat__value">2023</span>
+            <span class="footer-stat__label">始于</span>
+          </div>
+          <div class="footer-stat">
+            <span class="footer-stat__value">Plocr</span>
+            <span class="footer-stat__label">作者</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 02: Navigation -->
+      <div class="footer__col footer__col--nav">
+        <h4 class="footer__col-title">导航</h4>
+        
+          
+            <a href="/" class="footer__link">首页</a>
+          
+            <a href="/archives/" class="footer__link">文章</a>
+          
+            <a href="/ai/" class="footer__link">AI</a>
+          
+            <a href="/about/" class="footer__link">关于</a>
+          
+        
+      </div>
+
+      <!-- 03: Info -->
+      <div class="footer__col footer__col--info">
+        <h4 class="footer__col-title">信息</h4>
+        <a href="/archives/" class="footer__link">归档（3）</a>
+      </div>
+    </div>
+    <div class="footer__copyright">
+      &copy; 2020 - 2026 By Plocr
+    </div>
+  </div>
+</footer>
+
+<script src="/js/claude.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</body>
+</html>

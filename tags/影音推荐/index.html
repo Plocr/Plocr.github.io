@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Plocrの小窝</title>
+  <meta name="description" content="Plocr的个人博客"/>
+  <meta name="author" content="Plocr"/>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fantasque+Sans+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cn-fontsource-xiaolai-mono-sc-regular/font.css">
+
+  <link rel="shortcut icon" href="/img/WZTB.png">
+  <link rel="stylesheet" href="/css/claude.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<meta name="generator" content="Hexo 8.1.1"></head>
+<body>
+
+<!-- Noise texture overlay -->
+<div class="noise-overlay"></div>
+<div class="cursor-glow"></div>
+
+<!-- Navigation -->
+<nav class="nav">
+  <div class="nav__inner">
+    <a class="nav__logo" href="/">
+      <span class="nav__logo-dot"></span>
+      Plocrの小窝
+    </a>
+    <div class="nav__links">
+      <a href="/" class="">首页</a>
+      <div class="nav__dropdown">
+        <a href="javascript:void(0)" class="nav__dropdown-trigger active">
+          文章
+          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" class="nav__dropdown-arrow"><path d="M2 3.5L5 6.5L8 3.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+        </a>
+        <div class="nav__dropdown-menu">
+          <a href="/tags/项目日志/">01 项目日志</a>
+          <a href="/tags/工作流分享/">02 工作流分享</a>
+          <a href="/tags/随笔/">03 说些乱七八糟的</a>
+          <a href="/tags/影音推荐/">04 影音推荐</a>
+          <a href="/archives/">05 全部文章</a>
+        </div>
+      </div>
+      <a href="/ai/" class="">AI</a>
+      <a href="/about/" class="">关于</a>
+    </div>
+    <div class="nav__actions">
+      <button class="theme-toggle" id="themeToggle" aria-label="切换主题">
+        <svg class="sun-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <circle cx="8" cy="8" r="3.5" stroke="currentColor" stroke-width="1.3"/>
+          <path d="M8 1V3M8 13V15M1 8H3M13 8H15M3.05 3.05L4.46 4.46M11.54 11.54L12.95 12.95M12.95 3.05L11.54 4.46M4.46 11.54L3.05 12.95" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+        </svg>
+        <svg class="moon-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" style="display:none">
+          <path d="M13.5 9.5C12.5 12 9.5 13.5 6.5 12.5C3.5 11.5 2 8.5 3 5.5C3.5 4 4.5 3 5.5 2.5C3 3.5 1.5 6.5 2.5 9.5C3.5 12.5 6.5 14 9.5 13C11 12.5 12.5 11 13.5 9.5Z" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <button class="menu-toggle" id="menuToggle" aria-label="菜单">
+        <span class="menu-toggle__line"></span>
+        <span class="menu-toggle__line"></span>
+        <span class="menu-toggle__line"></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile Menu Drawer (outside nav for correct stacking) -->
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu__overlay"></div>
+  <div class="mobile-menu__panel">
+    <div class="mobile-menu__header">
+      <span class="nav__logo">
+        <span class="nav__logo-dot"></span>
+        Plocrの小窝
+      </span>
+      <button class="menu-close" id="menuClose" aria-label="关闭菜单">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+          <path d="M4 4L14 14M14 4L4 14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+    <div class="mobile-menu__body">
+      
+        
+          <a href="/" class="mobile-menu__link">
+            <span class="mobile-menu__link-text">首页</span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        
+          <a href="/archives/" class="mobile-menu__link">
+            <span class="mobile-menu__link-text">文章</span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        
+          <a href="/ai/" class="mobile-menu__link">
+            <span class="mobile-menu__link-text">AI</span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        
+          <a href="/about/" class="mobile-menu__link">
+            <span class="mobile-menu__link-text">关于</span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        
+      
+    </div>
+    <div class="mobile-menu__footer">
+      <button class="theme-toggle mobile-theme-toggle" id="mobileThemeToggle" aria-label="切换主题">
+        <svg class="sun-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <circle cx="8" cy="8" r="3.5" stroke="currentColor" stroke-width="1.3"/>
+          <path d="M8 1V3M8 13V15M1 8H3M13 8H15M3.05 3.05L4.46 4.46M11.54 11.54L12.95 12.95M12.95 3.05L11.54 4.46M4.46 11.54L3.05 12.95" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+        </svg>
+        <svg class="moon-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" style="display:none">
+          <path d="M13.5 9.5C12.5 12 9.5 13.5 6.5 12.5C3.5 11.5 2 8.5 3 5.5C3.5 4 4.5 3 5.5 2.5C3 3.5 1.5 6.5 2.5 9.5C3.5 12.5 6.5 14 9.5 13C11 12.5 12.5 11 13.5 9.5Z" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>切换主题</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<main class="main">
+  <section class="archive-page">
+  <div class="container">
+    <div class="archive-layout">
+      <!-- Left: Category Cards -->
+      <div class="archive-categories">
+        <header class="archive-categories__header">
+          <h1 class="archive-categories__title">文章分类</h1>
+        </header>
+        <div class="archive-categories__grid">
+          
+          
+            <a href="javascript:void(0)" class="archive-card" data-category="项目日志">
+              <span class="archive-card__num">01</span>
+              <span class="archive-card__title">项目日志</span>
+              <span class="archive-card__count">1 篇</span>
+            </a>
+          
+            <a href="javascript:void(0)" class="archive-card" data-category="工作流分享">
+              <span class="archive-card__num">02</span>
+              <span class="archive-card__title">工作流分享</span>
+              <span class="archive-card__count">0 篇</span>
+            </a>
+          
+            <a href="javascript:void(0)" class="archive-card" data-category="随笔">
+              <span class="archive-card__num">03</span>
+              <span class="archive-card__title">说些乱七八糟的</span>
+              <span class="archive-card__count">1 篇</span>
+            </a>
+          
+            <a href="javascript:void(0)" class="archive-card" data-category="影音推荐">
+              <span class="archive-card__num">04</span>
+              <span class="archive-card__title">影音推荐</span>
+              <span class="archive-card__count">1 篇</span>
+            </a>
+          
+        </div>
+      </div>
+
+      <!-- Right: Article List / Timeline -->
+      <div class="archive-timeline">
+        <header class="archive-timeline__header">
+          <h2 class="archive-timeline__title" id="archive-view-title">时间轴</h2>
+          <p class="archive-timeline__subtitle" id="archive-view-subtitle">共 3 篇文章</p>
+        </header>
+
+        <!-- Timeline view (default) -->
+        <div class="timeline" id="archive-timeline-view">
+          
+            
+            
+              
+              
+                <div class="timeline-year">2025</div>
+              
+              <article class="timeline-item" onclick="window.location='/2025/05/04/upgrade-review/'">
+                <div class="timeline-dot"></div>
+                <time class="timeline-date">05-05</time>
+                <div class="timeline-content">
+                  <h3 class="timeline-title">《升级》（Upgrade）— 如果你今晚想看一部不废话的科幻片</h3>
+                  
+                    <div class="timeline-tags">
+                      
+                        <span class="tag">影音推荐</span>
+                      
+                    </div>
+                  
+                </div>
+              </article>
+            
+              
+              
+                <div class="timeline-year">2023</div>
+              
+              <article class="timeline-item" onclick="window.location='/2023/05/11/hello-world/'">
+                <div class="timeline-dot"></div>
+                <time class="timeline-date">05-11</time>
+                <div class="timeline-content">
+                  <h3 class="timeline-title">Hello PlocrのBlog</h3>
+                  
+                    <div class="timeline-tags">
+                      
+                        <span class="tag">项目日志</span>
+                      
+                    </div>
+                  
+                </div>
+              </article>
+            
+              
+              
+              <article class="timeline-item" onclick="window.location='/2023/05/09/LOVE/'">
+                <div class="timeline-dot"></div>
+                <time class="timeline-date">05-10</time>
+                <div class="timeline-content">
+                  <h3 class="timeline-title">LOVE</h3>
+                  
+                    <div class="timeline-tags">
+                      
+                        <span class="tag">随笔</span>
+                      
+                    </div>
+                  
+                </div>
+              </article>
+            
+          
+        </div>
+
+        <!-- Category article list views (hidden by default) -->
+        
+          <div class="archive-category-view" id="archive-cat-项目日志" style="display:none">
+            
+              <div class="archive-article-list">
+                
+                  <article class="archive-article-card" onclick="window.location='/2023/05/11/hello-world/'" style="animation-delay: 0s">
+                    <span class="archive-article-card__index">01</span>
+                    <div class="archive-article-card__info">
+                      <h3 class="archive-article-card__title">Hello PlocrのBlog</h3>
+                      <time class="archive-article-card__date">2023-05-11</time>
+                    </div>
+                    <span class="archive-article-card__arrow">
+                      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M5 2L10 7L5 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </span>
+                  </article>
+                
+              </div>
+            
+          </div>
+        
+          <div class="archive-category-view" id="archive-cat-工作流分享" style="display:none">
+            
+              <div class="archive-empty">
+                <p>还没有文章哦~</p>
+              </div>
+            
+          </div>
+        
+          <div class="archive-category-view" id="archive-cat-随笔" style="display:none">
+            
+              <div class="archive-article-list">
+                
+                  <article class="archive-article-card" onclick="window.location='/2023/05/09/LOVE/'" style="animation-delay: 0s">
+                    <span class="archive-article-card__index">01</span>
+                    <div class="archive-article-card__info">
+                      <h3 class="archive-article-card__title">LOVE</h3>
+                      <time class="archive-article-card__date">2023-05-10</time>
+                    </div>
+                    <span class="archive-article-card__arrow">
+                      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M5 2L10 7L5 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </span>
+                  </article>
+                
+              </div>
+            
+          </div>
+        
+          <div class="archive-category-view" id="archive-cat-影音推荐" style="display:none">
+            
+              <div class="archive-article-list">
+                
+                  <article class="archive-article-card" onclick="window.location='/2025/05/04/upgrade-review/'" style="animation-delay: 0s">
+                    <span class="archive-article-card__index">01</span>
+                    <div class="archive-article-card__info">
+                      <h3 class="archive-article-card__title">《升级》（Upgrade）— 如果你今晚想看一部不废话的科幻片</h3>
+                      <time class="archive-article-card__date">2025-05-05</time>
+                    </div>
+                    <span class="archive-article-card__arrow">
+                      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M5 2L10 7L5 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </span>
+                  </article>
+                
+              </div>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__inner">
+      <!-- 01: Brand + Stats -->
+      <div class="footer__col footer__col--brand">
+        <div class="footer__logo">
+          <span class="nav__logo-dot"></span> Plocrの小窝
+        </div>
+        <p class="footer__desc">个人博客，记录技术与生活的点滴</p>
+        <div class="footer__social">
+          
+            
+              <a href="https://github.com/Plocr" target="_blank" rel="noopener">GitHub</a>
+            
+          
+        </div>
+        <div class="footer__stats">
+          <div class="footer-stat">
+            <span class="footer-stat__value">3</span>
+            <span class="footer-stat__label">文章</span>
+          </div>
+          <div class="footer-stat">
+            <span class="footer-stat__value">2023</span>
+            <span class="footer-stat__label">始于</span>
+          </div>
+          <div class="footer-stat">
+            <span class="footer-stat__value">Plocr</span>
+            <span class="footer-stat__label">作者</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 02: Navigation -->
+      <div class="footer__col footer__col--nav">
+        <h4 class="footer__col-title">导航</h4>
+        
+          
+            <a href="/" class="footer__link">首页</a>
+          
+            <a href="/archives/" class="footer__link">文章</a>
+          
+            <a href="/ai/" class="footer__link">AI</a>
+          
+            <a href="/about/" class="footer__link">关于</a>
+          
+        
+      </div>
+
+      <!-- 03: Info -->
+      <div class="footer__col footer__col--info">
+        <h4 class="footer__col-title">信息</h4>
+        <a href="/archives/" class="footer__link">归档（3）</a>
+      </div>
+    </div>
+    <div class="footer__copyright">
+      &copy; 2020 - 2026 By Plocr
+    </div>
+  </div>
+</footer>
+
+<script src="/js/claude.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</body>
+</html>

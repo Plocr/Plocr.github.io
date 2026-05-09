@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Plocrの小窝</title>
+  <meta name="description" content="Plocr的个人博客"/>
+  <meta name="author" content="Plocr"/>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fantasque+Sans+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cn-fontsource-xiaolai-mono-sc-regular/font.css">
+
+  <link rel="shortcut icon" href="/img/WZTB.png">
+  <link rel="stylesheet" href="/css/claude.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<meta name="generator" content="Hexo 8.1.1"></head>
+<body>
+
+<!-- Noise texture overlay -->
+<div class="noise-overlay"></div>
+<div class="cursor-glow"></div>
+
+<!-- Navigation -->
+<nav class="nav">
+  <div class="nav__inner">
+    <a class="nav__logo" href="/">
+      <span class="nav__logo-dot"></span>
+      Plocrの小窝
+    </a>
+    <div class="nav__links">
+      <a href="/" class="active">首页</a>
+      <div class="nav__dropdown">
+        <a href="javascript:void(0)" class="nav__dropdown-trigger ">
+          文章
+          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" class="nav__dropdown-arrow"><path d="M2 3.5L5 6.5L8 3.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+        </a>
+        <div class="nav__dropdown-menu">
+          <a href="/tags/项目日志/">01 项目日志</a>
+          <a href="/tags/工作流分享/">02 工作流分享</a>
+          <a href="/tags/随笔/">03 说些乱七八糟的</a>
+          <a href="/tags/影音推荐/">04 影音推荐</a>
+          <a href="/archives/">05 全部文章</a>
+        </div>
+      </div>
+      <a href="/ai/" class="">AI</a>
+      <a href="/about/" class="">关于</a>
+    </div>
+    <div class="nav__actions">
+      <button class="theme-toggle" id="themeToggle" aria-label="切换主题">
+        <svg class="sun-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <circle cx="8" cy="8" r="3.5" stroke="currentColor" stroke-width="1.3"/>
+          <path d="M8 1V3M8 13V15M1 8H3M13 8H15M3.05 3.05L4.46 4.46M11.54 11.54L12.95 12.95M12.95 3.05L11.54 4.46M4.46 11.54L3.05 12.95" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+        </svg>
+        <svg class="moon-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" style="display:none">
+          <path d="M13.5 9.5C12.5 12 9.5 13.5 6.5 12.5C3.5 11.5 2 8.5 3 5.5C3.5 4 4.5 3 5.5 2.5C3 3.5 1.5 6.5 2.5 9.5C3.5 12.5 6.5 14 9.5 13C11 12.5 12.5 11 13.5 9.5Z" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <button class="menu-toggle" id="menuToggle" aria-label="菜单">
+        <span class="menu-toggle__line"></span>
+        <span class="menu-toggle__line"></span>
+        <span class="menu-toggle__line"></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile Menu Drawer (outside nav for correct stacking) -->
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu__overlay"></div>
+  <div class="mobile-menu__panel">
+    <div class="mobile-menu__header">
+      <span class="nav__logo">
+        <span class="nav__logo-dot"></span>
+        Plocrの小窝
+      </span>
+      <button class="menu-close" id="menuClose" aria-label="关闭菜单">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+          <path d="M4 4L14 14M14 4L4 14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+    <div class="mobile-menu__body">
+      
+        
+          <a href="/" class="mobile-menu__link">
+            <span class="mobile-menu__link-text">首页</span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        
+          <a href="/archives/" class="mobile-menu__link">
+            <span class="mobile-menu__link-text">文章</span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        
+          <a href="/ai/" class="mobile-menu__link">
+            <span class="mobile-menu__link-text">AI</span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        
+          <a href="/about/" class="mobile-menu__link">
+            <span class="mobile-menu__link-text">关于</span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        
+      
+    </div>
+    <div class="mobile-menu__footer">
+      <button class="theme-toggle mobile-theme-toggle" id="mobileThemeToggle" aria-label="切换主题">
+        <svg class="sun-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <circle cx="8" cy="8" r="3.5" stroke="currentColor" stroke-width="1.3"/>
+          <path d="M8 1V3M8 13V15M1 8H3M13 8H15M3.05 3.05L4.46 4.46M11.54 11.54L12.95 12.95M12.95 3.05L11.54 4.46M4.46 11.54L3.05 12.95" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+        </svg>
+        <svg class="moon-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" style="display:none">
+          <path d="M13.5 9.5C12.5 12 9.5 13.5 6.5 12.5C3.5 11.5 2 8.5 3 5.5C3.5 4 4.5 3 5.5 2.5C3 3.5 1.5 6.5 2.5 9.5C3.5 12.5 6.5 14 9.5 13C11 12.5 12.5 11 13.5 9.5Z" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>切换主题</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<main class="main">
+  <!-- ===== Hero Section - Full Screen ===== -->
+<section class="hero" id="hero">
+  <!-- Floating particles background -->
+  <div class="hero-particles">
+    <div class="particle" style="top:15%;left:10%;width:12px;height:12px;animation-delay:0s"></div>
+    <div class="particle" style="top:25%;right:15%;width:8px;height:8px;animation-delay:0.5s"></div>
+    <div class="particle" style="bottom:35%;left:20%;width:10px;height:10px;animation-delay:1s"></div>
+    <div class="particle" style="top:40%;right:25%;width:6px;height:6px;animation-delay:1.5s"></div>
+    <div class="particle" style="bottom:20%;left:5%;width:14px;height:14px;animation-delay:2s"></div>
+    <div class="particle" style="top:60%;right:10%;width:9px;height:9px;animation-delay:2.5s"></div>
+    <div class="particle" style="bottom:45%;left:35%;width:7px;height:7px;animation-delay:3s"></div>
+    <div class="particle" style="top:10%;right:35%;width:11px;height:11px;animation-delay:3.5s"></div>
+  </div>
+
+  <div class="hero__inner">
+    <div class="hero__content">
+      <h1 class="hero__title" id="hero-title">
+        <span class="hero__title-line">Plocrの小窝</span>
+      </h1>
+      <p class="hero__description">个人博客，记录技术与生活的点滴</p>
+
+      <div class="hero__social">
+        
+          
+            <a href="https://github.com/Plocr" target="_blank" rel="noopener" class="hero__social-link">GitHub</a>
+          
+        
+      </div>
+
+      <div class="hero__actions">
+        <a class="btn btn--primary" href="/archives/">
+          浏览文章
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <path d="M5 2L10 7L5 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <a class="btn btn--outline" href="/about/">关于我</a>
+      </div>
+    </div>
+    <div class="hero__illustration" id="hero-illustration"></div>
+  </div>
+
+  <!-- Scroll down indicator -->
+  <div class="hero__scroll" id="scrollIndicator">
+    <span class="hero__scroll-text">向下滚动</span>
+    <div class="hero__scroll-arrow">
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+        <path d="M3 6L9 12L15 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Recent Posts ===== -->
+<section class="section featured reveal">
+  <div class="container">
+    <div class="section__header reveal-item">
+      <span class="section-label">最新文章</span>
+      <h2 class="section__title">最近更新</h2>
+    </div>
+    
+      <div class="posts-grid">
+        
+          <article class="post-card reveal-item" onclick="window.location='/2025/05/04/upgrade-review/'">
+              <div class="post-card__thumb">
+                
+                
+                  <div class="post-card__cover-placeholder" data-title="《升级》（Upgrade）— 如果你今晚想看一部不废话的科幻片" data-index="cuidxxFjR9SmMYtqc5C-S2NPO"></div>
+                
+              </div>
+            <div class="post-card__body">
+              <div class="post-card__meta">
+                <time datetime="2025-05-04T16:00:00.000Z">2025-05-05</time>
+              </div>
+              <h2 class="post-card__title">《升级》（Upgrade）— 如果你今晚想看一部不废话的科幻片</h2>
+              
+              <div class="post-card__tags">
+                
+                  
+                    <span class="tag">影音推荐</span>
+                  
+                
+              </div>
+              <span class="post-card__readmore">阅读全文 →</span>
+            </div>
+          </article>
+        
+          <article class="post-card reveal-item" onclick="window.location='/2023/05/11/hello-world/'">
+              <div class="post-card__thumb">
+                
+                
+                  <div class="post-card__cover-placeholder" data-title="Hello PlocrのBlog" data-index="cuidYgdIbQuy3zqa78GBzt-qB"></div>
+                
+              </div>
+            <div class="post-card__body">
+              <div class="post-card__meta">
+                <time datetime="2023-05-11T04:17:00.000Z">2023-05-11</time>
+              </div>
+              <h2 class="post-card__title">Hello PlocrのBlog</h2>
+              
+              <div class="post-card__tags">
+                
+                  
+                    <span class="tag">项目日志</span>
+                  
+                
+              </div>
+              <span class="post-card__readmore">阅读全文 →</span>
+            </div>
+          </article>
+        
+          <article class="post-card reveal-item" onclick="window.location='/2023/05/09/LOVE/'">
+              <div class="post-card__thumb">
+                
+                
+                  <img src="https://pic1.zhimg.com/v2-ce6eaf6c456a1df02313be90a19d28b0_r.jpg" alt="LOVE" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+                  <div class="post-card__cover-placeholder" data-title="LOVE" data-index="cuidOx0zObcgyIvO9UoYGg1cS" style="display:none"></div>
+                
+              </div>
+            <div class="post-card__body">
+              <div class="post-card__meta">
+                <time datetime="2023-05-09T17:02:19.000Z">2023-05-10</time>
+              </div>
+              <h2 class="post-card__title">LOVE</h2>
+              
+              <div class="post-card__tags">
+                
+                  
+                    <span class="tag">随笔</span>
+                  
+                
+              </div>
+              <span class="post-card__readmore">阅读全文 →</span>
+            </div>
+          </article>
+        
+      </div>
+    
+  </div>
+</section>
+
+
+
+<!-- ===== Stats Cards ===== -->
+<section class="section stats-cards reveal">
+  <div class="container">
+    <div class="stats-cards__grid">
+      <div class="stat-card reveal-item">
+        <span class="stat-card__icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg></span>
+        <span class="stat-card__value">3</span>
+        <span class="stat-card__label">篇文章</span>
+      </div>
+      <div class="stat-card reveal-item">
+        <span class="stat-card__icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/><path d="M12 18v-6"/><path d="M9 15h6"/></svg></span>
+        <span class="stat-card__value">1,856</span>
+        <span class="stat-card__label">总字数</span>
+      </div>
+      <div class="stat-card reveal-item">
+        <span class="stat-card__icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></span>
+        <span class="stat-card__value">1096</span>
+        <span class="stat-card__label">运行天数</span>
+      </div>
+      <div class="stat-card reveal-item">
+        <span class="stat-card__icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><path d="M7 7h.01"/></svg></span>
+        <span class="stat-card__value">3</span>
+        <span class="stat-card__label">标签数</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Tags Cloud ===== -->
+
+<section class="section tags-cloud reveal">
+  <div class="container">
+    <div class="section__header reveal-item">
+      <span class="section-label">标签</span>
+      <h2 class="section__title">标签云</h2>
+    </div>
+    <div class="tags-cloud__inner reveal-item">
+      
+        
+        
+        <a href="/tags/影音推荐/" class="tag-cloud-item" style="--tag-size: 1;">影音推荐<sup>1</sup></a>
+      
+        
+        
+        <a href="/tags/随笔/" class="tag-cloud-item" style="--tag-size: 1;">随笔<sup>1</sup></a>
+      
+        
+        
+        <a href="/tags/项目日志/" class="tag-cloud-item" style="--tag-size: 1;">项目日志<sup>1</sup></a>
+      
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== Quick Navigation ===== -->
+<section class="section quick-nav reveal">
+  <div class="container">
+    <div class="section__header reveal-item">
+      <span class="section-label">导航</span>
+      <h2 class="section__title">站点入口</h2>
+    </div>
+    <div class="quick-nav__grid">
+      <a href="/archives/" class="quick-nav__card reveal-item">
+        <div class="quick-nav__icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+        </div>
+        <span class="quick-nav__title">文章归档</span>
+        <span class="quick-nav__desc">浏览全部文章</span>
+      </a>
+      <a href="/ai/" class="quick-nav__card reveal-item">
+        <div class="quick-nav__icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 16a4 4 0 100-8 4 4 0 000 8z"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+        </div>
+        <span class="quick-nav__title">AI 导航</span>
+        <span class="quick-nav__desc">精选 AI 工具</span>
+      </a>
+      <a href="/about/" class="quick-nav__card reveal-item">
+        <div class="quick-nav__icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        <span class="quick-nav__title">关于</span>
+        <span class="quick-nav__desc">了解更多</span>
+      </a>
+      <a href="https://github.com/Plocr" target="_blank" rel="noopener" class="quick-nav__card reveal-item">
+        <div class="quick-nav__icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+        </div>
+        <span class="quick-nav__title">GitHub</span>
+        <span class="quick-nav__desc">开源项目</span>
+      </a>
+      <div class="quick-nav__card quick-nav__card--soon reveal-item">
+        <div class="quick-nav__icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+        </div>
+        <span class="quick-nav__title">项目展示</span>
+        <span class="quick-nav__desc">即将上线</span>
+      </div>
+      <div class="quick-nav__card quick-nav__card--soon reveal-item">
+        <div class="quick-nav__icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <span class="quick-nav__title">最近动态</span>
+        <span class="quick-nav__desc">即将上线</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Hitokoto Quote ===== -->
+<section class="section quote-section reveal">
+  <div class="container">
+    <div class="quote-card reveal-item">
+      <div class="quote-card__mark">"</div>
+      <p class="quote-card__text" id="hitokoto-text">正在加载名言...</p>
+      <p class="quote-card__from" id="hitokoto-from"></p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__inner">
+      <!-- 01: Brand + Stats -->
+      <div class="footer__col footer__col--brand">
+        <div class="footer__logo">
+          <span class="nav__logo-dot"></span> Plocrの小窝
+        </div>
+        <p class="footer__desc">个人博客，记录技术与生活的点滴</p>
+        <div class="footer__social">
+          
+            
+              <a href="https://github.com/Plocr" target="_blank" rel="noopener">GitHub</a>
+            
+          
+        </div>
+        <div class="footer__stats">
+          <div class="footer-stat">
+            <span class="footer-stat__value">3</span>
+            <span class="footer-stat__label">文章</span>
+          </div>
+          <div class="footer-stat">
+            <span class="footer-stat__value">2023</span>
+            <span class="footer-stat__label">始于</span>
+          </div>
+          <div class="footer-stat">
+            <span class="footer-stat__value">Plocr</span>
+            <span class="footer-stat__label">作者</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 02: Navigation -->
+      <div class="footer__col footer__col--nav">
+        <h4 class="footer__col-title">导航</h4>
+        
+          
+            <a href="/" class="footer__link">首页</a>
+          
+            <a href="/archives/" class="footer__link">文章</a>
+          
+            <a href="/ai/" class="footer__link">AI</a>
+          
+            <a href="/about/" class="footer__link">关于</a>
+          
+        
+      </div>
+
+      <!-- 03: Info -->
+      <div class="footer__col footer__col--info">
+        <h4 class="footer__col-title">信息</h4>
+        <a href="/archives/" class="footer__link">归档（3）</a>
+      </div>
+    </div>
+    <div class="footer__copyright">
+      &copy; 2020 - 2026 By Plocr
+    </div>
+  </div>
+</footer>
+
+<script src="/js/claude.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</body>
+</html>
