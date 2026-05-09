@@ -7,67 +7,98 @@
           <h1 class="archive-categories__title">文章分类</h1>
         </header>
         <div class="archive-categories__grid">
-          <a href="/tags/项目日志/" class="archive-card">
-            <span class="archive-card__num">01</span>
-            <span class="archive-card__title">项目日志</span>
-            <span class="archive-card__count"><%= site.posts.filter(function(p) { return p.tags && p.tags.find(function(t) { return t.name === '项目日志'; }); }).length %> 篇</span>
-          </a>
-          <a href="/tags/工作流分享/" class="archive-card">
-            <span class="archive-card__num">02</span>
-            <span class="archive-card__title">工作流分享</span>
-            <span class="archive-card__count"><%= site.posts.filter(function(p) { return p.tags && p.tags.find(function(t) { return t.name === '工作流分享'; }); }).length %> 篇</span>
-          </a>
-          <a href="/tags/随笔/" class="archive-card">
-            <span class="archive-card__num">03</span>
-            <span class="archive-card__title">说些乱七八糟的</span>
-            <span class="archive-card__count"><%= site.posts.filter(function(p) { return p.tags && p.tags.find(function(t) { return t.name === '随笔'; }); }).length %> 篇</span>
-          </a>
-          <a href="/tags/影音推荐/" class="archive-card">
-            <span class="archive-card__num">04</span>
-            <span class="archive-card__title">影音推荐</span>
-            <span class="archive-card__count"><%= site.posts.filter(function(p) { return p.tags && p.tags.find(function(t) { return t.name === '影音推荐'; }); }).length %> 篇</span>
-          </a>
+          <%
+            var categories = [
+              { id: '项目日志', num: '01', label: '项目日志' },
+              { id: '工作流分享', num: '02', label: '工作流分享' },
+              { id: '随笔', num: '03', label: '说些乱七八糟的' },
+              { id: '影音推荐', num: '04', label: '影音推荐' }
+            ];
+            var catCounts = {};
+            catData = {};
+            categories.forEach(function(c) { catCounts[c.id] = 0; catData[c.id] = []; });
+            site.posts.each(function(p) {
+              if (p.tags) {
+                p.tags.each(function(t) {
+                  if (catCounts[t.name] !== undefined) {
+                    catCounts[t.name]++;
+                    catData[t.name].push({ title: p.title, path: p.path, date: p.date });
+                  }
+                });
+              }
+            });
+          %>
+          <% categories.forEach(function(c) { %>
+            <a href="javascript:void(0)" class="archive-card" data-category="<%= c.id %>">
+              <span class="archive-card__num"><%= c.num %></span>
+              <span class="archive-card__title"><%= c.label %></span>
+              <span class="archive-card__count"><%= catCounts[c.id] %> 篇</span>
+            </a>
+          <% }) %>
         </div>
       </div>
 
-      <!-- Right: Timeline -->
+      <!-- Right: Article List / Timeline -->
       <div class="archive-timeline">
         <header class="archive-timeline__header">
-          <h2 class="archive-timeline__title">时间轴</h2>
-          <p class="archive-timeline__subtitle">共 <%= site.posts.length %> 篇文章</p>
+          <h2 class="archive-timeline__title" id="archive-view-title">时间轴</h2>
+          <p class="archive-timeline__subtitle" id="archive-view-subtitle">共 <%= site.posts.length %> 篇文章</p>
         </header>
-        <div class="timeline">
+
+        <!-- Timeline view (default) -->
+        <div class="timeline" id="archive-timeline-view">
           <% if (site.posts && site.posts.length > 0) { %>
-            <%
-              var currentYear = '';
-              site.posts.sort('date', -1).each(function(post) {
-                var postYear = date(post.date, 'YYYY');
-                if (postYear !== currentYear) {
-                  currentYear = postYear;
-            %>
-              <div class="timeline-year"><%= postYear %></div>
-            <% } %>
-            <article class="timeline-item" onclick="window.location='<%= url_for(post.path) %>'">
-              <div class="timeline-dot"></div>
-              <time class="timeline-date" datetime="<%= date_xml(post.date) %>">
-                <%= date(post.date, 'MM-DD') %>
-              </time>
-              <div class="timeline-content">
-                <h3 class="timeline-title"><%= post.title %></h3>
-                <% if (post.tags && post.tags.length > 0) { %>
-                  <div class="timeline-tags">
-                    <% post.tags.each(function(tag) { %>
-                      <span class="tag"><%= tag.name %></span>
-                    <% }) %>
-                  </div>
-                <% } %>
-              </div>
-            </article>
-          <% }) %>
-        <% } else { %>
-          <p class="empty-state">还没有文章</p>
-        <% } %>
+            <% var currentYear = ''; %>
+            <% site.posts.sort('date', -1).each(function(post) { %>
+              <% var postYear = date(post.date, 'YYYY'); %>
+              <% if (postYear !== currentYear) { currentYear = postYear; %>
+                <div class="timeline-year"><%= postYear %></div>
+              <% } %>
+              <article class="timeline-item" onclick="window.location='<%= url_for(post.path) %>'">
+                <div class="timeline-dot"></div>
+                <time class="timeline-date"><%= date(post.date, 'MM-DD') %></time>
+                <div class="timeline-content">
+                  <h3 class="timeline-title"><%= post.title %></h3>
+                  <% if (post.tags && post.tags.length > 0) { %>
+                    <div class="timeline-tags">
+                      <% post.tags.each(function(tag) { %>
+                        <span class="tag"><%= tag.name %></span>
+                      <% }) %>
+                    </div>
+                  <% } %>
+                </div>
+              </article>
+            <% }) %>
+          <% } else { %>
+            <p class="empty-state">还没有文章</p>
+          <% } %>
         </div>
+
+        <!-- Category article list views (hidden by default) -->
+        <% categories.forEach(function(c) { %>
+          <div class="archive-category-view" id="archive-cat-<%= c.id %>" style="display:none">
+            <% if (catData[c.id] && catData[c.id].length > 0) { %>
+              <div class="archive-article-list">
+                <% catData[c.id].sort(function(a, b) { return b.date - a.date; }).forEach(function(post, idx) { %>
+                  <article class="archive-article-card" onclick="window.location='<%= url_for(post.path) %>'" style="animation-delay: <%= idx * 0.05 %>s">
+                    <span class="archive-article-card__index"><%= String(idx + 1).padStart(2, '0') %></span>
+                    <div class="archive-article-card__info">
+                      <h3 class="archive-article-card__title"><%= post.title %></h3>
+                      <time class="archive-article-card__date"><%= date(post.date, 'YYYY-MM-DD') %></time>
+                    </div>
+                    <span class="archive-article-card__arrow">
+                      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M5 2L10 7L5 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </span>
+                  </article>
+                <% }) %>
+              </div>
+            <% } else { %>
+              <div class="archive-empty">
+                <p>还没有文章哦~</p>
+              </div>
+            <% } %>
+          </div>
+        <% }) %>
       </div>
     </div>
   </div>

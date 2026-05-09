@@ -421,6 +421,68 @@
     document.addEventListener('mouseleave', function() { glow.style.opacity = '0'; });
   }
 
+  // ===== Archive Category Switching =====
+  function initArchiveCategories() {
+    var cards = document.querySelectorAll('.archive-card');
+    var timeline = document.getElementById('archive-timeline-view');
+    var title = document.getElementById('archive-view-title');
+    var subtitle = document.getElementById('archive-view-subtitle');
+    if (!cards.length || !timeline) return;
+
+    var categoryViews = {};
+    document.querySelectorAll('.archive-category-view').forEach(function(v) {
+      categoryViews[v.id] = v;
+    });
+
+    cards.forEach(function(card) {
+      card.addEventListener('click', function() {
+        var cat = card.getAttribute('data-category');
+        var catTitle = card.querySelector('.archive-card__title').textContent;
+        var catCount = card.querySelector('.archive-card__count').textContent;
+
+        cards.forEach(function(c) { c.classList.remove('active'); });
+        card.classList.add('active');
+
+        timeline.style.display = 'none';
+        Object.keys(categoryViews).forEach(function(k) {
+          categoryViews[k].style.display = 'none';
+        });
+
+        var view = document.getElementById('archive-cat-' + cat);
+        if (view) {
+          view.style.display = 'block';
+          // Stagger animation
+          view.querySelectorAll('.archive-article-card').forEach(function(cardEl, i) {
+            cardEl.style.opacity = '0';
+            cardEl.style.transform = 'translateY(10px)';
+            setTimeout(function() {
+              cardEl.style.opacity = '1';
+              cardEl.style.transform = 'translateY(0)';
+            }, i * 60);
+          });
+        }
+
+        if (title) title.textContent = catTitle;
+        if (subtitle) subtitle.textContent = catCount;
+      });
+    });
+
+    // Reset to timeline on clicking the title
+    if (title) {
+      title.addEventListener('click', function() {
+        cards.forEach(function(c) { c.classList.remove('active'); });
+        Object.keys(categoryViews).forEach(function(k) {
+          if (categoryViews[k]) categoryViews[k].style.display = 'none';
+        });
+        timeline.style.display = 'block';
+        title.textContent = '时间轴';
+        var total = document.querySelectorAll('.timeline-item').length;
+        if (subtitle) subtitle.textContent = '共 ' + total + ' 篇文章';
+      });
+      title.style.cursor = 'pointer';
+    }
+  }
+
   // ===== Hitokoto Quote =====
   function initHitokoto() {
     const textEl = document.getElementById('hitokoto-text');
@@ -449,6 +511,7 @@
     initScrollIndicator();
     initMobileMenu();
     initMobileThemeToggle();
+    initArchiveCategories();
     initDropdownClick();
     initDefaultCovers();
     initCursorGlow();

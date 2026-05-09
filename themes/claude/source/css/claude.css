@@ -1975,6 +1975,106 @@ hr {
   border-color: var(--accent);
 }
 
+.archive-card.active {
+  border-color: var(--accent);
+  background: var(--accent-subtle);
+}
+
+.archive-card.active .archive-card__num {
+  opacity: 1;
+}
+
+/* Archive article list cards */
+.archive-category-view {
+  animation: fadeIn 0.3s ease;
+}
+
+.archive-article-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.archive-article-card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--space-4);
+  background: var(--bg-card);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all var(--transition-slow);
+  transition-delay: inherit;
+}
+
+.archive-article-card:hover {
+  transform: translateX(4px);
+  border-color: var(--accent);
+  box-shadow: var(--shadow-sm);
+}
+
+.archive-article-card__index {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  opacity: 0.5;
+  min-width: 1.5em;
+}
+
+.archive-article-card__info {
+  flex: 1;
+  min-width: 0;
+}
+
+.archive-article-card__title {
+  font-family: var(--font-display);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  transition: color var(--transition);
+  margin-bottom: var(--space-1);
+}
+
+.archive-article-card:hover .archive-article-card__title {
+  color: var(--accent);
+}
+
+.archive-article-card__date {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.archive-article-card__arrow {
+  color: var(--text-muted);
+  transition: all var(--transition);
+  flex-shrink: 0;
+}
+
+.archive-article-card:hover .archive-article-card__arrow {
+  color: var(--accent);
+  transform: translateX(3px);
+}
+
+.archive-empty {
+  text-align: center;
+  padding: var(--space-10) 0;
+  color: var(--text-muted);
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+}
+
+.archive-timeline__title {
+  cursor: pointer;
+  transition: color var(--transition);
+}
+
+.archive-timeline__title:hover {
+  color: var(--accent);
+}
+
 .archive-card__num {
   font-family: var(--font-display);
   font-size: 2rem;
