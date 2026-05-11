@@ -467,19 +467,29 @@
       });
     });
 
+    // Reset to timeline
+    function showTimeline() {
+      cards.forEach(function(c) { c.classList.remove('active'); });
+      var timelineBtn = document.getElementById('archive-timeline-btn');
+      if (timelineBtn) timelineBtn.classList.add('active');
+      Object.keys(categoryViews).forEach(function(k) {
+        if (categoryViews[k]) categoryViews[k].style.display = 'none';
+      });
+      timeline.style.display = 'block';
+      if (title) { title.textContent = '时间轴'; title.style.cursor = 'pointer'; }
+      var total = document.querySelectorAll('.timeline-item').length;
+      if (subtitle) subtitle.textContent = '共 ' + total + ' 篇文章';
+    }
+
+    // Timeline button
+    var timelineBtn = document.getElementById('archive-timeline-btn');
+    if (timelineBtn) {
+      timelineBtn.addEventListener('click', showTimeline);
+    }
+
     // Reset to timeline on clicking the title
     if (title) {
-      title.addEventListener('click', function() {
-        cards.forEach(function(c) { c.classList.remove('active'); });
-        Object.keys(categoryViews).forEach(function(k) {
-          if (categoryViews[k]) categoryViews[k].style.display = 'none';
-        });
-        timeline.style.display = 'block';
-        title.textContent = '时间轴';
-        var total = document.querySelectorAll('.timeline-item').length;
-        if (subtitle) subtitle.textContent = '共 ' + total + ' 篇文章';
-      });
-      title.style.cursor = 'pointer';
+      title.addEventListener('click', showTimeline);
     }
   }
 
@@ -512,6 +522,9 @@
     initMobileMenu();
     initMobileThemeToggle();
     initArchiveCategories();
+    // Timeline active by default
+    var tb = document.getElementById('archive-timeline-btn');
+    if (tb) tb.classList.add('active');
     initDropdownClick();
     initDefaultCovers();
     initCursorGlow();
