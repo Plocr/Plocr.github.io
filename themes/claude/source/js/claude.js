@@ -438,7 +438,9 @@
       if (title) title.textContent = '时间轴';
       var total = document.querySelectorAll('.timeline-item').length;
       if (subtitle) subtitle.textContent = '共 ' + total + ' 篇文章';
-      history.replaceState(null, '', '/archives/');
+      if (window.location.hash !== '#时间轴') {
+        history.replaceState(null, '', '/archives/#时间轴');
+      }
     }
 
     function showCategory(cat) {
@@ -483,11 +485,12 @@
 
     // Check hash on load
     var hash = decodeURIComponent(window.location.hash.replace('#', ''));
+    if (hash === '时间轴') { showTimeline(); return; }
     if (hash) {
-      // Try exact match first, then try to find by title text
+      // Try exact match first
       var found = document.querySelector('.archive-card[data-category="' + hash + '"]');
       if (found) { showCategory(hash); return; }
-      // Fallback: search by data-category or title text
+      // Fallback: search by title text
       document.querySelectorAll('.archive-card').forEach(function(c) {
         var t = c.querySelector('.archive-card__title');
         if (t && t.textContent.indexOf(hash) > -1) {
@@ -509,11 +512,11 @@
     // Handle hash changes (e.g. from nav submenu clicks while already on archive page)
     window.addEventListener('hashchange', function() {
       var h = decodeURIComponent(window.location.hash.replace('#', ''));
-      if (h) {
-        var f = document.querySelector('.archive-card[data-category="' + h + '"]');
-        if (f) { showCategory(h); }
-      } else {
+      if (h === '时间轴' || !h) {
         showTimeline();
+      } else {
+        var f = document.querySelector('.archive-card[data-category="' + h + '"]');
+        if (f) showCategory(h);
       }
     });
   }
