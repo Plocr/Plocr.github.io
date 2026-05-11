@@ -505,6 +505,17 @@
       title.style.cursor = 'pointer';
       title.addEventListener('click', showTimeline);
     }
+
+    // Handle hash changes (e.g. from nav submenu clicks while already on archive page)
+    window.addEventListener('hashchange', function() {
+      var h = decodeURIComponent(window.location.hash.replace('#', ''));
+      if (h) {
+        var f = document.querySelector('.archive-card[data-category="' + h + '"]');
+        if (f) { showCategory(h); }
+      } else {
+        showTimeline();
+      }
+    });
   }
 
   // ===== Hitokoto Quote =====
