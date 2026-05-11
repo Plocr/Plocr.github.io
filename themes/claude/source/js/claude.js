@@ -522,9 +522,6 @@
     initMobileMenu();
     initMobileThemeToggle();
     initArchiveCategories();
-    // Timeline active by default
-    var tb = document.getElementById('archive-timeline-btn');
-    if (tb) tb.classList.add('active');
     initDropdownClick();
     initDefaultCovers();
     initCursorGlow();
