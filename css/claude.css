@@ -1884,6 +1884,13 @@ hr {
   color: var(--accent);
 }
 
+/* ===== Giscus Comments ===== */
+.post-comments {
+  margin-top: var(--space-10);
+  padding-top: var(--space-8);
+  border-top: 1px solid var(--border);
+}
+
 /* ===== Page ===== */
 .page-article {
   padding: var(--space-12) 0 var(--space-16);
