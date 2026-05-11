@@ -482,10 +482,19 @@
     });
 
     // Check hash on load
-    var hash = window.location.hash.replace('#', '');
+    var hash = decodeURIComponent(window.location.hash.replace('#', ''));
     if (hash) {
+      // Try exact match first, then try to find by title text
       var found = document.querySelector('.archive-card[data-category="' + hash + '"]');
       if (found) { showCategory(hash); return; }
+      // Fallback: search by data-category or title text
+      document.querySelectorAll('.archive-card').forEach(function(c) {
+        var t = c.querySelector('.archive-card__title');
+        if (t && t.textContent.indexOf(hash) > -1) {
+          var cat = c.getAttribute('data-category');
+          if (cat && cat !== 'timeline') showCategory(cat);
+        }
+      });
     }
 
     // Default: timeline
