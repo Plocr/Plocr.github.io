@@ -429,66 +429,71 @@
     var subtitle = document.getElementById('archive-view-subtitle');
     if (!cards.length || !timeline) return;
 
-    var categoryViews = {};
-    document.querySelectorAll('.archive-category-view').forEach(function(v) {
-      categoryViews[v.id] = v;
-    });
+    function showTimeline() {
+      cards.forEach(function(c) { c.classList.remove('active'); });
+      var tb = document.querySelector('.archive-card[data-category="timeline"]');
+      if (tb) tb.classList.add('active');
+      document.querySelectorAll('.archive-category-view').forEach(function(v) { v.style.display = 'none'; });
+      timeline.style.display = 'block';
+      if (title) title.textContent = '时间轴';
+      var total = document.querySelectorAll('.timeline-item').length;
+      if (subtitle) subtitle.textContent = '共 ' + total + ' 篇文章';
+      history.replaceState(null, '', '/archives/');
+    }
 
+    function showCategory(cat) {
+      cards.forEach(function(c) { c.classList.remove('active'); });
+      document.querySelectorAll('.archive-category-view').forEach(function(v) { v.style.display = 'none'; });
+      timeline.style.display = 'none';
+
+      var target = document.querySelector('.archive-card[data-category="' + cat + '"]');
+      if (target) target.classList.add('active');
+
+      var view = document.getElementById('archive-cat-' + cat);
+      if (view) {
+        view.style.display = 'block';
+        view.querySelectorAll('.archive-article-card').forEach(function(el, i) {
+          el.style.opacity = '0';
+          el.style.transform = 'translateY(10px)';
+          setTimeout(function() {
+            el.style.opacity = '1';
+            el.style.transform = 'translateY(0)';
+          }, i * 60);
+        });
+      }
+      if (title) {
+        var t = target ? target.querySelector('.archive-card__title').textContent : cat;
+        title.textContent = t;
+      }
+      if (subtitle) {
+        var c = target ? target.querySelector('.archive-card__count').textContent : '0 篇';
+        subtitle.textContent = c;
+      }
+    }
+
+    // Card click handlers
     cards.forEach(function(card) {
       card.addEventListener('click', function() {
         var cat = card.getAttribute('data-category');
-        var catTitle = card.querySelector('.archive-card__title').textContent;
-        var catCount = card.querySelector('.archive-card__count').textContent;
-
-        cards.forEach(function(c) { c.classList.remove('active'); });
-        card.classList.add('active');
-
-        timeline.style.display = 'none';
-        Object.keys(categoryViews).forEach(function(k) {
-          categoryViews[k].style.display = 'none';
-        });
-
-        var view = document.getElementById('archive-cat-' + cat);
-        if (view) {
-          view.style.display = 'block';
-          // Stagger animation
-          view.querySelectorAll('.archive-article-card').forEach(function(cardEl, i) {
-            cardEl.style.opacity = '0';
-            cardEl.style.transform = 'translateY(10px)';
-            setTimeout(function() {
-              cardEl.style.opacity = '1';
-              cardEl.style.transform = 'translateY(0)';
-            }, i * 60);
-          });
-        }
-
-        if (title) title.textContent = catTitle;
-        if (subtitle) subtitle.textContent = catCount;
+        if (cat === 'timeline') { showTimeline(); return; }
+        showCategory(cat);
+        history.replaceState(null, '', '/archives/#' + cat);
       });
     });
 
-    // Reset to timeline
-    function showTimeline() {
-      cards.forEach(function(c) { c.classList.remove('active'); });
-      var timelineBtn = document.getElementById('archive-timeline-btn');
-      if (timelineBtn) timelineBtn.classList.add('active');
-      Object.keys(categoryViews).forEach(function(k) {
-        if (categoryViews[k]) categoryViews[k].style.display = 'none';
-      });
-      timeline.style.display = 'block';
-      if (title) { title.textContent = '时间轴'; title.style.cursor = 'pointer'; }
-      var total = document.querySelectorAll('.timeline-item').length;
-      if (subtitle) subtitle.textContent = '共 ' + total + ' 篇文章';
+    // Check hash on load
+    var hash = window.location.hash.replace('#', '');
+    if (hash) {
+      var found = document.querySelector('.archive-card[data-category="' + hash + '"]');
+      if (found) { showCategory(hash); return; }
     }
 
-    // Timeline button
-    var timelineBtn = document.getElementById('archive-timeline-btn');
-    if (timelineBtn) {
-      timelineBtn.addEventListener('click', showTimeline);
-    }
+    // Default: timeline
+    showTimeline();
 
-    // Reset to timeline on clicking the title
+    // Title click resets
     if (title) {
+      title.style.cursor = 'pointer';
       title.addEventListener('click', showTimeline);
     }
   }
@@ -522,6 +527,7 @@
     initMobileMenu();
     initMobileThemeToggle();
     initArchiveCategories();
+    // Timeline default active is set inside initArchiveCategories()
     initDropdownClick();
     initDefaultCovers();
     initCursorGlow();
