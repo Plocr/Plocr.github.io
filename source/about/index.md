@@ -32,6 +32,7 @@ updated: 2025-05-05
 - **[Fantasque Sans Mono](https://github.com/belluzj/fantasque-sans-mono)** — 等宽编程字体，用于代码块
 - **[Font Awesome](https://fontawesome.com/)** — 图标库
 - **[不蒜子](https://busuanzi.ibruce.info/)** — 轻量级网站统计，提供阅读量计数
+- **[Giscus](https://giscus.app/)** — 基于 GitHub Discussions 的开源评论系统
 
 ### API 与数据
 
