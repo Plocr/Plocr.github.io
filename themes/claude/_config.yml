@@ -25,10 +25,3 @@ footer_since: 2020
 
 # Dark mode
 darkmode: true
-
-# Comments (Valine config)
-valine:
-  enable: false
-  appId:
-  appKey:
-  avatar: monsterid
