@@ -34,6 +34,27 @@
 
   setTheme(getPreferredTheme());
 
+  // Retry Giscus theme sync (iframe loads after initial setTheme)
+  (function() {
+    var retries = 0;
+    var timer = setInterval(function() {
+      var frame = document.querySelector('iframe.giscus-frame');
+      if (frame || retries > 15) { clearInterval(timer); return; }
+      retries++;
+      var currentTheme = html.getAttribute('data-theme') || 'light';
+      var giscusTheme = currentTheme === 'dark'
+        ? 'https://www.plocr.online/css/giscus-dark.css'
+        : 'https://www.plocr.online/css/giscus-light.css';
+      var f = document.querySelector('iframe.giscus-frame');
+      if (f) {
+        f.contentWindow.postMessage(
+          { giscus: { setConfig: { theme: giscusTheme } } },
+          'https://giscus.app'
+        );
+      }
+    }, 300);
+  })();
+
   // ===== Scroll-Triggered Reveal (Intersection Observer) =====
   function initScrollReveal() {
     const items = document.querySelectorAll('.reveal-item');
@@ -368,6 +389,17 @@
   setTheme = function(theme) {
     origSetTheme(theme);
     syncMobileThemeIcons(theme);
+    // Sync Giscus theme
+    var giscusTheme = theme === 'dark'
+      ? 'https://www.plocr.online/css/giscus-dark.css'
+      : 'https://www.plocr.online/css/giscus-light.css';
+    var giscusFrame = document.querySelector('iframe.giscus-frame');
+    if (giscusFrame) {
+      giscusFrame.contentWindow.postMessage(
+        { giscus: { setConfig: { theme: giscusTheme } } },
+        'https://giscus.app'
+      );
+    }
   };
 
   // ===== Fill default cover placeholders =====
