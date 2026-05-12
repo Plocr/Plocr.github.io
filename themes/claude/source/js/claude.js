@@ -530,14 +530,14 @@
       });
     }
 
-    // Default: timeline
-    showTimeline();
+    // Default: 01 项目日志
+    showCategory('项目日志');
 
     // Handle hash changes (e.g. from nav submenu clicks while already on archive page)
     window.addEventListener('hashchange', function() {
       var h = decodeURIComponent(window.location.hash.replace('#', ''));
-      if (h === '时间轴' || !h) { showTimeline(); }
-      else {
+      if (h === '时间轴') { showTimeline(); }
+      else if (h) {
         var f = document.querySelector('.archive-card[data-category="' + h + '"]');
         if (f) showCategory(h);
       }
@@ -571,36 +571,36 @@
       var hash = href.split('#')[1] || '';
       var cat = hash ? decodeURIComponent(hash) : '';
 
-      if (cat === '时间轴' || !cat) {
-        // Show timeline
+      if (cat === '时间轴') {
         document.querySelectorAll('.archive-card').forEach(function(c) { c.classList.remove('active'); });
         var tb = document.querySelector('.archive-card[data-category="timeline"]');
         if (tb) tb.classList.add('active');
         document.querySelectorAll('.archive-category-view').forEach(function(v) { v.style.display = 'none'; });
-        var timeline = document.getElementById('archive-timeline-view');
-        if (timeline) timeline.style.display = 'block';
-        var title = document.getElementById('archive-view-title');
-        if (title) title.textContent = '时间轴';
-        var sub = document.getElementById('archive-view-subtitle');
+        var tv = document.getElementById('archive-timeline-view');
+        if (tv) tv.style.display = 'block';
+        var titleEl = document.getElementById('archive-view-title');
+        if (titleEl) titleEl.textContent = '时间轴';
+        var subEl = document.getElementById('archive-view-subtitle');
         var total = document.querySelectorAll('.timeline-item').length;
-        if (sub) sub.textContent = '共 ' + total + ' 篇文章';
+        if (subEl) subEl.textContent = '共 ' + total + ' 篇文章';
         history.replaceState(null, '', '/archives/#时间轴');
-      } else {
-        // Show category
-        document.querySelectorAll('.archive-card').forEach(function(c) { c.classList.remove('active'); });
-        var target = document.querySelector('.archive-card[data-category="' + cat + '"]');
-        if (target) target.classList.add('active');
-        document.querySelectorAll('.archive-category-view').forEach(function(v) { v.style.display = 'none'; });
-        var timeline = document.getElementById('archive-timeline-view');
-        if (timeline) timeline.style.display = 'none';
-        var view = document.getElementById('archive-cat-' + cat);
-        if (view) view.style.display = 'block';
-        var title = document.getElementById('archive-view-title');
-        if (title && target) title.textContent = target.querySelector('.archive-card__title').textContent;
-        var sub = document.getElementById('archive-view-subtitle');
-        if (sub && target) sub.textContent = target.querySelector('.archive-card__count').textContent;
-        history.replaceState(null, '', '/archives/#' + cat);
+        return;
       }
+      if (!cat) { cat = '项目日志'; }
+      // Show category
+      document.querySelectorAll('.archive-card').forEach(function(c) { c.classList.remove('active'); });
+      var target = document.querySelector('.archive-card[data-category="' + cat + '"]');
+      if (target) target.classList.add('active');
+      document.querySelectorAll('.archive-category-view').forEach(function(v) { v.style.display = 'none'; });
+      var timeline = document.getElementById('archive-timeline-view');
+      if (timeline) timeline.style.display = 'none';
+      var view = document.getElementById('archive-cat-' + cat);
+      if (view) view.style.display = 'block';
+      var title = document.getElementById('archive-view-title');
+      if (title && target) title.textContent = target.querySelector('.archive-card__title').textContent;
+      var sub = document.getElementById('archive-view-subtitle');
+      if (sub && target) sub.textContent = target.querySelector('.archive-card__count').textContent;
+      history.replaceState(null, '', '/archives/#' + cat);
 
       // Sync nav submenu active state
       document.querySelectorAll('.nav__dropdown-menu a').forEach(function(a) {
