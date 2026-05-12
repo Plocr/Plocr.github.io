@@ -85,6 +85,7 @@
 html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 /* ===== Custom Scrollbar ===== */
@@ -360,8 +361,8 @@ hr {
   right: 0;
   z-index: 100;
   background: rgba(244, 241, 234, 0.85);
-  backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
   border-bottom: 1.5px solid var(--border);
   transition: background var(--transition-slow), border-color var(--transition-slow), transform var(--transition-slow);
 }
@@ -2075,12 +2076,7 @@ hr {
 }
 
 .archive-timeline__title {
-  cursor: pointer;
   transition: color var(--transition);
-}
-
-.archive-timeline__title:hover {
-  color: var(--accent);
 }
 
 .archive-card__num {
@@ -2451,8 +2447,8 @@ hr {
   position: absolute;
   inset: 0;
   background: rgba(28, 28, 30, 0.4);
-  backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
 }
 
 .mobile-menu__panel {
