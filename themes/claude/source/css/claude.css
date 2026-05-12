@@ -2536,6 +2536,41 @@ hr {
   color: var(--accent);
 }
 
+.mobile-menu__group {
+  padding-left: var(--space-5);
+  padding-right: var(--space-5);
+  padding-bottom: var(--space-2);
+  border-bottom: 1px solid var(--border-light);
+  margin-bottom: var(--space-2);
+}
+
+.mobile-menu__group-title {
+  font-family: var(--font-display);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: var(--space-3) 0;
+}
+
+.mobile-menu__sublink {
+  display: block;
+  font-family: var(--font-ui);
+  font-size: 0.9375rem;
+  color: var(--text-primary);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-sm);
+  transition: all var(--transition);
+  text-decoration: none;
+}
+
+.mobile-menu__sublink:hover {
+  background: var(--accent-subtle);
+  color: var(--accent);
+  padding-left: var(--space-6);
+}
+
 .mobile-menu__footer {
   padding: var(--space-4) var(--space-5);
   border-top: 1px solid var(--border);

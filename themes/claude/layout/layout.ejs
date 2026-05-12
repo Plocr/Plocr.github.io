@@ -83,16 +83,23 @@
       </button>
     </div>
     <div class="mobile-menu__body">
-      <% if (theme.menu) { %>
-        <% for (const [label, url] of Object.entries(theme.menu)) { %>
-          <a href="<%= url %>" class="mobile-menu__link">
-            <span class="mobile-menu__link-text"><%= label %></span>
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </a>
-        <% } %>
-      <% } %>
+      <a href="/" class="mobile-menu__link">
+        <span class="mobile-menu__link-text">首页</span>
+      </a>
+      <div class="mobile-menu__group">
+        <div class="mobile-menu__group-title">文章</div>
+        <a href="/archives/#项目日志" class="mobile-menu__sublink">01 项目日志</a>
+        <a href="/archives/#工作流分享" class="mobile-menu__sublink">02 工作流分享</a>
+        <a href="/archives/#随笔" class="mobile-menu__sublink">03 说些乱七八糟的</a>
+        <a href="/archives/#影音推荐" class="mobile-menu__sublink">04 影音推荐</a>
+        <a href="/archives/#时间轴" class="mobile-menu__sublink">05 时间轴</a>
+      </div>
+      <a href="/ai/" class="mobile-menu__link">
+        <span class="mobile-menu__link-text">AI</span>
+      </a>
+      <a href="/about/" class="mobile-menu__link">
+        <span class="mobile-menu__link-text">关于</span>
+      </a>
     </div>
     <div class="mobile-menu__footer">
       <button class="theme-toggle mobile-theme-toggle" id="mobileThemeToggle" aria-label="切换主题">
