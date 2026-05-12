@@ -517,17 +517,15 @@
 
     // Check hash on load
     var hash = decodeURIComponent(window.location.hash.replace('#', ''));
-    if (hash === '时间轴') { showTimeline(); return; }
+    if (hash === '时间轴') { showTimeline(); syncNavSubmenu('时间轴'); return; }
     if (hash) {
-      // Try exact match first
       var found = document.querySelector('.archive-card[data-category="' + hash + '"]');
-      if (found) { showCategory(hash); return; }
-      // Fallback: search by title text
+      if (found) { showCategory(hash); syncNavSubmenu(hash); return; }
       document.querySelectorAll('.archive-card').forEach(function(c) {
         var t = c.querySelector('.archive-card__title');
         if (t && t.textContent.indexOf(hash) > -1) {
           var cat = c.getAttribute('data-category');
-          if (cat && cat !== 'timeline') showCategory(cat);
+          if (cat && cat !== 'timeline') { showCategory(cat); syncNavSubmenu(cat); }
         }
       });
     }
@@ -551,10 +549,31 @@
       }
     });
 
+    // Sync nav submenu active state
+    function syncNavSubmenu(cat) {
+      document.querySelectorAll('.nav__dropdown-menu a').forEach(function(a) {
+        var href = a.getAttribute('href') || '';
+        var hash = href.split('#')[1] || '';
+        a.classList.remove('active');
+        if (hash === cat) a.classList.add('active');
+      });
+    }
+
+    // Override showCategory and showTimeline to sync nav
+    var origShowCategory = showCategory;
+    var origShowTimeline = showTimeline;
+    showCategory = function(cat) {
+      origShowCategory(cat);
+      syncNavSubmenu(cat);
+    };
+    showTimeline = function() {
+      origShowTimeline();
+      syncNavSubmenu('时间轴');
+    };
+
     // Direct intercept: nav submenu clicks on archive page
     document.querySelectorAll('.nav__dropdown-menu a').forEach(function(link) {
       link.addEventListener('click', function(e) {
-        // Only intercept if we're already on the archive page
         if (!document.querySelector('.archive-page')) return;
         e.preventDefault();
         var href = link.getAttribute('href');
@@ -566,6 +585,7 @@
           var f = document.querySelector('.archive-card[data-category="' + cat + '"]');
           if (f) showCategory(cat);
         }
+        syncNavSubmenu(cat);
         history.replaceState(null, '', href);
       });
     });
