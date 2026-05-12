@@ -517,15 +517,15 @@
 
     // Check hash on load
     var hash = decodeURIComponent(window.location.hash.replace('#', ''));
-    if (hash === '时间轴') { showTimeline(); syncNavSubmenu('时间轴'); return; }
+    if (hash === '时间轴') { showTimeline(); return; }
     if (hash) {
       var found = document.querySelector('.archive-card[data-category="' + hash + '"]');
-      if (found) { showCategory(hash); syncNavSubmenu(hash); return; }
+      if (found) { showCategory(hash); return; }
       document.querySelectorAll('.archive-card').forEach(function(c) {
         var t = c.querySelector('.archive-card__title');
         if (t && t.textContent.indexOf(hash) > -1) {
           var cat = c.getAttribute('data-category');
-          if (cat && cat !== 'timeline') { showCategory(cat); syncNavSubmenu(cat); }
+          if (cat && cat !== 'timeline') { showCategory(cat); }
         }
       });
     }
@@ -549,55 +549,70 @@
       }
     });
 
-    // Sync nav submenu active state
-    function syncNavSubmenu(cat) {
+  }
+
+  // ===== Global nav submenu handler (outside initArchiveCategories for reliability) =====
+  function initGlobalNavSubmenu() {
+    document.addEventListener('click', function(e) {
+      // Check if the click is on a nav submenu link
+      var link = e.target.closest('.nav__dropdown-menu a');
+      if (!link) return;
+
+      var dd = document.querySelector('.nav__dropdown');
+      if (dd) dd.classList.remove('open');
+
+      // Close mobile menu if open
+      var mm = document.getElementById('mobileMenu');
+      if (mm && mm.classList.contains('open')) {
+        mm.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+
+      // If not on archive page, let normal navigation happen
+      if (!document.querySelector('.archive-page')) return;
+
+      // On archive page: intercept and switch view
+      e.preventDefault();
+      var href = link.getAttribute('href') || '';
+      var hash = href.split('#')[1] || '';
+      var cat = hash ? decodeURIComponent(hash) : '';
+
+      if (cat === '时间轴' || !cat) {
+        // Show timeline
+        document.querySelectorAll('.archive-card').forEach(function(c) { c.classList.remove('active'); });
+        var tb = document.querySelector('.archive-card[data-category="timeline"]');
+        if (tb) tb.classList.add('active');
+        document.querySelectorAll('.archive-category-view').forEach(function(v) { v.style.display = 'none'; });
+        var timeline = document.getElementById('archive-timeline-view');
+        if (timeline) timeline.style.display = 'block';
+        var title = document.getElementById('archive-view-title');
+        if (title) title.textContent = '时间轴';
+        var sub = document.getElementById('archive-view-subtitle');
+        var total = document.querySelectorAll('.timeline-item').length;
+        if (sub) sub.textContent = '共 ' + total + ' 篇文章';
+        history.replaceState(null, '', '/archives/#时间轴');
+      } else {
+        // Show category
+        document.querySelectorAll('.archive-card').forEach(function(c) { c.classList.remove('active'); });
+        var target = document.querySelector('.archive-card[data-category="' + cat + '"]');
+        if (target) target.classList.add('active');
+        document.querySelectorAll('.archive-category-view').forEach(function(v) { v.style.display = 'none'; });
+        var timeline = document.getElementById('archive-timeline-view');
+        if (timeline) timeline.style.display = 'none';
+        var view = document.getElementById('archive-cat-' + cat);
+        if (view) view.style.display = 'block';
+        var title = document.getElementById('archive-view-title');
+        if (title && target) title.textContent = target.querySelector('.archive-card__title').textContent;
+        var sub = document.getElementById('archive-view-subtitle');
+        if (sub && target) sub.textContent = target.querySelector('.archive-card__count').textContent;
+        history.replaceState(null, '', '/archives/#' + cat);
+      }
+
+      // Sync nav submenu active state
       document.querySelectorAll('.nav__dropdown-menu a').forEach(function(a) {
-        var href = a.getAttribute('href') || '';
-        var h = href.split('#')[1] || '';
+        var h = a.getAttribute('href') || '';
         a.classList.remove('active');
-        if (h === cat || (!cat && !h)) a.classList.add('active');
-      });
-    }
-
-    // Override showCategory and showTimeline to sync nav
-    var origShowCategory = showCategory;
-    var origShowTimeline = showTimeline;
-    showCategory = function(cat) {
-      origShowCategory(cat);
-      syncNavSubmenu(cat);
-    };
-    showTimeline = function() {
-      origShowTimeline();
-      syncNavSubmenu('时间轴');
-    };
-
-    // Intercept nav submenu clicks to switch archive view
-    document.querySelectorAll('.nav__dropdown-menu a').forEach(function(link) {
-      link.addEventListener('click', function(e) {
-        // Close dropdown
-        var dd = document.querySelector('.nav__dropdown');
-        if (dd) dd.classList.remove('open');
-
-        if (!document.querySelector('.archive-page')) return; // not on archive page, let nav happen
-        e.preventDefault();
-
-        var href = link.getAttribute('href') || '';
-        var hash = href.split('#')[1] || '';
-        var cat = hash ? decodeURIComponent(hash) : '';
-
-        // Close mobile menu if open
-        var mm = document.getElementById('mobileMenu');
-        if (mm && mm.classList.contains('open')) {
-          mm.classList.remove('open');
-          document.body.style.overflow = '';
-        }
-
-        if (cat === '时间轴' || !cat) { showTimeline(); }
-        else {
-          var found = document.querySelector('.archive-card[data-category="' + cat + '"]');
-          if (found) showCategory(cat);
-        }
-        history.replaceState(null, '', href || '/archives/');
+        if (cat && h.indexOf(cat) > -1) a.classList.add('active');
       });
     });
   }
@@ -631,7 +646,7 @@
     initMobileMenu();
     initMobileThemeToggle();
     initArchiveCategories();
-    // Timeline default active is set inside initArchiveCategories()
+    initGlobalNavSubmenu();
     initDropdownClick();
     initDefaultCovers();
     initCursorGlow();
