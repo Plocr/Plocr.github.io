@@ -500,7 +500,7 @@ hr {
   left: 0;
   right: 0;
   height: 8px;
-  z-index: 301;
+  pointer-events: none;
 }
 
 .nav__dropdown:hover .nav__dropdown-menu,
