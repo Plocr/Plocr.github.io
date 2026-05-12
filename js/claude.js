@@ -533,12 +533,6 @@
     // Default: timeline
     showTimeline();
 
-    // Title click resets
-    if (title) {
-      title.style.cursor = 'pointer';
-      title.addEventListener('click', showTimeline);
-    }
-
     // Handle hash changes (e.g. from nav submenu clicks while already on archive page)
     window.addEventListener('hashchange', function() {
       var h = decodeURIComponent(window.location.hash.replace('#', ''));
