@@ -553,9 +553,9 @@
     function syncNavSubmenu(cat) {
       document.querySelectorAll('.nav__dropdown-menu a').forEach(function(a) {
         var href = a.getAttribute('href') || '';
-        var hash = href.split('#')[1] || '';
+        var h = href.split('#')[1] || '';
         a.classList.remove('active');
-        if (hash === cat) a.classList.add('active');
+        if (h === cat || (!cat && !h)) a.classList.add('active');
       });
     }
 
@@ -571,22 +571,33 @@
       syncNavSubmenu('时间轴');
     };
 
-    // Direct intercept: nav submenu clicks on archive page
+    // Intercept nav submenu clicks to switch archive view
     document.querySelectorAll('.nav__dropdown-menu a').forEach(function(link) {
       link.addEventListener('click', function(e) {
-        if (!document.querySelector('.archive-page')) return;
+        // Close dropdown
+        var dd = document.querySelector('.nav__dropdown');
+        if (dd) dd.classList.remove('open');
+
+        if (!document.querySelector('.archive-page')) return; // not on archive page, let nav happen
         e.preventDefault();
-        var href = link.getAttribute('href');
-        var hash = href.split('#')[1];
-        if (!hash) { showTimeline(); return; }
-        var cat = decodeURIComponent(hash);
-        if (cat === '时间轴') { showTimeline(); }
-        else {
-          var f = document.querySelector('.archive-card[data-category="' + cat + '"]');
-          if (f) showCategory(cat);
+
+        var href = link.getAttribute('href') || '';
+        var hash = href.split('#')[1] || '';
+        var cat = hash ? decodeURIComponent(hash) : '';
+
+        // Close mobile menu if open
+        var mm = document.getElementById('mobileMenu');
+        if (mm && mm.classList.contains('open')) {
+          mm.classList.remove('open');
+          document.body.style.overflow = '';
         }
-        syncNavSubmenu(cat);
-        history.replaceState(null, '', href);
+
+        if (cat === '时间轴' || !cat) { showTimeline(); }
+        else {
+          var found = document.querySelector('.archive-card[data-category="' + cat + '"]');
+          if (found) showCategory(cat);
+        }
+        history.replaceState(null, '', href || '/archives/');
       });
     });
   }
