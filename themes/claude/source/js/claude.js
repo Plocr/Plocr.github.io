@@ -426,6 +426,24 @@
     });
   });
 
+  // ===== Back to Top =====
+  function initBackTop() {
+    var btn = document.getElementById('backTop');
+    if (!btn) return;
+
+    window.addEventListener('scroll', function() {
+      if (window.pageYOffset > 300) {
+        btn.classList.add('visible');
+      } else {
+        btn.classList.remove('visible');
+      }
+    }, { passive: true });
+
+    btn.addEventListener('click', function() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
   // ===== Cursor Glow =====
   function initCursorGlow() {
     var glow = document.querySelector('.cursor-glow');
@@ -660,6 +678,7 @@
     initGlobalNavSubmenu();
     initDropdownClick();
     initDefaultCovers();
+    initBackTop();
     initCursorGlow();
     initHitokoto();
     initCardImageParallax();
