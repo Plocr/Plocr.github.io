@@ -527,7 +527,8 @@ hr {
   cursor: pointer;
 }
 
-.nav__dropdown-menu a:hover {
+.nav__dropdown-menu a:hover,
+.nav__dropdown-menu a.active {
   background: var(--accent-subtle);
   color: var(--accent);
   padding-left: var(--space-4);
