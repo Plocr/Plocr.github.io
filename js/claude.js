@@ -473,6 +473,13 @@
       if (window.location.hash !== '#时间轴') {
         history.replaceState(null, '', '/archives/#时间轴');
       }
+
+      // Mobile: scroll down to show content
+      if (window.innerWidth < 768 && timeline) {
+        setTimeout(function() {
+          timeline.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 100);
+      }
     }
 
     function showCategory(cat) {
@@ -502,6 +509,16 @@
       if (subtitle) {
         var c = target ? target.querySelector('.archive-card__count').textContent : '0 篇';
         subtitle.textContent = c;
+      }
+
+      // Mobile: scroll down to show content
+      if (window.innerWidth < 768) {
+        var contentEl = document.getElementById('archive-cat-' + cat);
+        if (contentEl) {
+          setTimeout(function() {
+            contentEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }, 100);
+        }
       }
     }
 
