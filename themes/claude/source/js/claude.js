@@ -544,12 +544,30 @@
     // Handle hash changes (e.g. from nav submenu clicks while already on archive page)
     window.addEventListener('hashchange', function() {
       var h = decodeURIComponent(window.location.hash.replace('#', ''));
-      if (h === '时间轴' || !h) {
-        showTimeline();
-      } else {
+      if (h === '时间轴' || !h) { showTimeline(); }
+      else {
         var f = document.querySelector('.archive-card[data-category="' + h + '"]');
         if (f) showCategory(h);
       }
+    });
+
+    // Direct intercept: nav submenu clicks on archive page
+    document.querySelectorAll('.nav__dropdown-menu a').forEach(function(link) {
+      link.addEventListener('click', function(e) {
+        // Only intercept if we're already on the archive page
+        if (!document.querySelector('.archive-page')) return;
+        e.preventDefault();
+        var href = link.getAttribute('href');
+        var hash = href.split('#')[1];
+        if (!hash) { showTimeline(); return; }
+        var cat = decodeURIComponent(hash);
+        if (cat === '时间轴') { showTimeline(); }
+        else {
+          var f = document.querySelector('.archive-card[data-category="' + cat + '"]');
+          if (f) showCategory(cat);
+        }
+        history.replaceState(null, '', href);
+      });
     });
   }
 
