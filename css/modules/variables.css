@@ -1,0 +1,68 @@
+/* ===== CSS Variables ===== */
+:root {
+  --bg: #F4F1EA;
+  --bg-card: #FFFFFF;
+  --bg-elevated: #FFFFFF;
+  --text-primary: #2C2C2C;
+  --text-secondary: #6B6B6B;
+  --text-muted: #9A9A9A;
+  --accent: #D97757;
+  --accent-hover: #C86545;
+  --accent-light: #F5E6DE;
+  --accent-subtle: rgba(217, 119, 87, 0.08);
+  --border: #E5E0D8;
+  --border-light: #EFECE6;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.06);
+  --shadow-lg: 0 8px 30px rgba(0,0,0,0.08);
+  --shadow-hover: 0 12px 36px rgba(0,0,0,0.1);
+
+  /* Fonts */
+  --font-display: 'Xiaolai Mono SC', 'Kose', 'Courier New', monospace;
+  --font-body: 'Xiaolai Mono SC', 'Kose', 'Courier New', monospace;
+  --font-ui: 'Xiaolai Mono SC', 'Kose', 'Courier New', monospace;
+  --font-code: 'Fantasque Sans Mono', 'Courier New', monospace;
+
+  /* Spacing (4px base) */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+
+  /* Radii */
+  --radius-sm: 8px;
+  --radius: 12px;
+  --radius-lg: 16px;
+
+  /* Transitions */
+  --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-bounce: 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ===== Dark Mode ===== */
+[data-theme="dark"] {
+  --bg: #1C1C1E;
+  --bg-card: #2C2C2E;
+  --bg-elevated: #3A3A3C;
+  --text-primary: #F5F5F0;
+  --text-secondary: #B0B0A8;
+  --text-muted: #7C7C7A;
+  --accent: #E88B6A;
+  --accent-hover: #D97757;
+  --accent-light: #3A2A24;
+  --accent-subtle: rgba(232, 139, 106, 0.1);
+  --border: #3A3A3C;
+  --border-light: #333336;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.2);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.3);
+  --shadow-lg: 0 8px 30px rgba(0,0,0,0.35);
+  --shadow-hover: 0 12px 36px rgba(0,0,0,0.4);
+}

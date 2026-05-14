@@ -1,0 +1,191 @@
+/* ===== Mobile Menu ===== */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  padding: 8px;
+  flex-direction: column;
+  gap: 4px;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition);
+}
+
+.menu-toggle:hover {
+  border-color: var(--text-muted);
+}
+
+.menu-toggle__line {
+  display: block;
+  width: 16px;
+  height: 2px;
+  background: var(--text-secondary);
+  border-radius: 1px;
+  transition: all var(--transition);
+}
+
+.menu-toggle.active .menu-toggle__line:nth-child(1) {
+  transform: translateY(6px) rotate(45deg);
+}
+
+.menu-toggle.active .menu-toggle__line:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-toggle.active .menu-toggle__line:nth-child(3) {
+  transform: translateY(-6px) rotate(-45deg);
+}
+
+/* Mobile Menu - Full screen overlay */
+.mobile-menu {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  justify-content: flex-end;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition-slow);
+}
+
+.mobile-menu.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.mobile-menu__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(28, 28, 30, 0.4);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+}
+
+.mobile-menu__panel {
+  position: relative;
+  width: 85%;
+  max-width: 320px;
+  height: 100%;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  transform: translateX(100%);
+  transition: transform var(--transition-slow);
+  box-shadow: -4px 0 30px rgba(0,0,0,0.1);
+}
+
+.mobile-menu.open .mobile-menu__panel {
+  transform: translateX(0);
+}
+
+.mobile-menu__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-4) var(--space-5);
+  border-bottom: 1px solid var(--border);
+  min-height: 56px;
+}
+
+.mobile-menu__header .nav__logo {
+  font-size: 1rem;
+}
+
+.menu-close {
+  background: none;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  color: var(--text-secondary);
+  padding: var(--space-1);
+  display: flex;
+  align-items: center;
+  transition: all var(--transition);
+}
+
+.menu-close:hover {
+  color: var(--text-primary);
+  border-color: var(--text-muted);
+}
+
+.mobile-menu__body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-4) 0;
+  overflow-y: auto;
+}
+
+.mobile-menu__link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-4) var(--space-5);
+  color: var(--text-primary);
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 600;
+  transition: all var(--transition);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.mobile-menu__link:hover {
+  background: var(--accent-subtle);
+  color: var(--accent);
+  padding-left: var(--space-7, 28px);
+}
+
+.mobile-menu__link svg {
+  color: var(--text-muted);
+  opacity: 0;
+  transition: all var(--transition);
+}
+
+.mobile-menu__link:hover svg {
+  opacity: 1;
+  color: var(--accent);
+}
+
+.mobile-menu__sublink2 {
+  display: block;
+  font-family: var(--font-ui);
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  padding: var(--space-2) var(--space-5) var(--space-2) var(--space-8);
+  transition: all var(--transition);
+  text-decoration: none;
+}
+
+.mobile-menu__sublink2:hover {
+  color: var(--accent);
+  padding-left: var(--space-9);
+}
+
+.mobile-menu__footer {
+  padding: var(--space-4) var(--space-5);
+  border-top: 1px solid var(--border);
+}
+
+.mobile-theme-toggle {
+  width: 100%;
+  background: none;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  color: var(--text-secondary);
+  padding: var(--space-3) var(--space-4);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-family: var(--font-ui);
+  font-size: 0.875rem;
+  transition: all var(--transition);
+}
+
+.mobile-theme-toggle:hover {
+  color: var(--text-primary);
+  border-color: var(--text-muted);
+}
+
