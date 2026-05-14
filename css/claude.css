@@ -1597,26 +1597,6 @@ hr {
   }
 }
 
-/* ===== Scroll Reveal Animation ===== */
-.reveal-item {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
-              transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.reveal-item.revealed {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Stagger delays for grid items */
-.posts-grid .reveal-item:nth-child(1) { transition-delay: 0.05s; }
-.posts-grid .reveal-item:nth-child(2) { transition-delay: 0.1s; }
-.posts-grid .reveal-item:nth-child(3) { transition-delay: 0.15s; }
-.posts-grid .reveal-item:nth-child(4) { transition-delay: 0.2s; }
-.posts-grid .reveal-item:nth-child(5) { transition-delay: 0.25s; }
-
 /* ===== Footer ===== */
 .footer {
   padding: var(--space-12) 0 var(--space-8);
@@ -2430,6 +2410,46 @@ hr {
   width: 100%;
   max-width: 400px;
 }
+
+/* ===== Scroll Reveal Animation ===== */
+.reveal-item {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.reveal-item.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger delays for grid items */
+.posts-grid .reveal-item:nth-child(1) { transition-delay: 0.05s; }
+.posts-grid .reveal-item:nth-child(2) { transition-delay: 0.1s; }
+.posts-grid .reveal-item:nth-child(3) { transition-delay: 0.15s; }
+.posts-grid .reveal-item:nth-child(4) { transition-delay: 0.2s; }
+.posts-grid .reveal-item:nth-child(5) { transition-delay: 0.25s; }
+
+/* ===== Floating Animation for Icons ===== */
+@keyframes iconFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+/* ===== Subtle breathing for stat values ===== */
+@keyframes fadeInScale {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.stat-card.revealed .stat-card__value {
+  animation: fadeInScale 0.4s ease both;
+}
+.stat-card:nth-child(1).revealed .stat-card__value { animation-delay: 0.05s; }
+.stat-card:nth-child(2).revealed .stat-card__value { animation-delay: 0.1s; }
+.stat-card:nth-child(3).revealed .stat-card__value { animation-delay: 0.15s; }
+.stat-card:nth-child(4).revealed .stat-card__value { animation-delay: 0.2s; }
 
 /* ===== Loading screen pulse ===== */
 @keyframes pulseGlow {
