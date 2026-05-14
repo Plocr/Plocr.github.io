@@ -25,23 +25,24 @@
 <div class="noise-overlay"></div>
 <div class="cursor-glow"></div>
 <div class="site-pet" id="sitePet">
-  <div class="pet-body">
-    <div class="pet-ear pet-ear--left"></div>
-    <div class="pet-ear pet-ear--right"></div>
-    <div class="pet-face">
-      <div class="pet-eye pet-eye--left">
-        <div class="pet-pupil"></div>
-      </div>
-      <div class="pet-eye pet-eye--right">
-        <div class="pet-pupil"></div>
-      </div>
-      <div class="pet-nose"></div>
-      <div class="pet-mouth"></div>
-    </div>
-    <div class="pet-paw pet-paw--left"></div>
-    <div class="pet-paw pet-paw--right"></div>
-  </div>
-  <div class="pet-tail"></div>
+  <svg viewBox="0 0 60 60" width="48" height="48" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <filter id="pet-blur"><feGaussianBlur stdDeviation="0.5"/></filter>
+    </defs>
+    <!-- Blob body -->
+    <path d="M30 8 C18 8 8 16 8 28 C8 38 14 46 22 50 C24 52 26 54 30 54 C34 54 36 52 38 50 C46 46 52 38 52 28 C52 16 42 8 30 8Z" fill="var(--accent)" opacity="0.85" class="pet-blob"/>
+    <!-- Eyes -->
+    <circle cx="22" cy="26" r="3" fill="var(--text-primary)" class="pet-eye"/>
+    <circle cx="38" cy="26" r="3" fill="var(--text-primary)" class="pet-eye"/>
+    <!-- Pupils -->
+    <circle cx="23" cy="26" r="1.2" fill="var(--bg)" class="pet-pupil"/>
+    <circle cx="39" cy="26" r="1.2" fill="var(--bg)" class="pet-pupil"/>
+    <!-- Cheeks -->
+    <circle cx="17" cy="32" r="3.5" fill="var(--accent)" opacity="0.2"/>
+    <circle cx="43" cy="32" r="3.5" fill="var(--accent)" opacity="0.2"/>
+    <!-- Mouth -->
+    <path d="M26 34 Q30 38 34 34" fill="none" stroke="var(--text-primary)" stroke-width="1.2" stroke-linecap="round"/>
+  </svg>
 </div>
 <button class="back-top" id="backTop" aria-label="回到顶部">
   <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
