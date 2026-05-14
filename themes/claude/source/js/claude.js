@@ -467,21 +467,6 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   }
-
-  // ===== Site Pet Mascot =====
-  function initSitePet() {
-    var pet = document.getElementById('sitePet');
-    if (!pet) return;
-
-    window.addEventListener('scroll', function() {
-      if (window.pageYOffset > 300) {
-        pet.classList.add('visible');
-      } else {
-        pet.classList.remove('visible');
-      }
-    }, { passive: true });
-  }
-
   // ===== Cursor Glow =====
   function initCursorGlow() {
     var glow = document.querySelector('.cursor-glow');
@@ -718,7 +703,6 @@
     initDropdownClick();
     initDefaultCovers();
     initBackTop();
-    initSitePet();
     initCursorGlow();
     initHitokoto();
     initCardImageParallax();
