@@ -189,6 +189,204 @@
   }
 }
 
+/* ===== Site Pet Mascot ===== */
+.site-pet {
+  position: fixed;
+  bottom: var(--space-8);
+  left: var(--space-6);
+  z-index: 90;
+  opacity: 0;
+  transform: translateY(20px) scale(0.9);
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  cursor: pointer;
+}
+
+.site-pet.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+.site-pet:hover {
+  transform: translateY(-4px) scale(1.05);
+}
+
+.pet-body {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  background: var(--accent);
+  border-radius: 40% 40% 45% 45%;
+  animation: petIdle 2.5s ease-in-out infinite;
+  box-shadow: 0 2px 8px rgba(217, 119, 87, 0.2);
+}
+
+@keyframes petIdle {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25% { transform: translateY(-3px) rotate(-1deg); }
+  50% { transform: translateY(0) rotate(0deg); }
+  75% { transform: translateY(-2px) rotate(1deg); }
+}
+
+/* Ears */
+.pet-ear {
+  position: absolute;
+  top: -8px;
+  width: 14px;
+  height: 14px;
+  background: var(--accent);
+  border-radius: 50% 50% 0 0;
+  opacity: 0.8;
+}
+
+.pet-ear--left {
+  left: 4px;
+  transform: rotate(-10deg);
+  animation: earWiggleLeft 3s ease-in-out infinite;
+}
+
+.pet-ear--right {
+  right: 4px;
+  transform: rotate(10deg);
+  animation: earWiggleRight 3s ease-in-out infinite 0.15s;
+}
+
+@keyframes earWiggleLeft {
+  0%, 100% { transform: rotate(-10deg); }
+  30% { transform: rotate(-15deg); }
+  60% { transform: rotate(-8deg); }
+}
+@keyframes earWiggleRight {
+  0%, 100% { transform: rotate(10deg); }
+  30% { transform: rotate(15deg); }
+  60% { transform: rotate(8deg); }
+}
+
+/* Face */
+.pet-face {
+  position: absolute;
+  inset: 12px 8px 10px 8px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+}
+
+.pet-eye {
+  width: 8px;
+  height: 9px;
+  background: var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.1s ease;
+}
+
+.pet-pupil {
+  width: 3px;
+  height: 3px;
+  background: var(--bg);
+  border-radius: 50%;
+  transition: transform 0.1s ease;
+}
+
+.pet-nose {
+  width: 4px;
+  height: 3px;
+  background: var(--text-primary);
+  border-radius: 50%;
+  margin-top: 1px;
+  flex: 0 0 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.pet-mouth {
+  width: 10px;
+  height: 4px;
+  border-bottom: 1.5px solid var(--text-primary);
+  border-radius: 0 0 50% 50%;
+  margin-top: -1px;
+  flex: 0 0 100%;
+  display: flex;
+  justify-content: center;
+}
+
+/* Paws */
+.pet-paw {
+  position: absolute;
+  bottom: -3px;
+  width: 10px;
+  height: 6px;
+  background: var(--accent);
+  border-radius: 50%;
+  opacity: 0.8;
+}
+
+.pet-paw--left {
+  left: 6px;
+  animation: pawTap 2s ease-in-out infinite;
+}
+
+.pet-paw--right {
+  right: 6px;
+  animation: pawTap 2s ease-in-out infinite 0.3s;
+}
+
+@keyframes pawTap {
+  0%, 100% { transform: translateY(0); }
+  20% { transform: translateY(-2px); }
+  40% { transform: translateY(0); }
+}
+
+/* Tail */
+.pet-tail {
+  position: absolute;
+  bottom: 8px;
+  left: -10px;
+  width: 16px;
+  height: 16px;
+  border-left: 2.5px solid var(--accent);
+  border-bottom: 2.5px solid var(--accent);
+  border-radius: 0 0 0 10px;
+  transform-origin: bottom right;
+  animation: tailWag 1.8s ease-in-out infinite;
+  opacity: 0.7;
+}
+
+@keyframes tailWag {
+  0%, 100% { transform: rotate(-5deg); }
+  25% { transform: rotate(-15deg); }
+  50% { transform: rotate(-5deg); }
+  75% { transform: rotate(-10deg); }
+}
+
+.site-pet:hover .pet-body {
+  animation: petHappy 0.4s ease-in-out infinite;
+}
+
+@keyframes petHappy {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25% { transform: translateY(-5px) rotate(-2deg); }
+  75% { transform: translateY(-5px) rotate(2deg); }
+}
+
+/* Dark mode adjustments */
+[data-theme="dark"] .pet-body,
+[data-theme="dark"] .pet-ear,
+[data-theme="dark"] .pet-paw {
+  background: var(--accent);
+}
+
+@media (max-width: 480px) {
+  .site-pet {
+    bottom: var(--space-5);
+    left: var(--space-4);
+  }
+}
+
 /* ===== Hero Floating Particles ===== */
 .hero-particles {
   position: absolute;
