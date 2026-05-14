@@ -186,19 +186,29 @@
 
   // ===== Dropdown Click Toggle =====
   function initDropdownClick() {
-    const trigger = document.querySelector('.nav__dropdown-trigger');
-    const dropdown = document.querySelector('.nav__dropdown');
-    if (!trigger || !dropdown) return;
+    const triggers = document.querySelectorAll('.nav__dropdown-trigger');
+    const dropdowns = document.querySelectorAll('.nav__dropdown');
+    if (!triggers.length) return;
 
-    trigger.addEventListener('click', function(e) {
-      e.preventDefault();
-      dropdown.classList.toggle('open');
+    triggers.forEach(function(trigger, i) {
+      trigger.addEventListener('click', function(e) {
+        e.preventDefault();
+        // Close other dropdowns
+        dropdowns.forEach(function(d, j) {
+          if (j !== i) d.classList.remove('open');
+        });
+        dropdowns[i].classList.toggle('open');
+      });
     });
 
-    // Close on click outside
+    // Close on click outside any dropdown
     document.addEventListener('click', function(e) {
-      if (!dropdown.contains(e.target)) {
-        dropdown.classList.remove('open');
+      var clickedInside = false;
+      dropdowns.forEach(function(d) {
+        if (d.contains(e.target)) clickedInside = true;
+      });
+      if (!clickedInside) {
+        dropdowns.forEach(function(d) { d.classList.remove('open'); });
       }
     });
   }
