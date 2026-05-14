@@ -309,3 +309,36 @@
     color: black;
   }
 }
+/* ===== Responsive for new sections ===== */
+@media (max-width: 768px) {
+  .stats-cards__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .quick-nav__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .stat-card__value {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .stats-cards__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .quick-nav__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .quote-card {
+    padding: var(--space-6) var(--space-4);
+  }
+
+  .quote-card__text {
+    font-size: 0.95rem;
+  }
+}
+
