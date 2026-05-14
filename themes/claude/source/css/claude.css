@@ -2587,6 +2587,21 @@ hr {
   color: var(--accent);
 }
 
+.mobile-menu__sublink2 {
+  display: block;
+  font-family: var(--font-ui);
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  padding: var(--space-2) var(--space-5) var(--space-2) var(--space-8);
+  transition: all var(--transition);
+  text-decoration: none;
+}
+
+.mobile-menu__sublink2:hover {
+  color: var(--accent);
+  padding-left: var(--space-9);
+}
+
 .mobile-menu__footer {
   padding: var(--space-4) var(--space-5);
   border-top: 1px solid var(--border);
