@@ -226,6 +226,9 @@
   .post-article__body h2 {
     font-size: 1.3rem;
   }
+
+  .post-article__nav {
+  }
 }
 
 /* ===== Small Phone (< 480px) ===== */
@@ -338,5 +341,4 @@
     font-size: 0.95rem;
   }
 }
-
 
