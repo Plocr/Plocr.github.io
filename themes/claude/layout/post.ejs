@@ -15,12 +15,12 @@
         <time datetime="<%= date_xml(page.date) %>"><%= date(page.date, 'YYYY-MM-DD') %></time>
         <% if (page.updated && page.updated > page.date) { %>
           <span class="meta-sep">·</span>
-          <span>更新�?<%= date(page.updated, 'YYYY-MM-DD') %></span>
+          <span>更新�?<%= date(page.updated, 'YYYY-MM-DD') %></span>
         <% } %>
         <% if (page.content) { %>
           <% var words = strip_html(page.content).length; %>
           <span class="meta-sep">·</span>
-          <span><%= words %> �?/span>
+          <span><%= words %> �?/span>
           <span class="meta-sep">·</span>
           <span><%= Math.max(1, Math.round(words / 500)) %> 分钟阅读</span>
         <% } %>
@@ -45,7 +45,7 @@
       <div class="post-nav__prev">
         <% if (page.prev) { %>
           <a href="<%= url_for(page.prev.path) %>">
-            <span class="post-nav__label">�?上一�?/span>
+            <span class="post-nav__label">�?上一�?/span>
             <span class="post-nav__title"><%= page.prev.title %></span>
           </a>
         <% } %>
@@ -53,7 +53,7 @@
       <div class="post-nav__next">
         <% if (page.next) { %>
           <a href="<%= url_for(page.next.path) %>">
-            <span class="post-nav__label">下一�?�?/span>
+            <span class="post-nav__label">下一�?�?/span>
             <span class="post-nav__title"><%= page.next.title %></span>
           </a>
         <% } %>
@@ -72,7 +72,7 @@
         data-reactions-enabled="1"
         data-emit-metadata="0"
         data-input-position="bottom"
-        data-theme="https://www.plocr.online/css/giscus-light.css"
+        data-theme="/css/giscus-light.css"
         data-lang="zh-CN"
         crossorigin="anonymous"
         async>
@@ -87,12 +87,12 @@
         data-reactions-enabled="1"
         data-emit-metadata="0"
         data-input-position="bottom"
-        data-theme="https://www.plocr.online/css/giscus-light.css"
+        data-theme="/css/giscus-light.css"
         data-lang="zh-CN"
         crossorigin="anonymous"
         async>
       </script>
-      <noscript>请启�?JavaScript 来查看评论�?/noscript>
+      <noscript>请启�?JavaScript 来查看评论�?/noscript>
     </div>
   </div>
 </article>
