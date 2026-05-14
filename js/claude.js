@@ -44,8 +44,8 @@
       if (!f) return;
       var currentTheme = html.getAttribute('data-theme') || 'light';
       var giscusTheme = currentTheme === 'dark'
-        ? '/css/giscus-dark.css'
-        : '/css/giscus-light.css';
+        ? 'https://www.plocr.online/css/giscus-dark.css'
+        : 'https://www.plocr.online/css/giscus-light.css';
       f.contentWindow.postMessage(
         { giscus: { setConfig: { theme: giscusTheme } } },
         'https://giscus.app'
@@ -415,8 +415,8 @@
     syncMobileThemeIcons(theme);
     // Sync Giscus theme
     var giscusTheme = theme === 'dark'
-      ? '/css/giscus-dark.css'
-      : '/css/giscus-light.css';
+      ? 'https://www.plocr.online/css/giscus-dark.css'
+      : 'https://www.plocr.online/css/giscus-light.css';
     var giscusFrame = document.querySelector('iframe.giscus-frame');
     if (giscusFrame) {
       giscusFrame.contentWindow.postMessage(
@@ -509,11 +509,11 @@
       if (tb) tb.classList.add('active');
       document.querySelectorAll('.archive-category-view').forEach(function(v) { v.style.display = 'none'; });
       timeline.style.display = 'block';
-      if (title) title.textContent = '时间轴';
+      if (title) title.textContent = '时间�?;
       var total = document.querySelectorAll('.timeline-item').length;
-      if (subtitle) subtitle.textContent = '共 ' + total + ' 篇文章';
-      if (window.location.hash !== '#时间轴') {
-        history.replaceState(null, '', '/archives/#时间轴');
+      if (subtitle) subtitle.textContent = '�?' + total + ' 篇文�?;
+      if (window.location.hash !== '#时间�?) {
+        history.replaceState(null, '', '/archives/#时间�?);
       }
 
       // Mobile: scroll down to show content
@@ -549,7 +549,7 @@
         title.textContent = t;
       }
       if (subtitle) {
-        var c = target ? target.querySelector('.archive-card__count').textContent : '0 篇';
+        var c = target ? target.querySelector('.archive-card__count').textContent : '0 �?;
         subtitle.textContent = c;
       }
 
@@ -576,7 +576,7 @@
 
     // Check hash on load
     var hash = decodeURIComponent(window.location.hash.replace('#', ''));
-    if (hash === '时间轴') { showTimeline(); return; }
+    if (hash === '时间�?) { showTimeline(); return; }
     if (hash) {
       var found = document.querySelector('.archive-card[data-category="' + hash + '"]');
       if (found) { showCategory(hash); return; }
@@ -595,7 +595,7 @@
     // Handle hash changes (e.g. from nav submenu clicks while already on archive page)
     window.addEventListener('hashchange', function() {
       var h = decodeURIComponent(window.location.hash.replace('#', ''));
-      if (h === '时间轴') { showTimeline(); }
+      if (h === '时间�?) { showTimeline(); }
       else if (h) {
         var f = document.querySelector('.archive-card[data-category="' + h + '"]');
         if (f) showCategory(h);
@@ -630,7 +630,7 @@
       var hash = href.split('#')[1] || '';
       var cat = hash ? decodeURIComponent(hash) : '';
 
-      if (cat === '时间轴') {
+      if (cat === '时间�?) {
         document.querySelectorAll('.archive-card').forEach(function(c) { c.classList.remove('active'); });
         var tb = document.querySelector('.archive-card[data-category="timeline"]');
         if (tb) tb.classList.add('active');
@@ -638,11 +638,11 @@
         var tv = document.getElementById('archive-timeline-view');
         if (tv) tv.style.display = 'block';
         var titleEl = document.getElementById('archive-view-title');
-        if (titleEl) titleEl.textContent = '时间轴';
+        if (titleEl) titleEl.textContent = '时间�?;
         var subEl = document.getElementById('archive-view-subtitle');
         var total = document.querySelectorAll('.timeline-item').length;
-        if (subEl) subEl.textContent = '共 ' + total + ' 篇文章';
-        history.replaceState(null, '', '/archives/#时间轴');
+        if (subEl) subEl.textContent = '�?' + total + ' 篇文�?;
+        history.replaceState(null, '', '/archives/#时间�?);
         return;
       }
       if (!cat) { cat = '项目日志'; }
@@ -681,12 +681,12 @@
       .then(function(data) {
         textEl.textContent = data.hitokoto || '获取失败';
         if (data.from) {
-          fromEl.textContent = '—— ' + data.from;
+          fromEl.textContent = '—�?' + data.from;
         }
       })
       .catch(function() {
-        textEl.textContent = '生活不是缺少美，而是缺少发现美的眼睛。';
-        fromEl.textContent = '—— 罗丹';
+        textEl.textContent = '生活不是缺少美，而是缺少发现美的眼睛�?;
+        fromEl.textContent = '—�?罗丹';
       });
   }
 
