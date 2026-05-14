@@ -10,8 +10,10 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fantasque+Sans+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cn-fontsource-xiaolai-mono-sc-regular/font.css">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Fantasque+Sans+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fantasque+Sans+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"></noscript>
+  <link rel="preload" href="https://cdn.jsdelivr.net/npm/cn-fontsource-xiaolai-mono-sc-regular/font.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cn-fontsource-xiaolai-mono-sc-regular/font.css"></noscript>
 
   <link rel="shortcut icon" href="/img/WZTB.png">
   <link rel="stylesheet" href="/css/claude.css"/>
@@ -142,7 +144,7 @@
         
           
           <span class="meta-sep">·</span>
-          <span>576 字</span>
+          <span>578 字</span>
           <span class="meta-sep">·</span>
           <span>1 分钟阅读</span>
         
@@ -165,6 +167,8 @@
   <h2>关于爱情</h2>
   <p class="post-hero__epigraph">人生下来的时候都只有一半，为了找到另一半而在人世间行走。</p>
 </div>
+
+<span id="more"></span>
 
 <div class="post-quote-block">
   <p>关于爱情，我认为无为非是我们不需要二十四小时都在线，不需要通过刻意且频繁的聊天来维持关系。我只希望我们忙的时候认真努力，闲下来的时候就能立刻想起对方。我希望我们是相互想念的，相互在意就好。</p>
@@ -247,7 +251,7 @@
         data-reactions-enabled="1"
         data-emit-metadata="0"
         data-input-position="bottom"
-        data-theme="https://www.plocr.online/css/giscus-light.css"
+        data-theme="/css/giscus-light.css"
         data-lang="zh-CN"
         crossorigin="anonymous"
         async>
@@ -262,7 +266,7 @@
         data-reactions-enabled="1"
         data-emit-metadata="0"
         data-input-position="bottom"
-        data-theme="https://www.plocr.online/css/giscus-light.css"
+        data-theme="/css/giscus-light.css"
         data-lang="zh-CN"
         crossorigin="anonymous"
         async>

@@ -2770,15 +2770,6 @@ hr {
     gap: var(--space-5);
   }
 
-  .article-layout {
-    grid-template-columns: 1fr;
-    gap: var(--space-6);
-  }
-
-  .article-sidebar {
-    position: static;
-  }
-
   .section {
     padding: var(--space-14, 56px) 0;
   }
@@ -2881,12 +2872,7 @@ hr {
     font-size: 1.3rem;
   }
 
-  .article-layout {
-    grid-template-columns: 1fr;
-  }
-
-  .article-sidebar {
-    display: none;
+  .post-article__nav {
   }
 }
 
