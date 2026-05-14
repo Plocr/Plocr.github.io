@@ -91,14 +91,6 @@
     }, { passive: true });
   }
 
-  // ===== Subtle icon pulse =====
-  function initIconPulse() {
-    document.querySelectorAll('.stat-card__icon, .quick-nav__icon').forEach(function(el) {
-      el.style.animation = 'iconFloat 3s ease-in-out infinite';
-      el.style.animationDelay = Math.random() * 2 + 's';
-    });
-  }
-
   // ===== Parallax Hero on Scroll =====
   function initHeroParallax() {
     const hero = document.getElementById('hero');
@@ -703,7 +695,6 @@
   document.addEventListener('DOMContentLoaded', function() {
     initScrollReveal();
     initSectionParallax();
-    initIconPulse();
     initHeroParallax();
     initNavScroll();
     initScrollIndicator();

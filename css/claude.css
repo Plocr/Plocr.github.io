@@ -2432,11 +2432,6 @@ hr {
 .posts-grid .reveal-item:nth-child(5) { transition-delay: 0.25s; }
 
 /* ===== Floating Animation for Icons ===== */
-@keyframes iconFloat {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-4px); }
-}
-
 /* ===== Subtle breathing for stat values ===== */
 @keyframes fadeInScale {
   from { opacity: 0; transform: scale(0.9); }
