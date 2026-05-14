@@ -50,7 +50,16 @@
           <a href="/archives/#时间轴">05 时间轴</a>
         </div>
       </div>
-      <a href="/ai/" class="">AI</a>
+      <div class="nav__dropdown">
+        <a href="javascript:void(0)" class="nav__dropdown-trigger">
+          发现
+          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" class="nav__dropdown-arrow"><path d="M2 3.5L5 6.5L8 3.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+        </a>
+        <div class="nav__dropdown-menu">
+          <a href="/ai/">AI 导航</a>
+          <a href="https://omnihub.plocr.online/" target="_blank" rel="noopener">工具聚合 ↗</a>
+        </div>
+      </div>
       <a href="/about/" class="active">关于</a>
     </div>
     <div class="nav__actions">
@@ -88,37 +97,12 @@
       </button>
     </div>
     <div class="mobile-menu__body">
-      
-        
-          <a href="/" class="mobile-menu__link">
-            <span class="mobile-menu__link-text">首页</span>
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </a>
-        
-          <a href="/archives/" class="mobile-menu__link">
-            <span class="mobile-menu__link-text">文章</span>
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </a>
-        
-          <a href="/ai/" class="mobile-menu__link">
-            <span class="mobile-menu__link-text">AI</span>
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </a>
-        
-          <a href="/about/" class="mobile-menu__link">
-            <span class="mobile-menu__link-text">关于</span>
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </a>
-        
-      
+      <a href="/" class="mobile-menu__link"><span class="mobile-menu__link-text">首页</span></a>
+      <a href="/archives/" class="mobile-menu__link"><span class="mobile-menu__link-text">文章</span></a>
+      <div class="mobile-menu__group-title" style="padding-left:var(--space-5);padding-bottom:var(--space-1);font-size:0.75rem;color:var(--text-muted);font-family:var(--font-display);text-transform:uppercase;letter-spacing:0.06em;">发现</div>
+      <a href="/ai/" class="mobile-menu__sublink2">AI 导航</a>
+      <a href="https://omnihub.plocr.online/" target="_blank" rel="noopener" class="mobile-menu__sublink2">工具聚合 ↗</a>
+      <a href="/about/" class="mobile-menu__link"><span class="mobile-menu__link-text">关于</span></a>
     </div>
     <div class="mobile-menu__footer">
       <button class="theme-toggle mobile-theme-toggle" id="mobileThemeToggle" aria-label="切换主题">
