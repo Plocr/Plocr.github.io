@@ -55,7 +55,7 @@
     }, 300);
   })();
 
-  // ===== Scroll-Triggered Reveal (Intersection Observer) =====
+  // ===== Scroll-Triggered Reveal (re-triggers on scroll) =====
   function initScrollReveal() {
     const items = document.querySelectorAll('.reveal-item');
     if (!items.length) return;
@@ -64,12 +64,39 @@
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('revealed');
-          observer.unobserve(entry.target);
+        } else {
+          entry.target.classList.remove('revealed');
         }
       });
-    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    }, { threshold: 0.08, rootMargin: '0px 0px -20px 0px' });
 
     items.forEach(item => observer.observe(item));
+  }
+
+  // ===== Section Parallax on Scroll =====
+  function initSectionParallax() {
+    var sections = document.querySelectorAll('.section');
+    if (!sections.length) return;
+
+    window.addEventListener('scroll', function() {
+      var sy = window.pageYOffset;
+      sections.forEach(function(sec) {
+        var rect = sec.getBoundingClientRect();
+        var center = rect.top + rect.height / 2;
+        var viewCenter = window.innerHeight / 2;
+        var dist = (center - viewCenter) / window.innerHeight;
+        var bg = sec.querySelector('.section__bg');
+        if (bg) bg.style.transform = 'translateY(' + (dist * 15) + 'px)';
+      });
+    }, { passive: true });
+  }
+
+  // ===== Subtle icon pulse =====
+  function initIconPulse() {
+    document.querySelectorAll('.stat-card__icon, .quick-nav__icon').forEach(function(el) {
+      el.style.animation = 'iconFloat 3s ease-in-out infinite';
+      el.style.animationDelay = Math.random() * 2 + 's';
+    });
   }
 
   // ===== Parallax Hero on Scroll =====
@@ -675,6 +702,8 @@
   // ===== Init All =====
   document.addEventListener('DOMContentLoaded', function() {
     initScrollReveal();
+    initSectionParallax();
+    initIconPulse();
     initHeroParallax();
     initNavScroll();
     initScrollIndicator();
