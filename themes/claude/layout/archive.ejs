@@ -15,7 +15,7 @@
               { id: '影音推荐', num: '04', label: '影音推荐' }
             ];
             var catCounts = {};
-            catData = {};
+            var catData = {};
             categories.forEach(function(c) { catCounts[c.id] = 0; catData[c.id] = []; });
             site.posts.each(function(p) {
               if (p.tags) {

@@ -38,20 +38,19 @@
   (function() {
     var retries = 0;
     var timer = setInterval(function() {
-      var frame = document.querySelector('iframe.giscus-frame');
-      if (frame || retries > 15) { clearInterval(timer); return; }
+      if (retries > 15) { clearInterval(timer); return; }
       retries++;
+      var f = document.querySelector('iframe.giscus-frame');
+      if (!f) return;
       var currentTheme = html.getAttribute('data-theme') || 'light';
       var giscusTheme = currentTheme === 'dark'
-        ? 'https://www.plocr.online/css/giscus-dark.css'
-        : 'https://www.plocr.online/css/giscus-light.css';
-      var f = document.querySelector('iframe.giscus-frame');
-      if (f) {
-        f.contentWindow.postMessage(
-          { giscus: { setConfig: { theme: giscusTheme } } },
-          'https://giscus.app'
-        );
-      }
+        ? '/css/giscus-dark.css'
+        : '/css/giscus-light.css';
+      f.contentWindow.postMessage(
+        { giscus: { setConfig: { theme: giscusTheme } } },
+        'https://giscus.app'
+      );
+      clearInterval(timer);
     }, 300);
   })();
 
@@ -416,8 +415,8 @@
     syncMobileThemeIcons(theme);
     // Sync Giscus theme
     var giscusTheme = theme === 'dark'
-      ? 'https://www.plocr.online/css/giscus-dark.css'
-      : 'https://www.plocr.online/css/giscus-light.css';
+      ? '/css/giscus-dark.css'
+      : '/css/giscus-light.css';
     var giscusFrame = document.querySelector('iframe.giscus-frame');
     if (giscusFrame) {
       giscusFrame.contentWindow.postMessage(

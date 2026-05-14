@@ -162,7 +162,7 @@
       <% tagNames.sort().forEach(function(tag) { %>
         <% var count = tagCounts[tag]; %>
         <% var size = Math.min(5, Math.max(1, Math.ceil(count / 2))); %>
-        <a href="/tags/<%= tag.toLowerCase().replace(/\s+/g, '-') %>/" class="tag-cloud-item" style="--tag-size: <%= size %>;"><%= tag %><sup><%= count %></sup></a>
+        <a href="/tags/<%= encodeURIComponent(tag.toLowerCase().replace(/\s+/g, '-')) %>/" class="tag-cloud-item" style="--tag-size: <%= size %>;"><%= tag %><sup><%= count %></sup></a>
       <% }) %>
     </div>
   </div>

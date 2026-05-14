@@ -84,6 +84,10 @@ ignore:
 # Extensions
 theme: claude
 
+# Sitemap
+sitemap:
+  path: sitemap.xml
+
 # Deployment
 deploy:
   type: ''
