@@ -473,7 +473,6 @@
     var pet = document.getElementById('sitePet');
     if (!pet) return;
 
-    // Show/hide on scroll (same as back-to-top but opposite)
     window.addEventListener('scroll', function() {
       if (window.pageYOffset > 300) {
         pet.classList.add('visible');
@@ -481,30 +480,6 @@
         pet.classList.remove('visible');
       }
     }, { passive: true });
-
-    // Click pet to make it happy
-    pet.addEventListener('click', function() {
-      pet.classList.add('pet-happy');
-      setTimeout(function() { pet.classList.remove('pet-happy'); }, 800);
-    });
-
-    // Mouse-follow eyes (only on desktop)
-    if (isTouchDevice()) return;
-    var pupils = pet.querySelectorAll('.pet-pupil');
-    if (!pupils.length) return;
-
-    document.addEventListener('mousemove', function(e) {
-      var rect = pet.getBoundingClientRect();
-      var centerX = rect.left + rect.width / 2;
-      var centerY = rect.top + rect.height / 2;
-      var dx = (e.clientX - centerX) / 20;
-      var dy = (e.clientY - centerY) / 20;
-      dx = Math.max(-3, Math.min(3, dx));
-      dy = Math.max(-3, Math.min(3, dy));
-      pupils.forEach(function(p) {
-        p.style.transform = 'translate(' + dx + 'px, ' + dy + 'px)';
-      });
-    });
   }
 
   // ===== Cursor Glow =====
