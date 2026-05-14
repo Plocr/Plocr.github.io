@@ -44,8 +44,8 @@
       if (!f) return;
       var currentTheme = html.getAttribute('data-theme') || 'light';
       var giscusTheme = currentTheme === 'dark'
-        ? '/css/giscus-dark.css'
-        : '/css/giscus-light.css';
+        ? 'https://www.plocr.online/css/giscus-dark.css'
+        : 'https://www.plocr.online/css/giscus-light.css';
       f.contentWindow.postMessage(
         { giscus: { setConfig: { theme: giscusTheme } } },
         'https://giscus.app'
@@ -415,8 +415,8 @@
     syncMobileThemeIcons(theme);
     // Sync Giscus theme
     var giscusTheme = theme === 'dark'
-      ? '/css/giscus-dark.css'
-      : '/css/giscus-light.css';
+      ? 'https://www.plocr.online/css/giscus-dark.css'
+      : 'https://www.plocr.online/css/giscus-light.css';
     var giscusFrame = document.querySelector('iframe.giscus-frame');
     if (giscusFrame) {
       giscusFrame.contentWindow.postMessage(

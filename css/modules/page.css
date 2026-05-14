@@ -91,6 +91,7 @@
 
 .archive-card.active {
   border-color: var(--accent);
+  border-width: 2.5px;
   background: var(--accent-subtle);
 }
 
