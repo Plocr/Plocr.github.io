@@ -39,11 +39,11 @@ html {
 /* ===== Cursor Glow ===== */
 .cursor-glow {
   position: fixed;
-  width: 220px;
-  height: 220px;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
   background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
-  opacity: 0.06;
+  opacity: 0.08;
   pointer-events: none;
   z-index: 9998;
   transform: translate(-50%, -50%);

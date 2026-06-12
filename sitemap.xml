@@ -4,7 +4,16 @@
   <url>
     <loc>https://www.plocr.online/ai/index.html</loc>
     
-    <lastmod>2026-05-14</lastmod>
+    <lastmod>2026-06-12</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.plocr.online/2023/05/11/hello-world/</loc>
+    
+    <lastmod>2025-05-04</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -29,15 +38,6 @@
   </url>
   
   <url>
-    <loc>https://www.plocr.online/2023/05/11/hello-world/</loc>
-    
-    <lastmod>2025-05-04</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://www.plocr.online/about/index.html</loc>
     
     <lastmod>2025-05-04</lastmod>
@@ -49,29 +49,29 @@
 
   <url>
     <loc>https://www.plocr.online/</loc>
-    <lastmod>2026-05-14</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
 
   
   <url>
+    <loc>https://www.plocr.online/tags/%E9%A1%B9%E7%9B%AE%E6%97%A5%E5%BF%97/</loc>
+    <lastmod>2026-06-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://www.plocr.online/tags/%E9%9A%8F%E7%AC%94/</loc>
-    <lastmod>2026-05-14</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://www.plocr.online/tags/%E5%BD%B1%E9%9F%B3%E6%8E%A8%E8%8D%90/</loc>
-    <lastmod>2026-05-14</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.plocr.online/tags/%E9%A1%B9%E7%9B%AE%E6%97%A5%E5%BF%97/</loc>
-    <lastmod>2026-05-14</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
