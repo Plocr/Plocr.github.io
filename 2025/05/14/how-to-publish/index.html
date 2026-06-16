@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Hello PlocrのBlog | Plocrの小窝</title>
+  <title>如何写一篇文章并发布 | Plocrの小窝</title>
   <meta name="description" content="Plocr的个人博客"/>
   <meta name="author" content="Plocr"/>
 
@@ -134,17 +134,14 @@
     </div>
 
     <header class="post-article__header">
-      <h1 class="post-article__title">Hello PlocrのBlog</h1>
+      <h1 class="post-article__title">如何写一篇文章并发布</h1>
       <div class="post-article__meta">
-        <time datetime="2023-05-11T04:17:00.000Z">2023-05-11</time>
-        
-          <span class="meta-sep">·</span>
-          <span>更新于 2025-05-15</span>
+        <time datetime="2025-05-14T16:00:00.000Z">2025-05-15</time>
         
         
           
           <span class="meta-sep">·</span>
-          <span>1033 字</span>
+          <span>1130 字</span>
           <span class="meta-sep">·</span>
           <span>2 分钟阅读</span>
         
@@ -162,76 +159,90 @@
     
 
     <div class="post-article__body">
-      <h2 id="欢迎来到我的小窝"><a href="#欢迎来到我的小窝" class="headerlink" title="欢迎来到我的小窝"></a>欢迎来到我的小窝</h2><p>这是我的第一个博客。从 2023 年开始搭建，断断续续折腾了两年多，才有了现在的样子。</p>
-<blockquote>
-<p>一开始只想有个地方放文章，最后变成了一个精装修的 Web 项目。</p>
-</blockquote>
+      <p>写了这么久博客，不如写一篇教程给自己——免得以后忘了怎么操作。</p>
 <hr>
-<h2 id="博客都用了什么"><a href="#博客都用了什么" class="headerlink" title="博客都用了什么"></a>博客都用了什么</h2><h3 id="框架"><a href="#框架" class="headerlink" title="框架"></a>框架</h3><p><a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>，一个用 Node.js 驱动的静态博客生成器。用 Markdown 写文章，一条命令生成静态网页。</p>
-<p>当初选它是因为简单——不用数据库、不用服务器，写完 push 上去就完事。现在回头看这个决策，没选错。</p>
-<h3 id="主题"><a href="#主题" class="headerlink" title="主题"></a>主题</h3><p>最早用的是 <strong>Butterfly</strong> 主题，后来觉得太花哨，删了重写。</p>
-<p>现在的主题是照着 Claude 官网的设计语言手搓的：低饱和莫兰迪色系、手绘 SVG 插画、12px 圆角、4px 间距、亮暗双模式。全站字体换了小濑，代码用 Fantasque Sans Mono。</p>
-<p>没有用任何现成的 UI 框架，CSS 从零写，JS 从零写。所以细节全都是自己可控的。</p>
-<h3 id="域名"><a href="#域名" class="headerlink" title="域名"></a>域名</h3><p>最开始挂在 <code>plocr.github.io</code> 免费域名上。后来买了一枚域名 <code>plocr.online</code>，通过阿里云 DNS 解析到 Vercel。</p>
-<blockquote>
-<p>墙内访问 GitHub Pages 不太稳定，加一层 Vercel 做反向代理好很多。</p>
-</blockquote>
-<h3 id="部署架构"><a href="#部署架构" class="headerlink" title="部署架构"></a>部署架构</h3><p>现在有两套并行的部署：</p>
+<h2 id="第一步：本地新建文章"><a href="#第一步：本地新建文章" class="headerlink" title="第一步：本地新建文章"></a>第一步：本地新建文章</h2><p>在博客项目根目录打开终端：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> <span class="string">&quot;F:\文档\GitHub blog\Plocr.github.io&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>用 Hexo 新建一篇 Markdown 文章：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npx hexo new <span class="string">&quot;文章标题&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>这会在 <code>source/_posts/</code> 下生成一个 <code>.md</code> 文件。打开它，顶部有一段叫 <strong>Front-matter</strong> 的配置区域：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: 文章标题</span><br><span class="line">date: 2025-05-15</span><br><span class="line"><span class="section">tags: [项目日志]</span></span><br><span class="line"><span class="section">---</span></span><br><span class="line"></span><br><span class="line">正文从这里开始...</span><br></pre></td></tr></table></figure>
+
 <table>
 <thead>
 <tr>
-<th>线路</th>
-<th>方式</th>
-<th>地址</th>
+<th>字段</th>
+<th>说明</th>
+<th>必填</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>主站</td>
-<td>Vercel 自动部署</td>
-<td><a href="https://www.plocr.online/">https://www.plocr.online</a></td>
+<td><code>title</code></td>
+<td>文章标题</td>
+<td>是</td>
 </tr>
 <tr>
-<td>备用</td>
-<td>GitHub Actions → Pages</td>
-<td><a target="_blank" rel="noopener" href="https://plocr.github.io/">https://plocr.github.io</a></td>
+<td><code>date</code></td>
+<td>发布日期</td>
+<td>是</td>
+</tr>
+<tr>
+<td><code>tags</code></td>
+<td>标签（四选一）：项目日志 &#x2F; 工作流分享 &#x2F; 随笔 &#x2F; 影音推荐</td>
+<td>推荐</td>
+</tr>
+<tr>
+<td><code>excerpt</code></td>
+<td>摘要，显示在首页卡片上</td>
+<td>推荐</td>
 </tr>
 </tbody></table>
-<p>每次写文章 push 到 <code>master</code> 分支，两边会同时更新。主站挂了还有备用，不至于打不开。</p>
-<h3 id="字体"><a href="#字体" class="headerlink" title="字体"></a>字体</h3><ul>
-<li><strong>全站文字</strong>：<a target="_blank" rel="noopener" href="https://github.com/lxgw/kose-font">小濑字体</a>，一款手写风格的中文开源字体</li>
-<li><strong>代码块</strong>：<a target="_blank" rel="noopener" href="https://github.com/belluzj/fantasque-sans-mono">Fantasque Sans Mono</a></li>
-</ul>
-<h3 id="评论"><a href="#评论" class="headerlink" title="评论"></a>评论</h3><p>用了 <a target="_blank" rel="noopener" href="https://giscus.app/">Giscus</a>，基于 GitHub Discussions，不需要服务器也不需要数据库。只有登录 GitHub 的人才能评论，避免了机器人乱发广告的问题。</p>
-<h3 id="其他小东西"><a href="#其他小东西" class="headerlink" title="其他小东西"></a>其他小东西</h3><ul>
-<li>亮&#x2F;暗模式一键切换，首次打开跟随系统设置</li>
-<li>手绘 SVG 插画，每篇文章自动分配不同的默认封面</li>
-<li>一键回到顶部按钮</li>
-<li>光标跟随光晕</li>
-<li>响应式适配，手机、平板、桌面各有一套</li>
-</ul>
 <hr>
-<h2 id="关于我"><a href="#关于我" class="headerlink" title="关于我"></a>关于我</h2><p>一个喜欢折腾的开发者。对技术保持好奇，对生活保持感知。</p>
-<p>写代码、看电影、听歌、偶尔拍照。认为好的工具应该像手写一样自然。</p>
+<h2 id="第二步：写内容"><a href="#第二步：写内容" class="headerlink" title="第二步：写内容"></a>第二步：写内容</h2><p>用 Markdown 语法写正文。常用格式：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">## 二级标题</span></span><br><span class="line"></span><br><span class="line"><span class="section">### 三级标题</span></span><br><span class="line"></span><br><span class="line">这是<span class="strong">**粗体**</span>，这是<span class="emphasis">*斜体*</span>。</span><br><span class="line"></span><br><span class="line"><span class="quote">&gt; 引用文字</span></span><br><span class="line"></span><br><span class="line"><span class="bullet">-</span> 列表1</span><br><span class="line"><span class="bullet">-</span> 列表2</span><br><span class="line"></span><br><span class="line">[<span class="string">链接文字</span>](<span class="link">https://...</span>)</span><br><span class="line"></span><br><span class="line">![<span class="string">图片描述</span>](<span class="link">图片URL</span>)</span><br></pre></td></tr></table></figure>
+
+<p>图片建议用在线图床链接，不要放本地文件。</p>
 <hr>
-<h2 id="后续"><a href="#后续" class="headerlink" title="后续"></a>后续</h2><p>以后会在这里陆续更新技术笔记、工作流分享和生活记录。关于博客本身的改动也会写在「项目日志」这个分类里。</p>
-<p>欢迎常来看看。</p>
+<h2 id="第三步：本地预览"><a href="#第三步：本地预览" class="headerlink" title="第三步：本地预览"></a>第三步：本地预览</h2><p>写完后在本地看看效果：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npx hexo server</span><br></pre></td></tr></table></figure>
+
+<p>浏览器打开 <code>http://localhost:4000</code>，找到你的文章点进去。如果哪里不对，回到 <code>.md</code> 文件修改，保存后刷新页面即可看到变化。</p>
+<hr>
+<h2 id="第四步：提交并推送"><a href="#第四步：提交并推送" class="headerlink" title="第四步：提交并推送"></a>第四步：提交并推送</h2><p>确认没问题后：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git add -A</span><br><span class="line">git commit -m <span class="string">&quot;新文章：文章标题&quot;</span></span><br><span class="line">git push origin master</span><br></pre></td></tr></table></figure>
+
+<p>推送后，Vercel 会自动检测到 <code>master</code> 分支的更新，开始构建并部署到 <a href="https://www.plocr.online/">plocr.online</a>。</p>
+<hr>
+<h2 id="第五步：等一会儿"><a href="#第五步：等一会儿" class="headerlink" title="第五步：等一会儿"></a>第五步：等一会儿</h2><p>Vercel 构建通常需要 1-2 分钟。去 <a target="_blank" rel="noopener" href="https://vercel.com/">Vercel Dashboard</a> 可以实时看到构建进度。构建完成后，你的文章就在线了。</p>
+<hr>
+<h2 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h2><blockquote>
+<p><strong>推送后网站没变化？</strong><br>去 Vercel 看部署日志。如果失败，大概率是 Markdown 语法错误。</p>
+</blockquote>
+<blockquote>
+<p><strong>本地 <code>hexo s</code> 报错？</strong><br>检查 Front-matter 的格式，<code>---</code> 必须成对出现。</p>
+</blockquote>
+<blockquote>
+<p><strong>标签不对？</strong><br>标签只能从四个分类里选：<code>项目日志</code>、<code>工作流分享</code>、<code>随笔</code>、<code>影音推荐</code>，用其他的不会出现在归档分类里。</p>
+</blockquote>
+<blockquote>
+<p><strong>文章没有封面？</strong><br>有图就用第一张，没图就随机分配 12 种手绘插画之一，不用担心。</p>
+</blockquote>
+<hr>
+<p>就是这样。写给自己看的，也算帮未来的自己省点事。</p>
 
     </div>
 
     <nav class="post-article__nav">
       <div class="post-nav__prev">
         
-          <a href="/2025/05/04/upgrade-review/">
-            <span class="post-nav__label">← 上一篇</span>
-            <span class="post-nav__title">《升级》（Upgrade）— 如果你今晚想看一部不废话的科幻片</span>
-          </a>
-        
       </div>
       <div class="post-nav__next">
         
-          <a href="/2023/05/09/LOVE/">
+          <a href="/2025/05/04/upgrade-review/">
             <span class="post-nav__label">下一篇 →</span>
-            <span class="post-nav__title">LOVE</span>
+            <span class="post-nav__title">《升级》（Upgrade）— 如果你今晚想看一部不废话的科幻片</span>
           </a>
         
       </div>
