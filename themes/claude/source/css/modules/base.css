@@ -96,6 +96,7 @@ body {
 .page-article__body,
 .page-header {
   max-width: 720px;
+  margin: 0 auto;
 }
 
 .post-article__header,
@@ -103,6 +104,7 @@ body {
 .post-article__back,
 .post-article__nav {
   max-width: 720px;
+  margin: 0 auto;
 }
 
 /* ===== Typography ===== */
