@@ -1,0 +1,69 @@
+---
+title: Hello PlocrのBlog
+date: 2023-05-11 12:17:00
+updated: 2025-05-15
+tags: [项目日志]
+excerpt: 从 Hexo + Butterfly 到自研 Claude 风格主题 + Vercel 部署，折腾了两年多的博客进化史。
+---
+
+<div class="post-hero">
+  <h2>欢迎来到我的小窝</h2>
+  <p>这是我的第一个博客。从 2023 年开始搭建，断断续续折腾了两年多，才有了现在的样子。</p>
+</div>
+
+<blockquote>一开始只想有个地方放文章，最后变成了一个精装修的 Web 项目。</blockquote>
+
+<h3>框架</h3>
+
+<p><a href="https://hexo.io/">Hexo</a>，一个用 Node.js 驱动的静态博客生成器。用 HTML 写文章，一条命令生成静态网页。当初选它是因为简单——不用数据库、不用服务器，写完 push 上去就完事。</p>
+
+<h3>主题</h3>
+
+<p>最早用的是 <strong>Butterfly</strong> 主题，后来觉得太花哨，删了重写。现在的主题是照着 Claude 官网的设计语言手搓的：</p>
+
+<ul>
+  <li>低饱和莫兰迪色系</li>
+  <li>手绘 SVG 插画</li>
+  <li>12px 圆角、4px 间距</li>
+  <li>亮暗双模式</li>
+  <li>全站小濑字体 + Fantasque Sans Mono 代码字体</li>
+</ul>
+
+<p>没有用任何现成的 UI 框架，CSS 从零写，JS 从零写。细节全都是自己可控的。</p>
+
+<div class="post-callout">
+  <strong>域名</strong>
+  <p>从 <code>plocr.github.io</code> 到 <code>plocr.online</code>，阿里云 DNS 解析到 Vercel。墙内访问 GitHub Pages 不太稳定，加一层 Vercel 好很多。</p>
+</div>
+
+<div class="post-grid">
+  <div class="post-card-component">
+    <div class="post-card-component__icon">🚀</div>
+    <h3>部署</h3>
+    <p>Vercel（主站）+ GitHub Pages（备用），push 一次两边同步更新。</p>
+  </div>
+  <div class="post-card-component">
+    <div class="post-card-component__icon">🔤</div>
+    <h3>字体</h3>
+    <p>小濑字体（全站）+ Fantasque Sans Mono（代码）</p>
+  </div>
+  <div class="post-card-component">
+    <div class="post-card-component__icon">💬</div>
+    <h3>评论</h3>
+    <p>Giscus — 基于 GitHub Discussions，零服务器零数据库。</p>
+  </div>
+</div>
+
+<h3>其他</h3>
+
+<ul>
+  <li>亮/暗模式一键切换</li>
+  <li>手绘 SVG 插画 × 12 种随机轮换</li>
+  <li>一键回到顶部按钮</li>
+  <li>光标跟随光晕</li>
+  <li>响应式适配</li>
+</ul>
+
+<div class="post-ending">
+  <p>以后会在这里陆续更新技术笔记和生活记录。欢迎常来看看。</p>
+</div>

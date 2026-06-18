@@ -1,0 +1,117 @@
+---
+title: 如何写一篇文章并发布
+date: 2025-05-15
+updated: 2025-05-16
+tags: [项目日志]
+excerpt: 一篇写给自己的教程，记录从写文章到发布上线的完整流程。
+---
+
+<p>写了这么久博客，不如写一篇教程给自己——免得以后忘了怎么操作。</p>
+
+<hr>
+
+<h2>第一步：本地新建文章</h2>
+
+<p>在博客项目根目录打开终端：</p>
+
+<pre><code>cd "F:\文档\GitHub blog\Plocr.github.io"</code></pre>
+
+<p>用 Hexo 新建一篇文章：</p>
+
+<pre><code>npx hexo new "文章标题"</code></pre>
+
+<p>这会在 <code>source/_posts/</code> 下生成一个 <code>.md</code> 文件。把它重命名为 <code>.html</code> 后缀，然后用 HTML 格式写。</p>
+
+<p>文件顶部有一段叫 <strong>Front-matter</strong> 的配置区域：</p>
+
+<pre><code>---
+title: 文章标题
+date: 2025-05-15
+tags: [项目日志]
+excerpt: 摘要文字，显示在首页卡片
+---</code></pre>
+
+<table>
+  <tr><th>字段</th><th>说明</th><th>必填</th></tr>
+  <tr><td>title</td><td>文章标题</td><td>是</td></tr>
+  <tr><td>date</td><td>发布日期</td><td>是</td></tr>
+  <tr><td>updated</td><td>最后更新日期</td><td>否</td></tr>
+  <tr><td>tags</td><td>四选一：项目日志 / 工作流分享 / 随笔 / 影音推荐</td><td>推荐</td></tr>
+  <tr><td>excerpt</td><td>摘要，显示在首页卡片上</td><td>推荐</td></tr>
+</table>
+
+<hr>
+
+<h2>第二步：写内容</h2>
+
+<p>用 HTML 写正文。常用标签：</p>
+
+<pre><code>&lt;h2&gt;二级标题&lt;/h2&gt;
+&lt;h3&gt;三级标题&lt;/h3&gt;
+
+&lt;p&gt;段落文字&lt;/p&gt;
+
+&lt;blockquote&gt;引用文字&lt;/blockquote&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;列表项&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;a href="https://..."&gt;链接&lt;/a&gt;
+
+&lt;img src="图片URL" alt="描述"&gt;
+
+&lt;pre&gt;&lt;code&gt;代码块&lt;/code&gt;&lt;/pre&gt;
+</code></pre>
+
+<p>图片建议用在线图床链接，不要放本地文件。</p>
+
+<hr>
+
+<h2>第三步：本地预览</h2>
+
+<p>写完后在本地看看效果：</p>
+
+<pre><code>npx hexo server</code></pre>
+
+<p>浏览器打开 <code>http://localhost:4000</code>，找到文章点进去。修改文件保存后刷新页面即可看到变化。</p>
+
+<hr>
+
+<h2>第四步：提交并推送</h2>
+
+<p>确认没问题后：</p>
+
+<pre><code>git add -A
+git commit -m "新文章：文章标题"
+git push origin master</code></pre>
+
+<p>推送后，Vercel 会自动检测到 <code>master</code> 分支的更新，开始构建并部署到 <a href="https://www.plocr.online/">plocr.online</a>。</p>
+
+<hr>
+
+<h2>第五步：等一会儿</h2>
+
+<p>Vercel 构建通常需要 1-2 分钟。去 <a href="https://vercel.com">Vercel Dashboard</a> 可以实时看到构建进度。构建完成后，文章就在线了。</p>
+
+<hr>
+
+<h2>常见问题</h2>
+
+<dl>
+  <dt><strong>推送后网站没变化？</strong></dt>
+  <dd>去 Vercel 看部署日志。如果失败，大概率是 Front-matter 语法错误。</dd>
+
+  <dt><strong>本地 hexo s 报错？</strong></dt>
+  <dd>检查 Front-matter 的格式，<code>---</code> 必须成对出现。</dd>
+
+  <dt><strong>标签不对？</strong></dt>
+  <dd>标签只能从四个分类里选：项目日志、工作流分享、随笔、影音推荐。</dd>
+
+  <dt><strong>文章没有封面？</strong></dt>
+  <dd>有图就用第一张，没图就随机分配 12 种手绘插画之一，不用担心。</dd>
+</dl>
+
+<hr>
+
+<p>就是这样。写给自己看的，也算帮未来的自己省点事。</p>
