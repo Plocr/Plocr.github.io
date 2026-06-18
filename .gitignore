@@ -6,3 +6,5 @@ node_modules/
 public/
 .deploy*/
 项目日志.md
+.codegraph/
+.reasonix/
