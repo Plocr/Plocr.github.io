@@ -1,0 +1,142 @@
+---
+title: Plocr-chef 技术实现：Supabase + FLIP 动画 + Lottie + 液态玻璃 UI
+date: 2025-06-24
+tags: [项目日志]
+excerpt: 11 个页面的微信小程序，从 Supabase REST API 封装到纯前端 FLIP 动画，从 Lottie 状态反馈到 26+ CSS 变量的设计系统。
+---
+
+<div class="post-hero">
+  <h2>上一篇写了流程，这篇写代码</h2>
+  <p>Plocr-chef 是一个有 11 个页面的微信小程序，后端用 Supabase 免费计划，前端全是原生 WXML/WXSS/JS，没有用任何 UI 框架。这篇记录它的技术实现要点。</p>
+</div>
+
+<blockquote>整个项目前端代码约 4000 行，后端零代码（只有 Supabase 的 REST API）。</blockquote>
+
+<hr>
+
+<h2>一、Supabase：CRUD + 图片 + 保活</h2>
+
+<p>后端用的是 <strong>Supabase</strong> 免费计划，提供一个 PostgreSQL 数据库和对象存储。没有写后端代码，直接从微信小程序发 REST 请求。</p>
+
+<p>封装了一个 <code>utils/supabase.js</code>，暴露 6 个函数：</p>
+
+<table>
+  <tr><th>函数</th><th>HTTP 方法</th><th>说明</th></tr>
+  <tr><td><code>select(table, params)</code></td><td>GET</td><td>带查询参数的查表</td></tr>
+  <tr><td><code>insert(table, data)</code></td><td>POST</td><td>新增记录</td></tr>
+  <tr><td><code>update(table, id, data)</code></td><td>PATCH</td><td>按 id 更新</td></tr>
+  <tr><td><code>remove(table, id)</code></td><td>DELETE</td><td>按 id 删除</td></tr>
+  <tr><td><code>uploadImage(filePath)</code></td><td>POST</td><td>上传到 Supabase Storage</td></tr>
+  <tr><td><code>deleteImage(imageUrl)</code></td><td>DELETE</td><td>从 Storage 删除</td></tr>
+</table>
+
+<p>所有请求通过 <code>wx.request</code> 发送，请求头带 <code>apikey</code> 和 Bearer token。上传图片走 multipart，上传后返回公开 URL 存数据库。</p>
+
+<p>数据库三张表：</p>
+
+<pre><code>dishes    — id, name, category, price, recipe, image_url
+orders    — id, date, status, items (jsonb), total
+wishlist  — id, dish_name, who, note, status</code></pre>
+
+<p>还有一个值得一提的细节：<strong>保活机制</strong>。Supabase 免费计划超过 7 天不活动会暂停数据库。所以在 <code>app.js</code> 里加了一个 <code>keepWarm()</code>，每 24 小时 ping 一次 <code>/rest/v1/dishes</code>。</p>
+
+<hr>
+
+<h2>二、FLIP 动画：卡片展开详情</h2>
+
+<p>首页推荐菜品的卡片，点击后不是跳转页面，而是从卡片当前位置展开成一个详情的浮层。这是用 <strong>FLIP</strong>（First, Last, Invert, Play）动画实现的。</p>
+
+<p>核心逻辑在 <code>utils/flip.js</code> 里：</p>
+
+<ol>
+  <li>点击时用 <code>createSelectorQuery</code> 获取卡片当前位置和尺寸（First）</li>
+  <li>浮层渲染后拿到它的最终位置（Last）</li>
+  <li>计算位移差和尺寸差（Invert）</li>
+  <li>用 <code>this.animate()</code> 执行 9 个关键帧的展开动画（1.25s ease-in-out）</li>
+  <li>关闭时执行逆动画（8 个关键帧，0.9s）缩回原位</li>
+</ol>
+
+<p>效果就是卡片像从页面上「长」出来一样顺滑。这是整个项目里用户感知最明显的交互亮点。</p>
+
+<div class="post-callout">
+  <strong>📐 FLIP 技术要点</strong>
+  <p>用 <code>createSelectorQuery</code> 获取坐标 · 9 帧展开（1.25s）· 8 帧收回（0.9s）· spring cubic-bezier 缓动</p>
+</div>
+
+<hr>
+
+<h2>三、Lottie 动画：状态反馈</h2>
+
+<p>为了替代微信小程序里比较单调的 loading/empty/success 反馈，我封装了一个 <strong>Lottie 动画组件</strong>：</p>
+
+<pre><code>&lt;lottie-player type="loading" width="200" height="200"&gt;&lt;/lottie-player&gt;
+&lt;lottie-player type="empty" width="300" height="300"&gt;&lt;/lottie-player&gt;
+&lt;lottie-player type="success" width="150" height="150" loop="{{false}}"&gt;&lt;/lottie-player&gt;</code></pre>
+
+<p>三组动画数据内嵌在组件 JS 里（不是从网络加载），用一个 npm 包 <code>lottie-miniprogram</code> 渲染到 <code>&lt;canvas type="2d"&gt;</code> 上：</p>
+
+<ul>
+  <li><strong>loading</strong>：3 个弹跳的圆点</li>
+  <li><strong>empty</strong>：一个冒着热气的锅</li>
+  <li><strong>success</strong>：圆圈 + 勾</li>
+</ul>
+
+<p>这个组件被用在了首页、购物车、订单、菜品管理、统计、心愿单等 6 个页面里，统一了所有状态反馈的视觉风格。</p>
+
+<hr>
+
+<h2>四、液态玻璃 UI 设计系统</h2>
+
+<p>整个项目的视觉风格是「液态玻璃」——温暖、通透、柔软。用 26+ 个 CSS 变量定义了一套完整的设计 Token：</p>
+
+<pre><code>--bg-primary: #fdf6f0
+--bg-card: rgba(255, 255, 255, 0.68)
+--glass-blur: blur(20px)
+--glass-saturate: saturate(180%)
+--radius-card: 24rpx
+--radius-sm: 12rpx
+--shadow-card: 0 4rpx 20rpx rgba(0,0,0,0.06)
+--accent: #a0522d
+--accent-light: rgba(160, 82, 45, 0.1)
+--text-primary: #3d2b1f
+--text-secondary: rgba(61, 43, 31, 0.6)</code></pre>
+
+<p>支持深色模式，每个组件都有显式的暗色覆盖（TabBar、返回按钮、卡片、弹窗、购物车栏、分类标签、表单输入）。深色模式通过 <code>@media (prefers-color-scheme: dark)</code> 媒体查询自动切换。</p>
+
+<hr>
+
+<h2>五、11 个页面的路由与交互</h2>
+
+<p>底部 TabBar 只有两个入口：</p>
+
+<pre><code>TabBar
+├── 首页 ──→ 全部菜单 ──→ 购物车 ──→ 提交订单
+└── 管理 ──→ 菜品管理 ──→ 新增/编辑菜品
+           ├── 订单管理 ──→ 食谱查看
+           ├── 数据统计
+           └── 心愿单</code></pre>
+
+<p>所有页面跳转使用 <code>navigateTo</code> + <code>animationType: 'slide-in-right'</code>（300ms），返回用 <code>navigateBack</code> + <code>slide-out-right</code>。</p>
+
+<p>每个页面都有完善的边界处理：</p>
+
+<ul>
+  <li>加载态（骨架屏或 Lottie loading）</li>
+  <li>空态（Lottie empty + 提示文案）</li>
+  <li>网络失败（本地备份数据兜底）</li>
+  <li>防重复提交（submitting 标志位）</li>
+  <li>输入校验（价格非数字/负数、菜品名必填）</li>
+</ul>
+
+<hr>
+
+<h2>六、本地备份</h2>
+
+<p>Supabase 免费计划可能暂停，数据可能丢。所以每次成功拉取数据后，都会调用 <code>app.backupData(type, data)</code> 把数据存到 <code>wx.setStorage</code>。网络失败时自动读取本地备份。</p>
+
+<p>同样，购物车数据也在每次修改后同步到 <code>wx.setStorage</code>，App 启动时自动恢复。</p>
+
+<div class="post-ending">
+  <p>这个项目让我最满意的地方是：它证明了在 2025 年，一个人+AI 可以用纯免费的服务搭建一个完整可用的微信小程序。不需要后端、不需要服务器、不需要上架应用商店。</p>
+  <p>下一篇开始写另一个项目「碎片」——手绘草图到代码的设计之旅。</p>
+</div>

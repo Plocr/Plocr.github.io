@@ -1,0 +1,120 @@
+---
+title: 「碎片」设计系统：莫奈色卡 × 玻璃态 × 卡片翻转
+date: 2025-06-24
+tags: [项目日志]
+excerpt: 从莫奈的《睡莲》《日本桥》提取调色板，构建一套完整的玻璃态组件体系，再加上卡片堆叠位置算法和翻转机制。
+---
+
+<div class="post-hero">
+  <h2>这套设计系统不是从零想的——是从莫奈的画里偷来的</h2>
+  <p>「碎片」的配色直接取自莫奈的印象派画作：睡莲的绿、日本桥的蓝、日落的珊瑚、玫瑰园的红……然后包装成一套 CSS 变量 Token。</p>
+</div>
+
+<blockquote>设计系统的核心是：用 8 个颜色 Token 支撑起 4 种卡片类型、6 种玻璃组件、2 种布局模式。</blockquote>
+
+<hr>
+
+<h2>一、莫奈调色板</h2>
+
+<p>从莫奈的《睡莲》《日本桥》《日落》等画作中提取了 8 个颜色 Token：</p>
+
+<table>
+  <tr><th>Token</th><th>色值</th><th>灵感来源</th><th>用途</th></tr>
+  <tr><td><code>--paper</code></td><td><code>#fff4df</code></td><td>米色画布底</td><td>卡片基底</td></tr>
+  <tr><td><code>--ink</code></td><td><code>#18231f</code></td><td>松针深绿</td><td>正文字色</td></tr>
+  <tr><td><code>--green</code></td><td><code>#1f5a4d</code></td><td>睡莲叶</td><td>主强调色</td></tr>
+  <tr><td><code>--blue</code></td><td><code>#31677b</code></td><td>水面倒影</td><td>次要强调色</td></tr>
+  <tr><td><code>--amber</code></td><td><code>#b9782d</code></td><td>黄昏光线</td><td>笔记卡片强调</td></tr>
+  <tr><td><code>--coral</code></td><td><code>#b85f48</code></td><td>日落</td><td>心情卡片强调</td></tr>
+  <tr><td><code>--rose</code></td><td><code>#a84d63</code></td><td>玫瑰园</td><td>愿望卡片强调</td></tr>
+  <tr><td><code>--kicker</code></td><td><code>#8a6045</code></td><td>赭石</td><td>日期标签</td></tr>
+</table>
+
+<p>背景是一个三层渐变 + 模拟画布纹理：</p>
+
+<pre><code>background: 
+  linear-gradient(150deg, #ecdfc8 0%, #dbe8e2 54%, #bfd6d1 100%),
+  repeating-linear-gradient(0deg, transparent, transparent 56rpx, rgba(0,0,0,0.02) 56rpx, rgba(0,0,0,0.02) 57rpx);</code></pre>
+
+<p>这个渐变的三个颜色分别对应莫奈画中的草地、水面、天空——也是这个项目名字「碎片」的由来：把一幅画拆成色块，散落在交互里。</p>
+
+<hr>
+
+<h2>二、玻璃态组件体系</h2>
+
+<p>6 种玻璃态组件类，每个都用统一的毛玻璃公式：</p>
+
+<pre><code>background: rgba(255, 255, 255, 0.34~0.48)
+backdrop-filter: blur(10px)
+border: 2rpx solid rgba(255, 255, 255, 0.72~0.82)</code></pre>
+
+<table>
+  <tr><th>组件</th><th>圆角</th><th>用途</th></tr>
+  <tr><td><code>.glass-panel</code></td><td>60rpx</td><td>主卡片面板</td></tr>
+  <tr><td><code>.chip-glass</code></td><td>999rpx（药丸形）</td><td>标签、分类筛选</td></tr>
+  <tr><td><code>.field-like</code></td><td>36rpx</td><td>输入框、按钮</td></tr>
+  <tr><td><code>.round-glass</code></td><td>50%（圆形）</td><td>头像、图标徽章</td></tr>
+  <tr><td><code>.paper-sheet</code></td><td>60rpx</td><td>时间轴卡片</td></tr>
+  <tr><td><code>.mark</code></td><td>50%</td><td>卡片类型指示标</td></tr>
+</table>
+
+<p>透明度的数值经过反复调试：一开始设 0.18~0.26，在莫奈渐变背景上几乎完全消失。最终提到 0.34~0.48 才能看到清晰的玻璃质感。</p>
+
+<hr>
+
+<h2>三、卡片堆叠位置算法</h2>
+
+<p>首页的核心交互是一叠卡片，当前卡片居中，左右露出相邻卡片的边缘。这个位置计算用了一个 <code>relativePosition()</code> 函数：</p>
+
+<pre><code>function relativePosition(index, active, total) {
+  // 环形回绕：计算当前卡片到活跃卡片的偏移量
+  // 处理 wrap-around 情况（从最后一张划到第一张）
+  // 返回 -2, -1, 0, 1, 2 等相对位置
+}</code></pre>
+
+<p>每个相对位置对应一组 CSS 样式：</p>
+
+<ul>
+  <li><strong>pos-active</strong>（0）：居中，scale(1)，opacity 1，z-index 4</li>
+  <li><strong>pos-prev</strong>（-1）：左侧偏移 260rpx，scale(0.88)，opacity 0.82，z-index 2</li>
+  <li><strong>pos-next</strong>（+1）：右侧偏移 260rpx，scale(0.88)，opacity 0.82，z-index 2</li>
+  <li><strong>pos-far</strong>（其他）：translateY(36rpx)，scale(0.82)，opacity 0.28，z-index 1</li>
+</ul>
+
+<p>滑动切换的阈值：<code>Math.abs(dx) >= 50 && Math.abs(dx) > Math.abs(dy)</code>——水平划够 50px 且比垂直滑动多才触发切换。</p>
+
+<hr>
+
+<h2>四、卡片翻转机制</h2>
+
+<p>每张卡片都可以翻转——正面显示内容，反面是表单（填体重、记心情、写愿望）。</p>
+
+<p>实现上用一个 <code>flipMap[cardId]</code> 状态映射表，驱动 <code>wx:if / wx:else</code> 切换显示正面或反面。数据在 JS 中预计算（<code>buildCardsState()</code>），避免在模板中动态计算——这是为了解决 WXML 的「true 文字渲染」bug。</p>
+
+<hr>
+
+<h2>五、4 种卡片类型 + 笔记工厂</h2>
+
+<p>卡片按类型区分，每种的样式和交互都不一样：</p>
+
+<table>
+  <tr><th>卡片类型</th><th>底色</th><th>强调色</th><th>功能</th></tr>
+  <tr><td>体重（Body）</td><td><code>#fff4df</code></td><td>绿色</td><td>记录体重、单位切换（kg/斤）</td></tr>
+  <tr><td>心情（Mood）</td><td><code>#fff0dc</code></td><td>珊瑚色</td><td>记录今日心情语录</td></tr>
+  <tr><td>愿望（Wish）</td><td><code>#f8faef</code></td><td>玫瑰色</td><td>愿望列表管理</td></tr>
+  <tr><td>笔记工厂（Note）</td><td>8 色循环</td><td>琥珀色</td><td>每日笔记，每次新增换一个颜色</td></tr>
+</table>
+
+<p>笔记工厂是最好玩的设计——每次点「写笔记」按钮，系统自动生成一张新的笔记卡片，颜色在 8 色调色板中循环。这 8 个颜色也是从莫奈画作中提取的，每张新卡片都像从画布上撕下的一小块碎片。</p>
+
+<hr>
+
+<h2>六、底部导航指示器</h2>
+
+<p>底部导航栏有一个会滑动的绿色透镜，跟随当前激活的 Tab。实现上用 <code>createSelectorQuery()</code> 动态计算每个 Tab 的宽度，而不是写死偏移量——这样即使未来修改了 Tab 文案也不会断裂。</p>
+
+<p>点击 Tab 时，图标有一个 200ms 的弹跳动画（scale 关键帧），这是除了卡片滑动外最常用的交互反馈。</p>
+
+<div class="post-ending">
+  <p>下一篇写「碎片」的架构：单页 SPA、Turso 边缘数据库、云函数代理、缓存优先策略——这个小程序的技术底子同样有料。</p>
+</div>

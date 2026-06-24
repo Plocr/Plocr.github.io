@@ -1,0 +1,137 @@
+---
+title: 从 Figma 到微信小程序：Plocr-chef 的 vibe coding 完整流程
+date: 2025-06-24
+tags: [项目日志]
+excerpt: 用 Figma 画设计图 → 导出 PDF → AI 生成文件树 → 手动建文件粘贴代码 → Claude Code + DeepSeek API 优化。一个完全由 AI 辅助「聊」出来的微信小程序。
+---
+
+<div class="post-hero">
+  <h2>这是一篇写给自己的开发记录</h2>
+  <p>记录 Plocr-chef 这个家庭菜单小程序是怎么从一张 Figma 设计稿，一步步变成能用的微信小程序的。</p>
+</div>
+
+<blockquote>整个开发过程几乎没写什么原创代码——全是和 AI 对话聊出来的。但也不是一键生成，中间有很多手工活。</blockquote>
+
+<hr>
+
+<h2>第一步：Figma 画图</h2>
+
+<p>所有事情的起点是一张 Figma 设计稿。我在 Figma 里画了首页的布局、卡片样式、配色方案，然后导出 PDF。</p>
+
+<p>为什么是 Figma？因为那时候我还不知道后面会用什么技术栈，Figma 是纯视觉的，不绑定任何实现方式。画出想要的样子，再想怎么实现它。</p>
+
+<p>设计风格是后来贯穿整个项目的「液态玻璃」（Liquid Glass）：温暖的大地色系（主色 <code>#a0522d</code>），半透明毛玻璃卡片，大圆角，柔和的阴影。</p>
+
+<div class="post-callout">
+  <strong>🎨 设计关键词</strong>
+  <p>暖色调渐变背景 <code>#fdf6f0 → #fae8d8 → #f0d0b8</code> · backdrop-filter blur(20-28px) · 毛玻璃卡片 · 26+ CSS 变量</p>
+</div>
+
+<hr>
+
+<h2>第二步：把 PDF 丢给 AI，生成文件树</h2>
+
+<p>有了设计图之后，我把 PDF 上传给 AI，描述我想要的功能：</p>
+
+<ul>
+  <li>一个家庭私用的点菜小程序</li>
+  <li>首页展示推荐菜品</li>
+  <li>完整的菜单浏览和搜索</li>
+  <li>购物车 + 下单</li>
+  <li>订单管理 + 食谱查看</li>
+  <li>菜品后台管理（CRUD）</li>
+  <li>数据统计</li>
+  <li>心愿单</li>
+</ul>
+
+<p>AI 根据设计图和需求描述，生成了一整套项目文件树——每个文件叫什么、放在哪里、大致负责什么。这个文件树后来基本没改过，一直用到了项目完结。</p>
+
+<pre><code>Plocr-chef/
+├── app.js / app.json / app.wxss
+├── custom-tab-bar/          # 自定义毛玻璃 TabBar
+├── components/lottie-player/  # Lottie 动画组件
+├── utils/
+│   ├── supabase.js           # Supabase REST API 封装
+│   └── flip.js               # FLIP 动画
+├── pages/                    # 11 个页面
+│   ├── index/                # 首页
+│   ├── dishList/             # 全部菜单
+│   ├── cart/                 # 购物车
+│   ├── order/                # 订单
+│   ├── manage/               # 管理后台入口
+│   ├── dishManage/           # 菜品管理
+│   ├── addDish/              # 新增菜品
+│   ├── editDish/             # 编辑菜品
+│   ├── recipe/               # 食谱
+│   ├── stats/                # 数据统计
+│   └── wishlist/             # 心愿单
+└── node_modules/</code></pre>
+
+<hr>
+
+<h2>第三步：手工活——建文件、粘贴代码、改 bug</h2>
+
+<p>文件树有了，AI 也生成了每个文件的代码。但这里有一个关键步骤：<strong>不能一键生成</strong>。</p>
+
+<p>我需要：</p>
+
+<ol>
+  <li>在微信开发者工具里手动创建每个文件</li>
+  <li>把 AI 生成的代码逐段粘贴进去</li>
+  <li>运行看效果——几乎每次都有问题</li>
+  <li>截图 → 描述问题 → AI 改代码 → 粘贴 → 再看</li>
+</ol>
+
+<p>这个循环重复了无数次。微信小程序的坑特别多：<code>&lt;nav&gt;</code> 标签不支持、CSS 某些属性不认、组件间传值容易丢……每个都是人工发现的。</p>
+
+<div class="post-callout post-callout--warning">
+  <strong>💡 一个小经验</strong>
+  <p>AI 生成的文件树和接口设计可以大胆相信，因为它见过足够多的项目模板。但具体到每一个页面的交互逻辑，一定要跑起来验证。微信小程序的运行环境和浏览器差别很大。</p>
+</div>
+
+<hr>
+
+<h2>第四步：升级工具——Claude Code + DeepSeek API</h2>
+
+<p>项目到中期，手动粘贴代码已经效率太低了。我开始接入 <strong>Claude Code</strong> 开发模式：让 AI 直接读取项目代码、分析问题、生成 patch。</p>
+
+<p>同时，为了降低 API 成本——Claude 的 API 调用在大量迭代时费用不低——我接入了 <strong>DeepSeek API</strong> 来做辅助优化。DeepSeek 在代码理解和生成上表现不错，价格却便宜很多。</p>
+
+<p>具体分工是：</p>
+
+<ul>
+  <li><strong>Claude Code</strong>：架构设计、复杂逻辑、新功能开发</li>
+  <li><strong>DeepSeek API</strong>：代码优化、bug 修复、样式调整、小修小改</li>
+</ul>
+
+<p>相当于一个「主力 + 辅助」的双模型工作流。这在 vibe coding 项目里是一个值得记录的模式——不必所有对话都用最贵的模型。</p>
+
+<hr>
+
+<h2>第五步：免费方案全家桶</h2>
+
+<p>整个项目没有花一分钱（除了 API 调用的零散费用）：</p>
+
+<table>
+  <tr><th>服务</th><th>方案</th><th>费用</th></tr>
+  <tr><td>后端数据库</td><td>Supabase 免费计划（PostgreSQL + 对象存储）</td><td>免费</td></tr>
+  <tr><td>前端</td><td>微信小程序体验版（不发布上架）</td><td>免费</td></tr>
+  <tr><td>AI 编码</td><td>Claude Code + DeepSeek API</td><td>按量付费（很便宜）</td></tr>
+  <tr><td>域名/服务器</td><td>不需要，小程序不走 HTTP 域名</td><td>免费</td></tr>
+</table>
+
+<p>唯一的潜在成本是 Supabase 免费计划如果超过 7 天不活动会暂停。解决方案是在 App 启动时加了一个 <code>keepWarm()</code> 函数，每 24 小时 ping 一次数据库。</p>
+
+<hr>
+
+<h2>回顾</h2>
+
+<p>这个项目的开发方式总结下来就是三个词：<strong>Figma 定稿 → AI 写代码 → 人工调试</strong>。</p>
+
+<p>Figma 负责「我要什么」，AI 负责「怎么写」，人负责「哪里有问题」。三个角色缺一不可。</p>
+
+<p>它不是那种「输入一句话，AI 生成一个完整 App」的魔法——魔法不存在。但它确实是「输入一个设计稿，和 AI 聊几百轮，手工粘贴调试，最终得到一个能用的 App」的可行路径。</p>
+
+<div class="post-ending">
+  <p>下一篇会写 Plocr-chef 的技术实现细节：Supabase 封装、FLIP 动画、Lottie 组件、液态玻璃 UI。有兴趣的可以接着看。</p>
+</div>
