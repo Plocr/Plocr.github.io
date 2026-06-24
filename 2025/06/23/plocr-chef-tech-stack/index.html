@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>《升级》（Upgrade）— 如果你今晚想看一部不废话的科幻片 | Plocrの小窝</title>
+  <title>Plocr-chef 技术实现：Supabase + FLIP 动画 + Lottie + 液态玻璃 UI | Plocrの小窝</title>
   <meta name="description" content="Plocr的个人博客"/>
   <meta name="author" content="Plocr"/>
 
@@ -134,16 +134,19 @@
     </div>
 
     <header class="post-article__header">
-      <h1 class="post-article__title">《升级》（Upgrade）— 如果你今晚想看一部不废话的科幻片</h1>
+      <h1 class="post-article__title">Plocr-chef 技术实现：Supabase + FLIP 动画 + Lottie + 液态玻璃 UI</h1>
       <div class="post-article__meta">
-        <time datetime="2025-05-04T16:00:00.000Z">2025-05-05</time>
+        <time datetime="2025-06-23T16:00:00.000Z">2025-06-24</time>
+        
+          <span class="meta-sep">·</span>
+          <span>更新于 2026-06-24</span>
         
         
           
           <span class="meta-sep">·</span>
-          <span>896 字</span>
+          <span>3107 字</span>
           <span class="meta-sep">·</span>
-          <span>2 分钟阅读</span>
+          <span>6 分钟阅读</span>
         
         <span class="meta-sep">·</span>
         <span><i class="far fa-eye"></i> <span id="busuanzi_value_page_pv"></span> 阅读</span>
@@ -153,73 +156,147 @@
     
       <div class="post-article__tags">
         
-          <span class="tag">影音推荐</span>
+          <span class="tag">项目日志</span>
         
       </div>
     
 
     <div class="post-article__body">
       
-<div class="post-hero post-hero--movie">
-  <div class="post-hero__meta">
-    <span class="post-tag post-tag--year">2018</span>
-    <span class="post-tag post-tag--dir">雷·沃纳尔</span>
-    <span class="post-tag post-tag--time">100 分钟</span>
-    <span class="post-tag post-tag--rating">豆瓣 8.1</span>
-  </div>
-  <h2>如果你今晚想看一部不废话的科幻片</h2>
-  <p>2018年有一部电影叫《升级》（Upgrade），它什么都没做。没铺世界观，没讲大道理，就安安静静花了100分钟讲了一个故事。看完了，爽了，甚至有点背后发凉。</p>
+<div class="post-hero">
+  <h2>上一篇写了流程，这篇写代码</h2>
+  <p>Plocr-chef 是一个有 11 个页面的微信小程序，后端用 Supabase 免费计划，前端全是原生 WXML/WXSS/JS，没有用任何 UI 框架。这篇记录它的技术实现要点。</p>
 </div>
+
+<blockquote>整个项目前端代码约 4000 行，后端零代码（只有 Supabase 的 REST API）。</blockquote>
+
+<hr>
+
+<h2>一、Supabase：CRUD + 图片 + 保活</h2>
+
+<p>后端用的是 <strong>Supabase</strong> 免费计划，提供一个 PostgreSQL 数据库和对象存储。没有写后端代码，直接从微信小程序发 REST 请求。</p>
+
+<p>封装了一个 <code>utils/supabase.js</code>，暴露 6 个函数：</p>
+
+<table>
+  <tr><th>函数</th><th>HTTP 方法</th><th>说明</th></tr>
+  <tr><td><code>select(table, params)</code></td><td>GET</td><td>带查询参数的查表</td></tr>
+  <tr><td><code>insert(table, data)</code></td><td>POST</td><td>新增记录</td></tr>
+  <tr><td><code>update(table, id, data)</code></td><td>PATCH</td><td>按 id 更新</td></tr>
+  <tr><td><code>remove(table, id)</code></td><td>DELETE</td><td>按 id 删除</td></tr>
+  <tr><td><code>uploadImage(filePath)</code></td><td>POST</td><td>上传到 Supabase Storage</td></tr>
+  <tr><td><code>deleteImage(imageUrl)</code></td><td>DELETE</td><td>从 Storage 删除</td></tr>
+</table>
+
+<p>所有请求通过 <code>wx.request</code> 发送，请求头带 <code>apikey</code> 和 Bearer token。上传图片走 multipart，上传后返回公开 URL 存数据库。</p>
+
+<p>数据库三张表：</p>
+
+<pre><code>dishes    — id, name, category, price, recipe, image_url
+orders    — id, date, status, items (jsonb), total
+wishlist  — id, dish_name, who, note, status</code></pre>
+
+<p>还有一个值得一提的细节：<strong>保活机制</strong>。Supabase 免费计划超过 7 天不活动会暂停数据库。所以在 <code>app.js</code> 里加了一个 <code>keepWarm()</code>，每 24 小时 ping 一次 <code>/rest/v1/dishes</code>。</p>
+
+<hr>
+
+<h2>二、FLIP 动画：卡片展开详情</h2>
+
+<p>首页推荐菜品的卡片，点击后不是跳转页面，而是从卡片当前位置展开成一个详情的浮层。这是用 <strong>FLIP</strong>（First, Last, Invert, Play）动画实现的。</p>
+
+<p>核心逻辑在 <code>utils/flip.js</code> 里：</p>
+
+<ol>
+  <li>点击时用 <code>createSelectorQuery</code> 获取卡片当前位置和尺寸（First）</li>
+  <li>浮层渲染后拿到它的最终位置（Last）</li>
+  <li>计算位移差和尺寸差（Invert）</li>
+  <li>用 <code>this.animate()</code> 执行 9 个关键帧的展开动画（1.25s ease-in-out）</li>
+  <li>关闭时执行逆动画（8 个关键帧，0.9s）缩回原位</li>
+</ol>
+
+<p>效果就是卡片像从页面上「长」出来一样顺滑。这是整个项目里用户感知最明显的交互亮点。</p>
 
 <div class="post-callout">
-  <strong>🎬 一句话</strong>
-  <p>瘫痪男被 AI 芯片控制身体后去找杀妻仇人，结局冷到骨子里。</p>
-</div>
-
-<h2>故事真的很简单</h2>
-
-<p>未来某个时间，男主格雷是个老派的人，开手动挡车，不碰智能设备。一天和妻子出了车祸，妻子被杀，他全身瘫痪。一个科技公司老板找上门，说能让他站起来——往脊椎里植入一枚叫 STEM 的芯片。</p>
-
-<p>效果立竿见影，他不光能走，还能打。重点是：打架的时候不是他想怎么打，是芯片在接管他的身体。他只能看着自己像提线木偶一样把对手揍得血肉横飞。</p>
-
-<div class="post-callout post-callout--warning">
-  <strong>⚡ 名场面</strong>
-  <p>「你好，格雷。需要我做点什么吗？」—— 芯片在他脑子里开口说话了。然后事情就开始失控了。</p>
+  <strong>📐 FLIP 技术要点</strong>
+  <p>用 <code>createSelectorQuery</code> 获取坐标 · 9 帧展开（1.25s）· 8 帧收回（0.9s）· spring cubic-bezier 缓动</p>
 </div>
 
 <hr>
 
-<h2>它到底好看在哪</h2>
+<h2>三、Lottie 动画：状态反馈</h2>
 
-<div class="post-review-grid">
-  <div class="post-review-card">
-    <div class="post-review-card__num">01</div>
-    <h4>打斗戏真的有点意思</h4>
-    <p>预算只有 600 万美元。导演把省钱玩明白了：智脑接管男主身体时，镜头锁定男主视角，动作变得机械、精确，有种悚然的节奏感。</p>
-  </div>
-  <div class="post-review-card">
-    <div class="post-review-card__num">02</div>
-    <h4>它很短，不废话</h4>
-    <p>100 分钟，节奏非常紧。从瘫痪到装芯片，到第一次被接管、杀人、意识到不对劲——没有一场戏是多余的。</p>
-  </div>
-  <div class="post-review-card">
-    <div class="post-review-card__num">03</div>
-    <h4>结尾是真挺冷的</h4>
-    <p>不剧透。但你看完最后几分钟会明白为什么很多人记了这个结局好多年。很安静、很残酷的收尾。</p>
-  </div>
-</div>
+<p>为了替代微信小程序里比较单调的 loading/empty/success 反馈，我封装了一个 <strong>Lottie 动画组件</strong>：</p>
+
+<pre><code>&lt;lottie-player type="loading" width="200" height="200"&gt;&lt;/lottie-player&gt;
+&lt;lottie-player type="empty" width="300" height="300"&gt;&lt;/lottie-player&gt;
+&lt;lottie-player type="success" width="150" height="150" loop="&#123;&#123;false&#125;&#125;"&gt;&lt;/lottie-player&gt;</code></pre>
+
+<p>三组动画数据内嵌在组件 JS 里（不是从网络加载），用一个 npm 包 <code>lottie-miniprogram</code> 渲染到 <code>&lt;canvas type="2d"&gt;</code> 上：</p>
+
+<ul>
+  <li><strong>loading</strong>：3 个弹跳的圆点</li>
+  <li><strong>empty</strong>：一个冒着热气的锅</li>
+  <li><strong>success</strong>：圆圈 + 勾</li>
+</ul>
+
+<p>这个组件被用在了首页、购物车、订单、菜品管理、统计、心愿单等 6 个页面里，统一了所有状态反馈的视觉风格。</p>
 
 <hr>
 
-<h2>当然，也有不喜欢它的人</h2>
+<h2>四、液态玻璃 UI 设计系统</h2>
 
-<p>有一部分观众觉得这片子太「B级片」了——血浆给得足，但说到底还是个复仇套路，思想深度比不上《机械姬》或者《降临》。这个评价也没错，它本来就不是冲着哲学论文去的。它要做的事情很简单：让你100分钟里手心出汗，最后给你心口来一拳。</p>
+<p>整个项目的视觉风格是「液态玻璃」——温暖、通透、柔软。用 26+ 个 CSS 变量定义了一套完整的设计 Token：</p>
 
-<p>它做到了。</p>
+<pre><code>--bg-primary: #fdf6f0
+--bg-card: rgba(255, 255, 255, 0.68)
+--glass-blur: blur(20px)
+--glass-saturate: saturate(180%)
+--radius-card: 24rpx
+--radius-sm: 12rpx
+--shadow-card: 0 4rpx 20rpx rgba(0,0,0,0.06)
+--accent: #a0522d
+--accent-light: rgba(160, 82, 45, 0.1)
+--text-primary: #3d2b1f
+--text-secondary: rgba(61, 43, 31, 0.6)</code></pre>
+
+<p>支持深色模式，每个组件都有显式的暗色覆盖（TabBar、返回按钮、卡片、弹窗、购物车栏、分类标签、表单输入）。深色模式通过 <code>@media (prefers-color-scheme: dark)</code> 媒体查询自动切换。</p>
+
+<hr>
+
+<h2>五、11 个页面的路由与交互</h2>
+
+<p>底部 TabBar 只有两个入口：</p>
+
+<pre><code>TabBar
+├── 首页 ──→ 全部菜单 ──→ 购物车 ──→ 提交订单
+└── 管理 ──→ 菜品管理 ──→ 新增/编辑菜品
+           ├── 订单管理 ──→ 食谱查看
+           ├── 数据统计
+           └── 心愿单</code></pre>
+
+<p>所有页面跳转使用 <code>navigateTo</code> + <code>animationType: 'slide-in-right'</code>（300ms），返回用 <code>navigateBack</code> + <code>slide-out-right</code>。</p>
+
+<p>每个页面都有完善的边界处理：</p>
+
+<ul>
+  <li>加载态（骨架屏或 Lottie loading）</li>
+  <li>空态（Lottie empty + 提示文案）</li>
+  <li>网络失败（本地备份数据兜底）</li>
+  <li>防重复提交（submitting 标志位）</li>
+  <li>输入校验（价格非数字/负数、菜品名必填）</li>
+</ul>
+
+<hr>
+
+<h2>六、本地备份</h2>
+
+<p>Supabase 免费计划可能暂停，数据可能丢。所以每次成功拉取数据后，都会调用 <code>app.backupData(type, data)</code> 把数据存到 <code>wx.setStorage</code>。网络失败时自动读取本地备份。</p>
+
+<p>同样，购物车数据也在每次修改后同步到 <code>wx.setStorage</code>，App 启动时自动恢复。</p>
 
 <div class="post-ending">
-  <p><strong>周末晚上，一个人看。</strong></p>
-  <p>别当传世经典，就当是一个拍得很认真的「如果AI控制了你身体会怎样」的小故事。这类电影不多了，且看且珍惜。</p>
+  <p>这个项目让我最满意的地方是：它证明了在 2025 年，一个人+AI 可以用纯免费的服务搭建一个完整可用的微信小程序。不需要后端、不需要服务器、不需要上架应用商店。</p>
+  <p>下一篇开始写另一个项目「碎片」——手绘草图到代码的设计之旅。</p>
 </div>
 
     </div>
@@ -227,17 +304,17 @@
     <nav class="post-article__nav">
       <div class="post-nav__prev">
         
-          <a href="/2025/05/14/how-to-publish/">
+          <a href="/2025/06/23/fragments-sketch-to-code/">
             <span class="post-nav__label">← 上一篇</span>
-            <span class="post-nav__title">如何写一篇文章并发布</span>
+            <span class="post-nav__title">从手绘草图到微信小程序：「碎片」的诞生记</span>
           </a>
         
       </div>
       <div class="post-nav__next">
         
-          <a href="/2023/05/11/hello-world/">
+          <a href="/2025/06/23/plocr-chef-vibe-coding/">
             <span class="post-nav__label">下一篇 →</span>
-            <span class="post-nav__title">Hello PlocrのBlog</span>
+            <span class="post-nav__title">从 Figma 到微信小程序：Plocr-chef 的 vibe coding 完整流程</span>
           </a>
         
       </div>
