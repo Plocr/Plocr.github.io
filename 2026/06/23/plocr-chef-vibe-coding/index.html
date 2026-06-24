@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>从手绘草图到微信小程序：「碎片」的诞生记 | Plocrの小窝</title>
+  <title>从 Figma 到微信小程序：Plocr-chef 的 vibe coding 完整流程 | Plocrの小窝</title>
   <meta name="description" content="Plocr的个人博客"/>
   <meta name="author" content="Plocr"/>
 
@@ -134,9 +134,9 @@
     </div>
 
     <header class="post-article__header">
-      <h1 class="post-article__title">从手绘草图到微信小程序：「碎片」的诞生记</h1>
+      <h1 class="post-article__title">从 Figma 到微信小程序：Plocr-chef 的 vibe coding 完整流程</h1>
       <div class="post-article__meta">
-        <time datetime="2025-06-23T16:00:00.000Z">2025-06-24</time>
+        <time datetime="2026-06-23T16:00:00.000Z">2026-06-24</time>
         
           <span class="meta-sep">·</span>
           <span>更新于 2026-06-24</span>
@@ -144,9 +144,9 @@
         
           
           <span class="meta-sep">·</span>
-          <span>1565 字</span>
+          <span>2624 字</span>
           <span class="meta-sep">·</span>
-          <span>3 分钟阅读</span>
+          <span>5 分钟阅读</span>
         
         <span class="meta-sep">·</span>
         <span><i class="far fa-eye"></i> <span id="busuanzi_value_page_pv"></span> 阅读</span>
@@ -164,87 +164,134 @@
     <div class="post-article__body">
       
 <div class="post-hero">
-  <h2>这次不是从 Figma 开始了</h2>
-  <p>Plocr-chef 从 Figma 设计稿出发，而「碎片」（Fragments）的起点更原始——一张手绘草图。</p>
+  <h2>这是一篇写给自己的开发记录</h2>
+  <p>记录 Plocr-chef 这个家庭菜单小程序是怎么从一张 Figma 设计稿，一步步变成能用的微信小程序的。</p>
 </div>
 
-<blockquote>纸笔画出首页布局，拍照，描述给 AI。然后开始一个漫长的循环：截图 → 描述问题 → AI 改代码 → 再看 → 再截图……</blockquote>
+<blockquote>整个开发过程几乎没写什么原创代码——全是和 AI 对话聊出来的。但也不是一键生成，中间有很多手工活。</blockquote>
 
 <hr>
 
-<h2>第一步：纸和笔</h2>
+<h2>第一步：Figma 画图</h2>
 
-<p>「碎片」是一个生活记录小程序，灵感来自 Claude Monet 的印象派色调。最初的想法是一叠卡片的交互形式——首页展示一张大卡片，左右露出相邻卡片的边缘，底部有导航点。</p>
+<p>所有事情的起点是一张 Figma 设计稿。我在 Figma 里画了首页的布局、卡片样式、配色方案，然后导出 PDF。</p>
 
-<p>我在纸上画了这张草稿：中间一张大卡片（带内容），左右各露出半张卡片的边缘，底部三个导航图标加一个滑动指示器。</p>
+<p>为什么是 Figma？因为那时候我还不知道后面会用什么技术栈，Figma 是纯视觉的，不绑定任何实现方式。画出想要的样子，再想怎么实现它。</p>
+
+<p>设计风格是后来贯穿整个项目的「液态玻璃」（Liquid Glass）：温暖的大地色系（主色 <code>#a0522d</code>），半透明毛玻璃卡片，大圆角，柔和的阴影。</p>
 
 <div class="post-callout">
-  <strong>✏️ 手绘草图 vs Figma</strong>
-  <p>手绘的优点：快，10 分钟画完，不需要打开任何软件。缺点：不能精确描述颜色、间距、动画。这意味着 AI 需要更多轮次的「看图改图」才能接近预期的效果。</p>
+  <strong>🎨 设计关键词</strong>
+  <p>暖色调渐变背景 <code>#fdf6f0 → #fae8d8 → #f0d0b8</code> · backdrop-filter blur(20-28px) · 毛玻璃卡片 · 26+ CSS 变量</p>
 </div>
 
 <hr>
 
-<h2>第二步：描述给 AI，生成 HTML 线稿</h2>
+<h2>第二步：把 PDF 丢给 AI，生成文件树</h2>
 
-<p>把手绘草图的照片发给 AI，口头描述交互逻辑：</p>
+<p>有了设计图之后，我把 PDF 上传给 AI，描述我想要的功能：</p>
 
 <ul>
-  <li>一套卡片叠放布局，当前卡片居中放大</li>
-  <li>左右可滑动切换</li>
-  <li>每张卡片不同类型（体重、心情、愿望、笔记）</li>
-  <li>底部导航栏有三个入口</li>
-  <li>莫奈风格的色彩</li>
+  <li>一个家庭私用的点菜小程序</li>
+  <li>首页展示推荐菜品</li>
+  <li>完整的菜单浏览和搜索</li>
+  <li>购物车 + 下单</li>
+  <li>订单管理 + 食谱查看</li>
+  <li>菜品后台管理（CRUD）</li>
+  <li>数据统计</li>
+  <li>心愿单</li>
 </ul>
 
-<p>AI 生成了一份完整的 HTML 页面，用纯 CSS 实现了卡片叠放、玻璃态效果、滑动切换。这个 HTML 就是在浏览器里看的样子——和微信小程序还有很大距离，但交互概念验证够了。</p>
+<p>AI 根据设计图和需求描述，生成了一整套项目文件树——每个文件叫什么、放在哪里、大致负责什么。这个文件树后来基本没改过，一直用到了项目完结。</p>
+
+<pre><code>Plocr-chef/
+├── app.js / app.json / app.wxss
+├── custom-tab-bar/          # 自定义毛玻璃 TabBar
+├── components/lottie-player/  # Lottie 动画组件
+├── utils/
+│   ├── supabase.js           # Supabase REST API 封装
+│   └── flip.js               # FLIP 动画
+├── pages/                    # 11 个页面
+│   ├── index/                # 首页
+│   ├── dishList/             # 全部菜单
+│   ├── cart/                 # 购物车
+│   ├── order/                # 订单
+│   ├── manage/               # 管理后台入口
+│   ├── dishManage/           # 菜品管理
+│   ├── addDish/              # 新增菜品
+│   ├── editDish/             # 编辑菜品
+│   ├── recipe/               # 食谱
+│   ├── stats/                # 数据统计
+│   └── wishlist/             # 心愿单
+└── node_modules/</code></pre>
 
 <hr>
 
-<h2>第三步：漫长的手工调试循环</h2>
+<h2>第三步：手工活——建文件、粘贴代码、改 bug</h2>
 
-<p>HTML 验证了概念后，开始在微信开发者工具里建项目。这里开始了一个极其磨人的循环：</p>
+<p>文件树有了，AI 也生成了每个文件的代码。但这里有一个关键步骤：<strong>不能一键生成</strong>。</p>
 
-<pre><code>截图 → 发给 AI 描述问题 → AI 改代码 → 粘贴 → 再看 → 新截图 → 再描述 → 再改</code></pre>
+<p>我需要：</p>
 
-<p>这个循环里踩了无数微信小程序的坑，值得单独列出来：</p>
+<ol>
+  <li>在微信开发者工具里手动创建每个文件</li>
+  <li>把 AI 生成的代码逐段粘贴进去</li>
+  <li>运行看效果——几乎每次都有问题</li>
+  <li>截图 → 描述问题 → AI 改代码 → 粘贴 → 再看</li>
+</ol>
+
+<p>这个循环重复了无数次。微信小程序的坑特别多：<code>&lt;nav&gt;</code> 标签不支持、CSS 某些属性不认、组件间传值容易丢……每个都是人工发现的。</p>
 
 <div class="post-callout post-callout--warning">
-  <strong>⚠️ 记住这个列表，以后可能还会遇到</strong>
+  <strong>💡 一个小经验</strong>
+  <p>AI 生成的文件树和接口设计可以大胆相信，因为它见过足够多的项目模板。但具体到每一个页面的交互逻辑，一定要跑起来验证。微信小程序的运行环境和浏览器差别很大。</p>
 </div>
-
-<h3>踩坑记录</h3>
-
-<table>
-  <tr><th>问题</th><th>原因</th><th>解决</th></tr>
-  <tr><td><code>&lt;nav&gt;</code> 标签不渲染</td><td>微信小程序不支持 <code>&lt;nav&gt;</code>，只能用 <code>&lt;view&gt;</code></td><td>全部换成 <code>&lt;view&gt;</code></td></tr>
-  <tr><td><code>inset: 0</code> 无效</td><td>小程序 CSS 不支持 <code>inset</code> 简写属性</td><td>分别写 <code>top/right/bottom/left: 0</code></td></tr>
-  <tr><td>模板里 <code>}}rpx</code> 解析失败</td><td>WXML 会把 <code>}}rpx</code> 的 <code>rpx</code> 当成模板语法一部分</td><td>用 <code>}}</code> 闭合后加空格再接 <code>rpx</code></td></tr>
-  <tr><td>卡片上出现「true」文字</td><td>WXML <code>wx:if</code> 布尔值渲染 bug</td><td>数据在 JS 中预计算后在模版渲染</td></tr>
-  <tr><td>玻璃态元素看不见</td><td>背景透明度初始设太低（0.18），在莫奈渐变背景上消失</td><td>透明度从 0.18 提到 0.34~0.48</td></tr>
-  <tr><td><code>page-container</code> 无效</td><td>微信 webview 模式不支持该组件</td><td>改用纯 CSS overlay 方案</td></tr>
-</table>
-
-<p>这些坑没有一个是「读文档能提前知道的」——大部分是跑起来之后才发现的。这也是为什么 vibe coding 到中期需要大量人力介入调试。</p>
 
 <hr>
 
-<h2>第四步：手绘 vs Figma 的取舍思考</h2>
+<h2>第四步：升级工具——Claude Code + DeepSeek API</h2>
 
-<p>做完两个项目后，对手绘草图和 Figma 两种路径有了实际体会：</p>
+<p>项目到中期，手动粘贴代码已经效率太低了。我开始接入 <strong>Claude Code</strong> 开发模式：让 AI 直接读取项目代码、分析问题、生成 patch。</p>
+
+<p>同时，为了降低 API 成本——Claude 的 API 调用在大量迭代时费用不低——我接入了 <strong>DeepSeek API</strong> 来做辅助优化。DeepSeek 在代码理解和生成上表现不错，价格却便宜很多。</p>
+
+<p>具体分工是：</p>
+
+<ul>
+  <li><strong>Claude Code</strong>：架构设计、复杂逻辑、新功能开发</li>
+  <li><strong>DeepSeek API</strong>：代码优化、bug 修复、样式调整、小修小改</li>
+</ul>
+
+<p>相当于一个「主力 + 辅助」的双模型工作流。这在 vibe coding 项目里是一个值得记录的模式——不必所有对话都用最贵的模型。</p>
+
+<hr>
+
+<h2>第五步：免费方案全家桶</h2>
+
+<p>整个项目没有花一分钱（除了 API 调用的零散费用）：</p>
 
 <table>
-  <tr><th></th><th>手绘草图</th><th>Figma</th></tr>
-  <tr><td>启动速度</td><td>10 分钟</td><td>2-3 小时</td></tr>
-  <tr><td>精确度</td><td>低，需要大量调试</td><td>高，AI 可直接照着实现</td></tr>
-  <tr><td>适合场景</td><td>探索期、快速试错</td><td>设计已定、追求还原度</td></tr>
-  <tr><td>与 AI 协作效率</td><td>需要更多轮次「看图改图」</td><td>一次性描述即可生成</td></tr>
+  <tr><th>服务</th><th>方案</th><th>费用</th></tr>
+  <tr><td>后端数据库</td><td>Supabase 免费计划（PostgreSQL + 对象存储）</td><td>免费</td></tr>
+  <tr><td>前端</td><td>微信小程序体验版（不发布上架）</td><td>免费</td></tr>
+  <tr><td>AI 编码</td><td>Claude Code + DeepSeek API</td><td>按量付费（很便宜）</td></tr>
+  <tr><td>域名/服务器</td><td>不需要，小程序不走 HTTP 域名</td><td>免费</td></tr>
 </table>
 
-<p>「碎片」走的是手绘路线，因为它是一个更偏实验性的项目——设计风格在开发过程中不断调整（莫奈色调是后来才定下来的）。如果一开始就用 Figma 画死，反而会限制很多后来才想到的好点子。</p>
+<p>唯一的潜在成本是 Supabase 免费计划如果超过 7 天不活动会暂停。解决方案是在 App 启动时加了一个 <code>keepWarm()</code> 函数，每 24 小时 ping 一次数据库。</p>
+
+<hr>
+
+<h2>回顾</h2>
+
+<p>这个项目的开发方式总结下来就是三个词：<strong>Figma 定稿 → AI 写代码 → 人工调试</strong>。</p>
+
+<p>Figma 负责「我要什么」，AI 负责「怎么写」，人负责「哪里有问题」。三个角色缺一不可。</p>
+
+<p>它不是那种「输入一句话，AI 生成一个完整 App」的魔法——魔法不存在。但它确实是「输入一个设计稿，和 AI 聊几百轮，手工粘贴调试，最终得到一个能用的 App」的可行路径。</p>
 
 <div class="post-ending">
-  <p>下一篇写「碎片」的完整设计系统：莫奈色卡、玻璃态组件体系、卡片翻转机制和 8 色笔记循环。</p>
+  <p>下一篇会写 Plocr-chef 的技术实现细节：Supabase 封装、FLIP 动画、Lottie 组件、液态玻璃 UI。有兴趣的可以接着看。</p>
 </div>
 
     </div>
@@ -252,17 +299,17 @@
     <nav class="post-article__nav">
       <div class="post-nav__prev">
         
-          <a href="/2025/06/23/fragments-design-system/">
+          <a href="/2026/06/23/plocr-chef-tech-stack/">
             <span class="post-nav__label">← 上一篇</span>
-            <span class="post-nav__title">「碎片」设计系统：莫奈色卡 × 玻璃态 × 卡片翻转</span>
+            <span class="post-nav__title">Plocr-chef 技术实现：Supabase + FLIP 动画 + Lottie + 液态玻璃 UI</span>
           </a>
         
       </div>
       <div class="post-nav__next">
         
-          <a href="/2025/06/23/plocr-chef-tech-stack/">
+          <a href="/2025/05/14/how-to-publish/">
             <span class="post-nav__label">下一篇 →</span>
-            <span class="post-nav__title">Plocr-chef 技术实现：Supabase + FLIP 动画 + Lottie + 液态玻璃 UI</span>
+            <span class="post-nav__title">如何写一篇文章并发布</span>
           </a>
         
       </div>
