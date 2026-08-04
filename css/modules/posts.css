@@ -25,6 +25,30 @@
 .featured {
   padding: var(--space-20) 0;
   border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+/* Soft ambient blobs behind the glass cards (light & dark) */
+.featured::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(480px 320px at 12% 18%, rgba(217, 119, 87, 0.07), transparent 65%),
+    radial-gradient(520px 360px at 88% 30%, rgba(141, 154, 127, 0.08), transparent 65%),
+    radial-gradient(420px 300px at 60% 92%, rgba(176, 184, 168, 0.07), transparent 65%);
+}
+
+[data-theme="dark"] .featured::before {
+  background:
+    radial-gradient(480px 320px at 12% 18%, rgba(232, 139, 106, 0.06), transparent 65%),
+    radial-gradient(520px 360px at 88% 30%, rgba(141, 154, 127, 0.05), transparent 65%),
+    radial-gradient(420px 300px at 60% 92%, rgba(176, 184, 168, 0.05), transparent 65%);
+}
+
+.featured > .container {
+  position: relative;
 }
 
 .posts-grid {
@@ -34,15 +58,24 @@
 }
 
 .post-card {
-  background: var(--bg-card);
-  border: 1.5px solid var(--border);
-  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.55);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--border);
+  border-radius: 16px;
   overflow: hidden;
-  transition: transform var(--transition-slow), box-shadow var(--transition-slow), border-color var(--transition-slow);
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+              border-color 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+              background-color 0.6s cubic-bezier(0.22, 1, 0.36, 1);
   cursor: pointer;
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
   position: relative;
   isolation: isolate;
+}
+
+[data-theme="dark"] .post-card {
+  background: rgba(44, 44, 46, 0.55);
 }
 
 .post-card::after {
@@ -59,8 +92,22 @@
 
 .post-card:hover {
   transform: translateY(-6px);
-  box-shadow: var(--shadow-hover);
-  border-color: var(--accent);
+  background: rgba(255, 255, 255, 0.92);
+  border-color: var(--border);
+  box-shadow:
+    0 22px 44px -26px rgba(15, 15, 15, 0.22),
+    0 2px 6px -2px rgba(15, 15, 15, 0.06);
+}
+
+[data-theme="dark"] .post-card:hover {
+  background: rgba(58, 58, 60, 0.92);
+  box-shadow:
+    0 22px 44px -26px rgba(0, 0, 0, 0.55),
+    0 2px 6px -2px rgba(0, 0, 0, 0.3);
+}
+
+.post-card:active {
+  transform: translateY(0);
 }
 
 .post-card__thumb {

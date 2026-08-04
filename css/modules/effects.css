@@ -18,11 +18,10 @@
    visibility on a class-triggered transition. */
 .posts-grid .post-card {
   opacity: 1;
-  transform: none;
 }
 
 .js-motion .posts-grid .post-card {
-  animation: cardEntrance 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: cardEntrance 0.7s cubic-bezier(0.16, 1, 0.3, 1) backwards;
   animation-delay: calc(var(--card-index, 0) * 80ms);
 }
 
