@@ -38,7 +38,7 @@
 }
 
 .hero__content {
-  animation: heroFadeInUp 1s ease both;
+  animation: heroBlurIn 1s cubic-bezier(0.16, 1, 0.3, 1) backwards;
 }
 
 .hero__title {
@@ -49,12 +49,9 @@
   font-size: clamp(2.8rem, 5.5vw, 4rem);
   font-weight: 700;
   line-height: 1.1;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.02em;
   display: block;
-  background: linear-gradient(135deg, var(--text-primary) 40%, var(--accent) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--text-primary);
 }
 
 .hero__description {
@@ -63,7 +60,7 @@
   margin-bottom: var(--space-5);
   line-height: 1.7;
   max-width: 420px;
-  animation: heroFadeInUp 1s 0.3s ease both;
+  animation: heroBlurIn 1s 0.15s cubic-bezier(0.16, 1, 0.3, 1) backwards;
 }
 
 /* Hero social link */
@@ -71,7 +68,7 @@
   display: flex;
   gap: var(--space-3);
   margin-bottom: var(--space-6);
-  animation: heroFadeInUp 1s 0.35s ease both;
+  animation: heroBlurIn 1s 0.25s cubic-bezier(0.16, 1, 0.3, 1) backwards;
 }
 
 .hero__social-link {
@@ -89,47 +86,17 @@
   border-color: var(--accent);
 }
 
-/* Hero stats */
-.hero__stats {
-  display: flex;
-  gap: var(--space-6);
-  margin-bottom: var(--space-6);
-  animation: heroFadeInUp 1s 0.4s ease both;
-}
-
-.hero-stat {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.hero-stat__value {
-  font-family: var(--font-display);
-  font-size: 1.15rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  line-height: 1.2;
-}
-
-.hero-stat__label {
-  font-family: var(--font-display);
-  font-size: 0.7rem;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-}
-
 .hero__actions {
   display: flex;
   gap: var(--space-3);
-  animation: heroFadeInUp 1s 0.45s ease both;
+  animation: heroBlurIn 1s 0.35s cubic-bezier(0.16, 1, 0.3, 1) backwards;
 }
 
 .hero__illustration {
   display: flex;
   justify-content: center;
   align-items: center;
-  animation: heroFadeIn 1.2s 0.6s ease both;
+  animation: heroIllustrationIn 1.2s 0.5s cubic-bezier(0.16, 1, 0.3, 1) backwards;
 }
 
 .hero__illustration svg {
@@ -157,7 +124,7 @@
   opacity: 0;
   transform: translateY(20px) scale(0.9);
   pointer-events: none;
-  transition: opacity 0.3s ease, transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+  transition: opacity 0.3s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
               background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
   box-shadow: var(--shadow-sm);
 }
@@ -189,30 +156,6 @@
   }
 }
 
-/* ===== Hero Floating Particles ===== */
-.hero-particles {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-  pointer-events: none;
-  z-index: 1;
-}
-
-.particle {
-  position: absolute;
-  border-radius: 50%;
-  background: var(--accent);
-  opacity: 0.12;
-  animation: particleFloat 8s ease-in-out infinite;
-}
-
-@keyframes particleFloat {
-  0%, 100% { transform: translateY(0) scale(1); opacity: 0.08; }
-  25% { transform: translateY(-30px) scale(1.1); opacity: 0.15; }
-  50% { transform: translateY(-15px) scale(0.95); opacity: 0.1; }
-  75% { transform: translateY(-40px) scale(1.05); opacity: 0.14; }
-}
-
 /* ===== Hero Scroll Indicator ===== */
 .hero__scroll {
   position: absolute;
@@ -223,7 +166,7 @@
   flex-direction: column;
   align-items: center;
   gap: var(--space-2);
-  animation: heroFadeIn 1s 1s ease both;
+  animation: heroScrollIn 1s 1s cubic-bezier(0.16, 1, 0.3, 1) backwards;
   z-index: 3;
   cursor: pointer;
 }
@@ -237,23 +180,42 @@
 }
 
 .hero__scroll-arrow {
-  animation: scrollBounce 2s ease-in-out infinite;
+  animation: scrollHint 2.2s cubic-bezier(0.16, 1, 0.3, 1) infinite;
   color: var(--text-muted);
 }
 
-@keyframes scrollBounce {
-  0%, 100% { transform: translateY(0); opacity: 0.6; }
-  50% { transform: translateY(6px); opacity: 1; }
+@keyframes scrollHint {
+  0%, 100% { transform: translateY(0); opacity: 0.5; }
+  40% { transform: translateY(6px); opacity: 1; }
 }
 
 /* ===== Hero animations ===== */
-@keyframes heroFadeInUp {
-  from { opacity: 0; transform: translateY(24px); }
-  to { opacity: 1; transform: translateY(0); }
+/* Expressive ease-out (expo-ish) for entrance choreography */
+@keyframes heroBlurIn {
+  from { opacity: 0; transform: translateY(20px); filter: blur(6px); }
+  to { opacity: 1; transform: translateY(0); filter: blur(0); }
 }
 
-@keyframes heroFadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+@keyframes heroScrollIn {
+  from { opacity: 0; transform: translate(-50%, 16px); }
+  to { opacity: 1; transform: translate(-50%, 0); }
+}
+
+@keyframes heroIllustrationIn {
+  from { opacity: 0; transform: translateY(28px) scale(0.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Gentle float for the hand-drawn illustration (desktop only) */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .hero__illustration svg {
+    animation: heroFloat 7s ease-in-out infinite;
+    animation-delay: 1.8s;
+  }
+}
+
+@keyframes heroFloat {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(-0.5deg); }
 }
 

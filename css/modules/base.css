@@ -36,27 +36,6 @@ html {
   scrollbar-color: var(--border) transparent;
 }
 
-/* ===== Cursor Glow ===== */
-.cursor-glow {
-  position: fixed;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
-  opacity: 0.08;
-  pointer-events: none;
-  z-index: 9998;
-  transform: translate(-50%, -50%);
-  transition: opacity 0.3s ease;
-  will-change: transform, left, top;
-}
-
-@media (max-width: 768px) {
-  .cursor-glow {
-    display: none;
-  }
-}
-
 body {
   background: var(--bg);
   color: var(--text-primary);
@@ -137,13 +116,12 @@ ul, ol {
 }
 
 blockquote {
-  border-left: 3px solid var(--accent);
   margin: var(--space-6) 0;
   padding: var(--space-4) var(--space-6);
   color: var(--text-secondary);
   font-style: italic;
   background: var(--accent-light);
-  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  border-radius: var(--radius-sm);
 }
 
 code {

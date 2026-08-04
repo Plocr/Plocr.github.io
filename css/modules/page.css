@@ -101,7 +101,7 @@
 
 /* Archive article list cards */
 .archive-category-view {
-  animation: fadeIn 0.3s ease;
+  /* No entrance animation: cards stagger in via JS (reduced-motion aware) */
 }
 
 .archive-article-list {
