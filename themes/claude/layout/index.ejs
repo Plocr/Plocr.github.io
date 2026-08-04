@@ -1,23 +1,11 @@
-<!-- ===== Hero Section - Full Screen ===== -->
+<!-- ===== Hero ===== -->
 <section class="hero" id="hero">
-  <!-- Floating particles background -->
-  <div class="hero-particles">
-    <div class="particle" style="top:15%;left:10%;width:12px;height:12px;animation-delay:0s"></div>
-    <div class="particle" style="top:25%;right:15%;width:8px;height:8px;animation-delay:0.5s"></div>
-    <div class="particle" style="bottom:35%;left:20%;width:10px;height:10px;animation-delay:1s"></div>
-    <div class="particle" style="top:40%;right:25%;width:6px;height:6px;animation-delay:1.5s"></div>
-    <div class="particle" style="bottom:20%;left:5%;width:14px;height:14px;animation-delay:2s"></div>
-    <div class="particle" style="top:60%;right:10%;width:9px;height:9px;animation-delay:2.5s"></div>
-    <div class="particle" style="bottom:45%;left:35%;width:7px;height:7px;animation-delay:3s"></div>
-    <div class="particle" style="top:10%;right:35%;width:11px;height:11px;animation-delay:3.5s"></div>
-  </div>
-
   <div class="hero__inner">
     <div class="hero__content">
       <h1 class="hero__title" id="hero-title">
         <span class="hero__title-line"><%= theme.home_title || config.title %></span>
       </h1>
-      <p class="hero__description"><%= theme.home_description || '个人博客，记录技术与生活的点滴' %></p>
+      <p class="hero__description"><%= theme.home_subtitle || theme.home_description || '思考、创造、记录' %></p>
 
       <div class="hero__social">
         <% if (theme.social) { %>
@@ -52,16 +40,16 @@
 </section>
 
 <!-- ===== Recent Posts ===== -->
-<section class="section featured reveal">
+<section class="section featured">
   <div class="container">
-    <div class="section__header reveal-item">
-      <span class="section-label">最新文章</span>
-      <h2 class="section__title">最近更新</h2>
+    <div class="section__header">
+      <h2 class="section__title">最新文章</h2>
+      <p class="section__subtitle">想到什么写什么</p>
     </div>
     <% if (site.posts && site.posts.length > 0) { %>
       <div class="posts-grid">
         <% site.posts.sort('date', -1).each(function(post) { %>
-          <article class="post-card reveal-item" onclick="window.location='<%= url_for(post.path) %>'">
+          <article class="post-card" onclick="window.location='<%= url_for(post.path) %>'">
               <div class="post-card__thumb">
                 <%
                   // Try to extract first image from post content
@@ -101,135 +89,5 @@
     <% } else { %>
       <p class="empty-state">还没有文章</p>
     <% } %>
-  </div>
-</section>
-
-<%
-  // Compute stats
-  var totalWords = 0;
-  var siteCreated = new Date('2023-05-09');
-  var daysRunning = Math.floor((new Date() - siteCreated) / 86400000);
-  site.posts.each(function(post) {
-    if (post.content) totalWords += strip_html(post.content).length;
-  });
-  // Collect all tags with counts
-  var tagCounts = {};
-  site.posts.each(function(post) {
-    if (post.tags) post.tags.each(function(t) {
-      tagCounts[t.name] = (tagCounts[t.name] || 0) + 1;
-    });
-  });
-  var tagNames = Object.keys(tagCounts);
-%>
-
-<!-- ===== Stats Cards ===== -->
-<section class="section stats-cards reveal">
-  <div class="container">
-    <div class="stats-cards__grid">
-      <div class="stat-card reveal-item">
-        <span class="stat-card__icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg></span>
-        <span class="stat-card__value"><%= site.posts.length %></span>
-        <span class="stat-card__label">篇文章</span>
-      </div>
-      <div class="stat-card reveal-item">
-        <span class="stat-card__icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/><path d="M12 18v-6"/><path d="M9 15h6"/></svg></span>
-        <span class="stat-card__value"><%= totalWords.toLocaleString() %></span>
-        <span class="stat-card__label">总字数</span>
-      </div>
-      <div class="stat-card reveal-item">
-        <span class="stat-card__icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></span>
-        <span class="stat-card__value"><%= daysRunning %></span>
-        <span class="stat-card__label">运行天数</span>
-      </div>
-      <div class="stat-card reveal-item">
-        <span class="stat-card__icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><path d="M7 7h.01"/></svg></span>
-        <span class="stat-card__value"><%= tagNames.length %></span>
-        <span class="stat-card__label">标签数</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== Tags Cloud ===== -->
-<% if (tagNames.length > 0) { %>
-<section class="section tags-cloud reveal">
-  <div class="container">
-    <div class="section__header reveal-item">
-      <span class="section-label">标签</span>
-      <h2 class="section__title">标签云</h2>
-    </div>
-    <div class="tags-cloud__inner reveal-item">
-      <% tagNames.sort().forEach(function(tag) { %>
-        <% var count = tagCounts[tag]; %>
-        <% var size = Math.min(5, Math.max(1, Math.ceil(count / 2))); %>
-        <a href="/tags/<%= encodeURIComponent(tag.toLowerCase().replace(/\s+/g, '-')) %>/" class="tag-cloud-item" style="--tag-size: <%= size %>;"><%= tag %><sup><%= count %></sup></a>
-      <% }) %>
-    </div>
-  </div>
-</section>
-<% } %>
-
-<!-- ===== Quick Navigation ===== -->
-<section class="section quick-nav reveal">
-  <div class="container">
-    <div class="section__header reveal-item">
-      <span class="section-label">导航</span>
-      <h2 class="section__title">站点入口</h2>
-    </div>
-    <div class="quick-nav__grid">
-      <a href="/archives/" class="quick-nav__card reveal-item">
-        <div class="quick-nav__icon">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
-        </div>
-        <span class="quick-nav__title">文章归档</span>
-        <span class="quick-nav__desc">浏览全部文章</span>
-      </a>
-      <a href="/ai/" class="quick-nav__card reveal-item">
-        <div class="quick-nav__icon">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 16a4 4 0 100-8 4 4 0 000 8z"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
-        </div>
-        <span class="quick-nav__title">AI 导航</span>
-        <span class="quick-nav__desc">精选 AI 工具</span>
-      </a>
-      <a href="/about/" class="quick-nav__card reveal-item">
-        <div class="quick-nav__icon">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-        </div>
-        <span class="quick-nav__title">关于</span>
-        <span class="quick-nav__desc">了解更多</span>
-      </a>
-      <a href="https://github.com/Plocr" target="_blank" rel="noopener" class="quick-nav__card reveal-item">
-        <div class="quick-nav__icon">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
-        </div>
-        <span class="quick-nav__title">GitHub</span>
-        <span class="quick-nav__desc">开源项目</span>
-      </a>
-      <div class="quick-nav__card quick-nav__card--soon reveal-item">
-        <div class="quick-nav__icon">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
-        </div>
-        <span class="quick-nav__title">项目展示</span>
-        <span class="quick-nav__desc">即将上线</span>
-      </div>
-      <div class="quick-nav__card quick-nav__card--soon reveal-item">
-        <div class="quick-nav__icon">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-        </div>
-        <span class="quick-nav__title">最近动态</span>
-        <span class="quick-nav__desc">即将上线</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== Hitokoto Quote ===== -->
-<section class="section quote-section reveal">
-  <div class="container">
-    <div class="quote-card reveal-item">
-      <div class="quote-card__mark">"</div>
-      <p class="quote-card__text" id="hitokoto-text">正在加载名言...</p>
-      <p class="quote-card__from" id="hitokoto-from"></p>
-    </div>
   </div>
 </section>

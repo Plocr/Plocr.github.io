@@ -85,7 +85,7 @@
             <% if (catData[c.id] && catData[c.id].length > 0) { %>
               <div class="archive-article-list">
                 <% catData[c.id].sort(function(a, b) { return b.date - a.date; }).forEach(function(post, idx) { %>
-                  <article class="archive-article-card" onclick="window.location='<%= url_for(post.path) %>'" style="animation-delay: <%= idx * 0.05 %>s">
+                  <article class="archive-article-card" onclick="window.location='<%= url_for(post.path) %>'">
                     <span class="archive-article-card__index"><%= String(idx + 1).padStart(2, '0') %></span>
                     <div class="archive-article-card__info">
                       <h3 class="archive-article-card__title"><%= post.title %></h3>

@@ -54,40 +54,14 @@
     }, 300);
   })();
 
-  // ===== Scroll-Triggered Reveal (re-triggers on scroll) =====
-  function initScrollReveal() {
-    const items = document.querySelectorAll('.reveal-item');
-    if (!items.length) return;
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('revealed');
-        } else {
-          entry.target.classList.remove('revealed');
-        }
-      });
-    }, { threshold: 0.08, rootMargin: '0px 0px -20px 0px' });
-
-    items.forEach(item => observer.observe(item));
-  }
-
-  // ===== Section Parallax on Scroll =====
-  function initSectionParallax() {
-    var sections = document.querySelectorAll('.section');
-    if (!sections.length) return;
-
-    window.addEventListener('scroll', function() {
-      var sy = window.pageYOffset;
-      sections.forEach(function(sec) {
-        var rect = sec.getBoundingClientRect();
-        var center = rect.top + rect.height / 2;
-        var viewCenter = window.innerHeight / 2;
-        var dist = (center - viewCenter) / window.innerHeight;
-        var bg = sec.querySelector('.section__bg');
-        if (bg) bg.style.transform = 'translateY(' + (dist * 15) + 'px)';
-      });
-    }, { passive: true });
+  // ===== One-time entrance motion (content is visible by default) =====
+  function initEntranceMotion() {
+    // Only enable motion when JS actually runs; content never depends on it.
+    document.documentElement.classList.add('js-motion');
+    // Number post cards so CSS can stagger them.
+    document.querySelectorAll('.posts-grid .post-card').forEach(function(card, i) {
+      card.style.setProperty('--card-index', i);
+    });
   }
 
   // ===== Parallax Hero on Scroll =====
@@ -96,21 +70,31 @@
     const heroContent = hero?.querySelector('.hero__content');
     const heroIllus = hero?.querySelector('.hero__illustration');
 
-    if (!hero) return;
+    if (!hero || !heroContent) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
+    // Cache hero height once; recalc on resize only.
+    let heroHeight = hero.offsetHeight;
+    window.addEventListener('resize', function() {
+      heroHeight = hero.offsetHeight;
+    }, { passive: true });
+
+    let ticking = false;
     window.addEventListener('scroll', function() {
-      const scrolled = window.pageYOffset;
-      const heroHeight = hero.offsetHeight;
-      const progress = Math.min(scrolled / heroHeight, 0.35);
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(function() {
+        const scrolled = window.pageYOffset;
+        const progress = Math.min(scrolled / heroHeight, 0.35);
 
-      if (heroContent) {
         heroContent.style.transform = `translateY(${progress * 40}px)`;
         heroContent.style.opacity = 1 - progress * 1.8;
-      }
-      if (heroIllus) {
-        heroIllus.style.transform = `translateY(${progress * 30}px)`;
-        heroIllus.style.opacity = 1 - progress * 2;
-      }
+        if (heroIllus) {
+          heroIllus.style.transform = `translateY(${progress * 30}px)`;
+          heroIllus.style.opacity = 1 - progress * 2;
+        }
+        ticking = false;
+      });
     }, { passive: true });
   }
 
@@ -467,33 +451,6 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   }
-  // ===== Cursor Glow =====
-  function initCursorGlow() {
-    var glow = document.querySelector('.cursor-glow');
-    if (!glow || isTouchDevice()) return;
-
-    var mouseX = 0, mouseY = 0;
-    var currentX = 0, currentY = 0;
-
-    document.addEventListener('mousemove', function(e) {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-    });
-
-    function animate() {
-      currentX += (mouseX - currentX) * 0.08;
-      currentY += (mouseY - currentY) * 0.08;
-      glow.style.left = currentX + 'px';
-      glow.style.top = currentY + 'px';
-      requestAnimationFrame(animate);
-    }
-    animate();
-
-    // Show/hide on window enter/leave
-    document.addEventListener('mouseenter', function() { glow.style.opacity = '1'; });
-    document.addEventListener('mouseleave', function() { glow.style.opacity = '0'; });
-  }
-
   // ===== Archive Category Switching =====
   function initArchiveCategories() {
     var cards = document.querySelectorAll('.archive-card');
@@ -534,7 +491,9 @@
       var view = document.getElementById('archive-cat-' + cat);
       if (view) {
         view.style.display = 'block';
+        var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         view.querySelectorAll('.archive-article-card').forEach(function(el, i) {
+          if (reduceMotion) { el.style.opacity = '1'; return; }
           el.style.opacity = '0';
           el.style.transform = 'translateY(10px)';
           setTimeout(function() {
@@ -669,30 +628,9 @@
     });
   }
 
-  // ===== Hitokoto Quote =====
-  function initHitokoto() {
-    const textEl = document.getElementById('hitokoto-text');
-    const fromEl = document.getElementById('hitokoto-from');
-    if (!textEl) return;
-
-    fetch('https://v1.hitokoto.cn?c=d&c=f&c=i&c=k')
-      .then(function(res) { return res.json(); })
-      .then(function(data) {
-        textEl.textContent = data.hitokoto || '获取失败';
-        if (data.from) {
-          fromEl.textContent = '—— ' + data.from;
-        }
-      })
-      .catch(function() {
-        textEl.textContent = '生活不是缺少美，而是缺少发现美的眼睛。';
-        fromEl.textContent = '—— 罗丹';
-      });
-  }
-
   // ===== Init All =====
   document.addEventListener('DOMContentLoaded', function() {
-    initScrollReveal();
-    initSectionParallax();
+    initEntranceMotion();
     initHeroParallax();
     initNavScroll();
     initScrollIndicator();
@@ -703,8 +641,6 @@
     initDropdownClick();
     initDefaultCovers();
     initBackTop();
-    initCursorGlow();
-    initHitokoto();
     initCardImageParallax();
   });
 
