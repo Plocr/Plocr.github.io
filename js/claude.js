@@ -291,6 +291,18 @@
     `<svg viewBox="0 0 480 360" xmlns="http://www.w3.org/2000/svg" class="illustration">${roughFilter('h11')}<circle cx="350" cy="100" r="65" fill="${COLORS.clay}" opacity="0.7" filter="url(#h11)"/><path d="M320 58 C344 50 380 64 384 98 C388 134 370 168 352 184 C330 206 292 210 266 204 C240 198 236 180 252 166 C268 152 294 146 308 134" fill="none" stroke="${COLORS.charcoal}" stroke-width="2" stroke-linecap="round" filter="url(#h11)"/><rect x="70" y="110" width="130" height="85" rx="5" fill="none" stroke="${COLORS.charcoal}" stroke-width="2" filter="url(#h11)"/><circle cx="135" cy="152" r="24" fill="none" stroke="${COLORS.charcoal}" stroke-width="1.8" filter="url(#h11)"/><circle cx="135" cy="152" r="12" fill="${COLORS.clay}" opacity="0.45" filter="url(#h11)"/><rect x="90" y="100" width="40" height="7" rx="2" fill="${COLORS.charcoal}" opacity="0.35" filter="url(#h11)"/><circle cx="185" cy="120" r="7" fill="${COLORS.sage}" opacity="0.5" filter="url(#h11)"/><path d="M30 320 Q120 308 240 316 Q360 324 450 312" fill="none" stroke="${COLORS.stone}" stroke-width="1.5" stroke-linecap="round" filter="url(#h11)"/></svg>`,
     // 12. Globe/world
     `<svg viewBox="0 0 480 360" xmlns="http://www.w3.org/2000/svg" class="illustration">${roughFilter('h12')}<circle cx="360" cy="100" r="65" fill="${COLORS.clay}" opacity="0.65" filter="url(#h12)"/><path d="M330 58 C354 50 388 64 392 98 C396 136 378 170 360 188 C336 210 298 214 272 208 C246 202 242 186 258 172 C274 158 300 152 314 140" fill="none" stroke="${COLORS.charcoal}" stroke-width="2" stroke-linecap="round" filter="url(#h12)"/><circle cx="120" cy="150" r="45" fill="none" stroke="${COLORS.charcoal}" stroke-width="2" filter="url(#h12)"/><path d="M76 150 Q106 130 120 150 C134 170 164 150 164 150" fill="none" stroke="${COLORS.charcoal}" stroke-width="1.5" filter="url(#h12)"/><path d="M76 150 Q106 170 120 150 C134 130 164 150 164 150" fill="none" stroke="${COLORS.charcoal}" stroke-width="1.5" filter="url(#h12)"/><line x1="120" y1="105" x2="120" y2="195" stroke="${COLORS.charcoal}" stroke-width="1.2" stroke-dasharray="3 3" filter="url(#h12)"/><path d="M30 320 Q120 310 240 318 Q360 326 450 314" fill="none" stroke="${COLORS.stone}" stroke-width="1.5" stroke-linecap="round" filter="url(#h12)"/><circle cx="50" cy="80" r="10" fill="${COLORS.sage}" opacity="0.4" filter="url(#h12)"/></svg>`,
+    // 13. Cat
+    `<svg viewBox="0 0 480 360" xmlns="http://www.w3.org/2000/svg" class="illustration">${roughFilter('h13')}<circle cx="360" cy="100" r="65" fill="${COLORS.clay}" opacity="0.65" filter="url(#h13)"/><path d="M330 58 C354 50 388 64 392 98 C396 136 378 170 360 188 C336 210 298 214 272 208 C246 202 242 186 258 172 C274 158 300 152 314 140" fill="none" stroke="${COLORS.charcoal}" stroke-width="2" stroke-linecap="round" filter="url(#h13)"/><circle cx="130" cy="170" r="48" fill="none" stroke="${COLORS.charcoal}" stroke-width="2" filter="url(#h13)"/><polygon points="88,135 92,92 122,122" fill="none" stroke="${COLORS.charcoal}" stroke-width="2" stroke-linejoin="round" filter="url(#h13)"/><polygon points="172,135 168,92 138,122" fill="none" stroke="${COLORS.charcoal}" stroke-width="2" stroke-linejoin="round" filter="url(#h13)"/><circle cx="114" cy="162" r="4" fill="${COLORS.charcoal}" filter="url(#h13)"/><circle cx="146" cy="162" r="4" fill="${COLORS.charcoal}" filter="url(#h13)"/><path d="M126 178 Q130 184 134 178" fill="none" stroke="${COLORS.charcoal}" stroke-width="1.5" stroke-linecap="round" filter="url(#h13)"/><path d="M98 150 L86 146 M98 158 L84 156" stroke="${COLORS.charcoal}" stroke-width="1.2" stroke-linecap="round" filter="url(#h13)"/><path d="M162 150 L174 146 M162 158 L176 156" stroke="${COLORS.charcoal}" stroke-width="1.2" stroke-linecap="round" filter="url(#h13)"/><path d="M100 220 Q130 214 160 220" fill="none" stroke="${COLORS.stone}" stroke-width="1.5" stroke-linecap="round" filter="url(#h13)"/><circle cx="220" cy="240" r="5" fill="${COLORS.clay}" opacity="0.5" filter="url(#h13)"/><path d="M30 320 Q140 308 240 316 Q360 324 450 312" fill="none" stroke="${COLORS.stone}" stroke-width="1.5" stroke-linecap="round" filter="url(#h13)"/></svg>`,
+    // 14. Rain/umbrella
+    `<svg viewBox="0 0 480 360" xmlns="http://www.w3.org/2000/svg" class="illustration">${roughFilter('h14')}<circle cx="360" cy="100" r="65" fill="${COLORS.clay}" opacity="0.65" filter="url(#h14)"/><path d="M330 58 C354 50 388 64 392 98 C396 136 378 170 360 188 C336 210 298 214 272 208 C246 202 242 186 258 172 C274 158 300 152 314 140" fill="none" stroke="${COLORS.charcoal}" stroke-width="2" stroke-linecap="round" filter="url(#h14)"/><path d="M60 180 Q120 120 200 180" fill="none" stroke="${COLORS.charcoal}" stroke-width="2" stroke-linecap="round" filter="url(#h14)"/><path d="M200 180 L204 236" stroke="${COLORS.charcoal}" stroke-width="2" stroke-linecap="round" filter="url(#h14)"/><path d="M120 232 Q130 236 140 232" fill="none" stroke="${COLORS.sage}" stroke-width="2" stroke-linecap="round" filter="url(#h14)"/><path d="M110 210 Q120 214 130 210 M160 208 Q170 212 180 208" fill="none" stroke="${COLORS.clay}" stroke-width="1.8" stroke-linecap="round" filter="url(#h14)"/><path d="M100 96 Q110 92 120 96 M140 90 Q150 86 160 90 M180 98 Q190 94 200 98" fill="none" stroke="${COLORS.stone}" stroke-width="1.5" stroke-linecap="round" filter="url(#h14)"/><circle cx="250" cy="70" r="8" fill="${COLORS.sage}" opacity="0.5" filter="url(#h14)"/><path d="M30 320 Q140 308 240 316 Q360 324 450 312" fill="none" stroke="${COLORS.stone}" stroke-width="1.5" stroke-linecap="round" filter="url(#h14)"/></svg>`,
+    // 15. Moon/night
+    `<svg viewBox="0 0 480 360" xmlns="http://www.w3.org/2000/svg" class="illustration">${roughFilter('h15')}<circle cx="360" cy="100" r="65" fill="${COLORS.clay}" opacity="0.65" filter="url(#h15)"/><path d="M330 58 C354 50 388 64 392 98 C396 136 378 170 360 188 C336 210 298 214 272 208 C246 202 242 186 258 172 C274 158 300 152 314 140" fill="none" stroke="${COLORS.charcoal}" stroke-width="2" stroke-linecap="round" filter="url(#h15)"/><path d="M160 120 A52 52 0 1 0 160 224 A42 42 0 1 1 160 120 Z" fill="${COLORS.clay}" opacity="0.55" filter="url(#h15)"/><circle cx="230" cy="70" r="6" fill="${COLORS.charcoal}" opacity="0.5" filter="url(#h15)"/><circle cx="255" cy="95" r="4" fill="${COLORS.charcoal}" opacity="0.4" filter="url(#h15)"/><circle cx="215" cy="110" r="3" fill="${COLORS.charcoal}" opacity="0.35" filter="url(#h15)"/><path d="M95 130 L110 130 M102 123 L102 137" stroke="${COLORS.stone}" stroke-width="1.2" filter="url(#h15)"/><path d="M30 320 Q140 308 240 316 Q360 324 450 312" fill="none" stroke="${COLORS.stone}" stroke-width="1.5" stroke-linecap="round" filter="url(#h15)"/></svg>`,
+    // 16. Teapot/tea
+    `<svg viewBox="0 0 480 360" xmlns="http://www.w3.org/2000/svg" class="illustration">${roughFilter('h16')}<circle cx="360" cy="100" r="65" fill="${COLORS.clay}" opacity="0.65" filter="url(#h16)"/><path d="M330 58 C354 50 388 64 392 98 C396 136 378 170 360 188 C336 210 298 214 272 208 C246 202 242 186 258 172 C274 158 300 152 314 140" fill="none" stroke="${COLORS.charcoal}" stroke-width="2" stroke-linecap="round" filter="url(#h16)"/><ellipse cx="130" cy="190" rx="60" ry="34" fill="none" stroke="${COLORS.charcoal}" stroke-width="2" filter="url(#h16)"/><path d="M130 156 Q130 140 144 140" fill="none" stroke="${COLORS.charcoal}" stroke-width="2" filter="url(#h16)"/><ellipse cx="144" cy="140" rx="14" ry="8" fill="${COLORS.sage}" opacity="0.6" filter="url(#h16)"/><path d="M70 190 L70 210 M82 188 L82 214 M94 186 L94 212" stroke="${COLORS.charcoal}" stroke-width="1.5" stroke-linecap="round" filter="url(#h16)"/><path d="M182 176 Q200 176 200 190 Q200 204 182 204" fill="none" stroke="${COLORS.charcoal}" stroke-width="2" filter="url(#h16)"/><path d="M198 182 Q208 180 210 188" fill="none" stroke="${COLORS.charcoal}" stroke-width="1.5" filter="url(#h16)"/><path d="M118 130 Q122 120 118 112 M142 128 Q146 118 142 110" fill="none" stroke="${COLORS.stone}" stroke-width="1.5" stroke-linecap="round" filter="url(#h16)"/><circle cx="230" cy="60" r="9" fill="${COLORS.clay}" opacity="0.5" filter="url(#h16)"/><path d="M30 320 Q140 308 240 316 Q360 324 450 312" fill="none" stroke="${COLORS.stone}" stroke-width="1.5" stroke-linecap="round" filter="url(#h16)"/></svg>`,
+    // 17. Sailboat
+    `<svg viewBox="0 0 480 360" xmlns="http://www.w3.org/2000/svg" class="illustration">${roughFilter('h17')}<circle cx="360" cy="100" r="65" fill="${COLORS.clay}" opacity="0.65" filter="url(#h17)"/><path d="M330 58 C354 50 388 64 392 98 C396 136 378 170 360 188 C336 210 298 214 272 208 C246 202 242 186 258 172 C274 158 300 152 314 140" fill="none" stroke="${COLORS.charcoal}" stroke-width="2" stroke-linecap="round" filter="url(#h17)"/><path d="M140 250 L60 250 L84 180 Z" fill="none" stroke="${COLORS.charcoal}" stroke-width="2" stroke-linejoin="round" filter="url(#h17)"/><path d="M140 250 L220 250 L188 190 L140 190 Z" fill="${COLORS.sage}" opacity="0.6" filter="url(#h17)"/><path d="M140 190 L140 250" stroke="${COLORS.charcoal}" stroke-width="1.5" filter="url(#h17)"/><path d="M50 258 Q90 252 140 258 Q190 264 230 256" fill="none" stroke="${COLORS.stone}" stroke-width="1.5" stroke-linecap="round" filter="url(#h17)"/><circle cx="240" cy="120" r="10" fill="${COLORS.clay}" opacity="0.5" filter="url(#h17)"/><path d="M30 320 Q140 308 240 316 Q360 324 450 312" fill="none" stroke="${COLORS.stone}" stroke-width="1.5" stroke-linecap="round" filter="url(#h17)"/></svg>`,
+    // 18. Kite
+    `<svg viewBox="0 0 480 360" xmlns="http://www.w3.org/2000/svg" class="illustration">${roughFilter('h18')}<circle cx="360" cy="100" r="65" fill="${COLORS.clay}" opacity="0.65" filter="url(#h18)"/><path d="M330 58 C354 50 388 64 392 98 C396 136 378 170 360 188 C336 210 298 214 272 208 C246 202 242 186 258 172 C274 158 300 152 314 140" fill="none" stroke="${COLORS.charcoal}" stroke-width="2" stroke-linecap="round" filter="url(#h18)"/><polygon points="120,70 190,120 120,170 50,120" fill="none" stroke="${COLORS.charcoal}" stroke-width="2" stroke-linejoin="round" filter="url(#h18)"/><line x1="120" y1="70" x2="120" y2="170" stroke="${COLORS.charcoal}" stroke-width="1" filter="url(#h18)"/><line x1="50" y1="120" x2="190" y2="120" stroke="${COLORS.charcoal}" stroke-width="1" filter="url(#h18)"/><path d="M120 170 Q130 210 118 244" fill="none" stroke="${COLORS.charcoal}" stroke-width="1.2" stroke-dasharray="4 3" filter="url(#h18)"/><path d="M118 244 Q128 248 138 244" fill="none" stroke="${COLORS.clay}" stroke-width="2" stroke-linecap="round" filter="url(#h18)"/><circle cx="250" cy="55" r="9" fill="${COLORS.sage}" opacity="0.5" filter="url(#h18)"/><path d="M30 320 Q140 308 240 316 Q360 324 450 312" fill="none" stroke="${COLORS.stone}" stroke-width="1.5" stroke-linecap="round" filter="url(#h18)"/></svg>`,
   ];
 
   // Pick random hero illustration (session-persistent)
@@ -353,11 +365,52 @@
     `<svg viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg"><defs><filter id="cv11"><feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="3" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2" xChannelSelector="R" yChannelSelector="G"/></filter></defs><rect width="320" height="180" fill="${COLORS.sand}"/><circle cx="160" cy="90" r="50" fill="none" stroke="${COLORS.charcoal}" stroke-width="2" filter="url(#cv11)"/><path d="M110 90 Q140 70 160 90 Q180 110 210 90" fill="none" stroke="${COLORS.charcoal}" stroke-width="1.5" filter="url(#cv11)"/><path d="M110 90 Q140 110 160 90 Q180 70 210 90" fill="none" stroke="${COLORS.charcoal}" stroke-width="1.5" filter="url(#cv11)"/><line x1="160" y1="40" x2="160" y2="140" stroke="${COLORS.charcoal}" stroke-width="1.2" stroke-dasharray="3 3" filter="url(#cv11)"/><line x1="120" y1="55" x2="200" y2="55" stroke="${COLORS.stone}" stroke-width="1" stroke-dasharray="2 3" filter="url(#cv11)"/><line x1="115" y1="75" x2="205" y2="75" stroke="${COLORS.stone}" stroke-width="1" stroke-dasharray="2 3" filter="url(#cv11)"/><line x1="115" y1="105" x2="205" y2="105" stroke="${COLORS.stone}" stroke-width="1" stroke-dasharray="2 3" filter="url(#cv11)"/><line x1="120" y1="125" x2="200" y2="125" stroke="${COLORS.stone}" stroke-width="1" stroke-dasharray="2 3" filter="url(#cv11)"/><circle cx="240" cy="50" r="16" fill="${COLORS.clay}" opacity="0.5" filter="url(#cv11)"/></svg>`,
     // 12. Lightbulb/idea
     `<svg viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg"><defs><filter id="cv12"><feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="3" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2" xChannelSelector="R" yChannelSelector="G"/></filter></defs><rect width="320" height="180" fill="${COLORS.sand}"/><ellipse cx="160" cy="75" rx="32" ry="38" fill="none" stroke="${COLORS.charcoal}" stroke-width="2" filter="url(#cv12)"/><path d="M145 108 L175 108" stroke="${COLORS.charcoal}" stroke-width="2" filter="url(#cv12)"/><path d="M150 115 L170 115" stroke="${COLORS.charcoal}" stroke-width="2" filter="url(#cv12)"/><path d="M155 122 L165 122" stroke="${COLORS.charcoal}" stroke-width="2" filter="url(#cv12)"/><polygon points="155,125 165,125 162,140 158,140" fill="${COLORS.charcoal}" opacity="0.4" filter="url(#cv12)"/><circle cx="230" cy="40" r="20" fill="${COLORS.clay}" opacity="0.5" filter="url(#cv12)"/><path d="M100 145 Q130 138 160 142 Q190 146 220 140" fill="none" stroke="${COLORS.stone}" stroke-width="1.2" filter="url(#cv12)"/><circle cx="100" cy="50" r="6" fill="${COLORS.sage}" opacity="0.5" filter="url(#cv12)"/></svg>`,
+    // 13. Cat
+    `<svg viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg"><defs><filter id="cv13"><feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="3" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2" xChannelSelector="R" yChannelSelector="G"/></filter></defs><rect width="320" height="180" fill="${COLORS.sand}"/><circle cx="160" cy="95" r="45" fill="none" stroke="${COLORS.charcoal}" stroke-width="2" filter="url(#cv13)"/><polygon points="120,62 124,22 152,50" fill="none" stroke="${COLORS.charcoal}" stroke-width="2" stroke-linejoin="round" filter="url(#cv13)"/><polygon points="200,62 196,22 168,50" fill="none" stroke="${COLORS.charcoal}" stroke-width="2" stroke-linejoin="round" filter="url(#cv13)"/><circle cx="146" cy="88" r="3.5" fill="${COLORS.charcoal}" filter="url(#cv13)"/><circle cx="174" cy="88" r="3.5" fill="${COLORS.charcoal}" filter="url(#cv13)"/><path d="M156 102 Q160 108 164 102" fill="none" stroke="${COLORS.charcoal}" stroke-width="1.5" stroke-linecap="round" filter="url(#cv13)"/><path d="M130 78 L118 74 M130 86 L116 84" stroke="${COLORS.charcoal}" stroke-width="1.2" stroke-linecap="round" filter="url(#cv13)"/><path d="M190 78 L202 74 M190 86 L204 84" stroke="${COLORS.charcoal}" stroke-width="1.2" stroke-linecap="round" filter="url(#cv13)"/><path d="M132 128 Q160 134 188 128" fill="none" stroke="${COLORS.stone}" stroke-width="1.3" stroke-linecap="round" filter="url(#cv13)"/><circle cx="235" cy="45" r="12" fill="${COLORS.clay}" opacity="0.5" filter="url(#cv13)"/></svg>`,
+    // 14. Umbrella/rain
+    `<svg viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg"><defs><filter id="cv14"><feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="3" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2" xChannelSelector="R" yChannelSelector="G"/></filter></defs><rect width="320" height="180" fill="${COLORS.sand}"/><path d="M50 100 Q160 40 270 100" fill="none" stroke="${COLORS.charcoal}" stroke-width="2" stroke-linecap="round" filter="url(#cv14)"/><path d="M270 100 L274 148" stroke="${COLORS.charcoal}" stroke-width="2" stroke-linecap="round" filter="url(#cv14)"/><path d="M160 138 Q170 142 180 138" fill="none" stroke="${COLORS.sage}" stroke-width="2" stroke-linecap="round" filter="url(#cv14)"/><path d="M120 122 Q130 126 140 122 M200 124 Q210 128 220 124" fill="none" stroke="${COLORS.clay}" stroke-width="1.8" stroke-linecap="round" filter="url(#cv14)"/><circle cx="100" cy="55" r="10" fill="${COLORS.sage}" opacity="0.5" filter="url(#cv14)"/><path d="M240 55 Q250 51 260 55" fill="none" stroke="${COLORS.stone}" stroke-width="1.3" stroke-linecap="round" filter="url(#cv14)"/></svg>`,
+    // 15. Moon
+    `<svg viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg"><defs><filter id="cv15"><feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="3" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2" xChannelSelector="R" yChannelSelector="G"/></filter></defs><rect width="320" height="180" fill="${COLORS.sand}"/><path d="M200 55 A55 55 0 1 0 200 165 A44 44 0 1 1 200 55 Z" fill="${COLORS.clay}" opacity="0.55" filter="url(#cv15)"/><circle cx="80" cy="60" r="5" fill="${COLORS.charcoal}" opacity="0.5" filter="url(#cv15)"/><circle cx="110" cy="85" r="3.5" fill="${COLORS.charcoal}" opacity="0.4" filter="url(#cv15)"/><circle cx="90" cy="110" r="4" fill="${COLORS.charcoal}" opacity="0.45" filter="url(#cv15)"/><path d="M140 60 L155 60 M147.5 52.5 L147.5 67.5" stroke="${COLORS.stone}" stroke-width="1.2" filter="url(#cv15)"/><path d="M50 140 Q120 132 190 138 Q260 144 280 138" fill="none" stroke="${COLORS.stone}" stroke-width="1.2" filter="url(#cv15)"/></svg>`,
+    // 16. Teapot
+    `<svg viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg"><defs><filter id="cv16"><feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="3" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2" xChannelSelector="R" yChannelSelector="G"/></filter></defs><rect width="320" height="180" fill="${COLORS.sand}"/><ellipse cx="140" cy="120" rx="62" ry="30" fill="none" stroke="${COLORS.charcoal}" stroke-width="2" filter="url(#cv16)"/><path d="M140 90 Q140 74 154 74" fill="none" stroke="${COLORS.charcoal}" stroke-width="2" filter="url(#cv16)"/><ellipse cx="154" cy="74" rx="13" ry="7" fill="${COLORS.sage}" opacity="0.6" filter="url(#cv16)"/><path d="M76 122 L76 140 M88 120 L88 144 M100 118 L100 142" stroke="${COLORS.charcoal}" stroke-width="1.5" stroke-linecap="round" filter="url(#cv16)"/><path d="M196 108 Q216 108 216 120 Q216 132 196 132" fill="none" stroke="${COLORS.charcoal}" stroke-width="2" filter="url(#cv16)"/><path d="M128 64 Q132 54 128 46 M148 62 Q152 52 148 44" fill="none" stroke="${COLORS.stone}" stroke-width="1.4" stroke-linecap="round" filter="url(#cv16)"/><circle cx="255" cy="55" r="13" fill="${COLORS.clay}" opacity="0.5" filter="url(#cv16)"/></svg>`,
+    // 17. Sailboat
+    `<svg viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg"><defs><filter id="cv17"><feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="3" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2" xChannelSelector="R" yChannelSelector="G"/></filter></defs><rect width="320" height="180" fill="${COLORS.sand}"/><path d="M110 160 L50 160 L70 105 Z" fill="none" stroke="${COLORS.charcoal}" stroke-width="2" stroke-linejoin="round" filter="url(#cv17)"/><path d="M110 160 L180 160 L152 112 L110 112 Z" fill="${COLORS.sage}" opacity="0.6" filter="url(#cv17)"/><path d="M110 112 L110 160" stroke="${COLORS.charcoal}" stroke-width="1.5" filter="url(#cv17)"/><path d="M40 168 Q90 162 160 168 Q230 174 280 166" fill="none" stroke="${COLORS.stone}" stroke-width="1.5" stroke-linecap="round" filter="url(#cv17)"/><circle cx="250" cy="80" r="11" fill="${COLORS.clay}" opacity="0.5" filter="url(#cv17)"/></svg>`,
+    // 18. Kite
+    `<svg viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg"><defs><filter id="cv18"><feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="3" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2" xChannelSelector="R" yChannelSelector="G"/></filter></defs><rect width="320" height="180" fill="${COLORS.sand}"/><polygon points="160,40 220,82 160,124 100,82" fill="none" stroke="${COLORS.charcoal}" stroke-width="2" stroke-linejoin="round" filter="url(#cv18)"/><line x1="160" y1="40" x2="160" y2="124" stroke="${COLORS.charcoal}" stroke-width="1" filter="url(#cv18)"/><line x1="100" y1="82" x2="220" y2="82" stroke="${COLORS.charcoal}" stroke-width="1" filter="url(#cv18)"/><path d="M160 124 Q168 150 158 172" fill="none" stroke="${COLORS.charcoal}" stroke-width="1.2" stroke-dasharray="4 3" filter="url(#cv18)"/><path d="M158 172 Q166 176 174 172" fill="none" stroke="${COLORS.clay}" stroke-width="2" stroke-linecap="round" filter="url(#cv18)"/><circle cx="255" cy="45" r="10" fill="${COLORS.sage}" opacity="0.5" filter="url(#cv18)"/><path d="M50 60 Q60 56 70 60" fill="none" stroke="${COLORS.stone}" stroke-width="1.3" stroke-linecap="round" filter="url(#cv18)"/></svg>`,
   ];
 
-  // Pick a deterministic cover based on string hash
-  function getCoverForPost(title, index) {
+  // Category → cover theme mapping. 分类优先,否则标题 hash 兜底。
+  // 每组内按文章数轮换,让同类文章封面不完全重复。
+  var CATEGORY_COVER_MAP = {
+    '项目日志': [5, 10, 0, 6, 16],   // code, globe, mountain, compass, sailboat
+    '工作流分享': [2, 7, 11, 12],    // coffee, palette, lightbulb, cat
+    '随笔': [4, 1, 3, 13, 14, 15],   // stars, book, plant, umbrella, moon, teapot
+    '影音推荐': [9, 8, 17]           // headphones, camera, kite
+  };
+
+  // Pick a deterministic cover: category-first, then title hash fallback
+  function getCoverForPost(title, tags, index) {
+    if (!title && tags === undefined && index === undefined) return null;
     if (!title) return COVERS[index % COVERS.length];
+
+    // Category mapping (stable per post by hashing title into the group)
+    if (tags && tags.length) {
+      var cat = null;
+      for (var i = 0; i < tags.length; i++) {
+        if (CATEGORY_COVER_MAP[tags[i]]) { cat = tags[i]; break; }
+      }
+      if (cat) {
+        var group = CATEGORY_COVER_MAP[cat];
+        var h = 0;
+        for (var j = 0; j < title.length; j++) {
+          h = ((h << 5) - h) + title.charCodeAt(j);
+          h |= 0;
+        }
+        return COVERS[group[Math.abs(h) % group.length]];
+      }
+    }
+
+    // Fallback: plain title hash
     let hash = 0;
     for (let i = 0; i < title.length; i++) {
       hash = ((hash << 5) - hash) + title.charCodeAt(i);
@@ -415,8 +468,10 @@
     const placeholders = document.querySelectorAll('.post-card__cover-placeholder');
     placeholders.forEach(function(el) {
       const title = el.getAttribute('data-title') || '';
+      const tagsAttr = el.getAttribute('data-tags') || '';
+      const tags = tagsAttr ? tagsAttr.split(',') : [];
       const index = parseInt(el.getAttribute('data-index') || '0', 10);
-      const svg = getCoverForPost(title, index);
+      const svg = getCoverForPost(title, tags, index);
       el.innerHTML = svg;
       // If it's hidden (image fallback mode), keep hidden until onerror triggers
       if (el.style.display === 'none') {
@@ -451,6 +506,82 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   }
+  // ===== Post TOC: build from body headings, scroll-spy highlight =====
+  function initPostToc() {
+    const toc = document.getElementById('postToc');
+    const body = document.querySelector('.post-article__body');
+    if (!toc || !body) return;
+
+    const headings = body.querySelectorAll('h2, h3');
+    if (headings.length < 2) return; // not worth a TOC
+
+    // Assign stable ids (avoid mutating content visibly)
+    headings.forEach(function(h, i) {
+      if (!h.id) h.id = 'toc-' + i;
+    });
+
+    const title = document.createElement('p');
+    title.className = 'post-toc__title';
+    title.textContent = '目录';
+    const list = document.createElement('ul');
+    list.className = 'post-toc__list';
+
+    headings.forEach(function(h) {
+      const li = document.createElement('li');
+      const a = document.createElement('a');
+      a.className = 'post-toc__link' + (h.tagName === 'H3' ? ' post-toc__link--h3' : '');
+      a.href = '#' + h.id;
+      a.textContent = h.textContent.trim();
+      a.addEventListener('click', function(e) {
+        e.preventDefault();
+        h.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        history.replaceState(null, '', '#' + h.id);
+      });
+      li.appendChild(a);
+      list.appendChild(li);
+    });
+
+    toc.appendChild(title);
+    toc.appendChild(list);
+    toc.hidden = false;
+
+    // Scroll-spy
+    const links = list.querySelectorAll('.post-toc__link');
+    const sections = Array.from(headings);
+    let current = -1;
+
+    function updateSpy() {
+      const marker = window.scrollY + window.innerHeight * 0.35;
+      let idx = -1;
+      for (let i = 0; i < sections.length; i++) {
+        if (sections[i].getBoundingClientRect().top + window.scrollY <= marker) idx = i;
+        else break;
+      }
+      if (idx !== current) {
+        current = idx;
+        links.forEach(function(l, i) {
+          l.classList.toggle('post-toc__link--active', i === idx);
+        });
+      }
+    }
+
+    // Respect reduced motion: no smooth scrolling
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      list.querySelectorAll('a').forEach(function(a) {
+        a.addEventListener('click', function(e) {
+          e.preventDefault();
+          var id = this.getAttribute('href').slice(1);
+          var target = document.getElementById(id);
+          if (target) target.scrollIntoView({ block: 'start' });
+          history.replaceState(null, '', '#' + id);
+        });
+      });
+    }
+
+    window.addEventListener('scroll', updateSpy, { passive: true });
+    updateSpy();
+  }
+
   // ===== Archive Category Switching =====
   function initArchiveCategories() {
     var cards = document.querySelectorAll('.archive-card');
@@ -642,6 +773,7 @@
     initDefaultCovers();
     initBackTop();
     initCardImageParallax();
+    initPostToc();
   });
 
 })();

@@ -3,19 +3,19 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>从手绘草图到微信小程序：「碎片」的诞生记 | Plocrの小窝</title>
+  <title>404 | Plocrの小窝</title>
   <meta name="description" content="Plocr的个人博客"/>
   <meta name="author" content="Plocr"/>
 
   <!-- Open Graph (social share previews) -->
   <meta property="og:site_name" content="Plocrの小窝"/>
-  <meta property="og:type" content="article"/>
-  <meta property="og:title" content="从手绘草图到微信小程序：「碎片」的诞生记"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:title" content="404"/>
   <meta property="og:description" content="Plocr的个人博客"/>
-  <meta property="og:url" content="https://www.plocr.online/2026/06/23/fragments-sketch-to-code/"/>
+  <meta property="og:url" content="https://www.plocr.online/404.html"/>
   <meta property="og:image" content="https://www.plocr.online/img/WZTB.png"/>
   <meta name="twitter:card" content="summary"/>
-  <meta name="twitter:title" content="从手绘草图到微信小程序：「碎片」的诞生记"/>
+  <meta name="twitter:title" content="404"/>
   <meta name="twitter:description" content="Plocr的个人博客"/>
 
   <!-- Fonts -->
@@ -133,181 +133,40 @@
 </div>
 
 <main class="main">
-  <article class="post-article">
+  <article class="page-article error-page">
   <div class="container">
-    <div class="post-article__back">
-      <a href="/archives/">
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-          <path d="M9 2L4 7L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        返回文章列表
-      </a>
-    </div>
+    <div class="error-page__inner">
+      <!-- Hand-drawn lost cat -->
+      <svg viewBox="0 0 320 220" xmlns="http://www.w3.org/2000/svg" class="error-page__art" role="img" aria-label="一只迷路的小猫插画">
+        <defs>
+          <filter id="err-rough" x="-10%" y="-10%" width="120%" height="120%">
+            <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="4" result="noise"/>
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.5" xChannelSelector="R" yChannelSelector="G"/>
+          </filter>
+        </defs>
+        <ellipse cx="160" cy="196" rx="70" ry="14" fill="#6B5B4E" opacity="0.25" filter="url(#err-rough)"/>
+        <circle cx="160" cy="120" r="55" fill="none" stroke="#2C2C2C" stroke-width="2" filter="url(#err-rough)"/>
+        <polygon points="112,76 118,30 148,62" fill="none" stroke="#2C2C2C" stroke-width="2" stroke-linejoin="round" filter="url(#err-rough)"/>
+        <polygon points="208,76 202,30 172,62" fill="none" stroke="#2C2C2C" stroke-width="2" stroke-linejoin="round" filter="url(#err-rough)"/>
+        <circle cx="144" cy="114" r="4" fill="#2C2C2C" filter="url(#err-rough)"/>
+        <circle cx="176" cy="114" r="4" fill="#2C2C2C" filter="url(#err-rough)"/>
+        <path d="M156 128 Q160 134 164 128" fill="none" stroke="#2C2C2C" stroke-width="1.5" stroke-linecap="round" filter="url(#err-rough)"/>
+        <path d="M126 104 L112 100 M126 112 L110 110" stroke="#2C2C2C" stroke-width="1.2" stroke-linecap="round" filter="url(#err-rough)"/>
+        <path d="M194 104 L208 100 M194 112 L210 110" stroke="#2C2C2C" stroke-width="1.2" stroke-linecap="round" filter="url(#err-rough)"/>
+        <path d="M132 152 Q160 160 188 152" fill="none" stroke="#B0B8A8" stroke-width="1.5" stroke-linecap="round" filter="url(#err-rough)"/>
+        <path d="M160 175 Q168 190 160 205 Q152 190 160 175 Z" fill="#D97757" opacity="0.35" filter="url(#err-rough)"/>
+        <circle cx="48" cy="70" r="4" fill="#D97757" opacity="0.6" filter="url(#err-rough)"/>
+        <circle cx="272" cy="90" r="5" fill="#8D9A7F" opacity="0.5" filter="url(#err-rough)"/>
+        <path d="M20 210 Q100 202 160 208 Q240 214 300 206" fill="none" stroke="#B0B8A8" stroke-width="1.5" stroke-linecap="round" opacity="0.6" filter="url(#err-rough)"/>
+      </svg>
 
-    <header class="post-article__header">
-      <h1 class="post-article__title">从手绘草图到微信小程序：「碎片」的诞生记</h1>
-      <div class="post-article__meta">
-        <time datetime="2026-06-23T16:00:00.000Z">2026-06-24</time>
-        
-          <span class="meta-sep">·</span>
-          <span>更新于 2026-08-08</span>
-        
-        <span class="meta-sep">·</span>
-        <span><i class="far fa-eye"></i> <span id="busuanzi_value_page_pv"></span> 阅读</span>
+      <p class="error-page__code">404</p>
+      <h1 class="error-page__title">这里什么都没有</h1>
+      <p class="error-page__desc">页面走丢了，可能被我删了，也可能从来不存在。就像我家那只假装迷路的猫。</p>
+      <div class="error-page__actions">
+        <a class="btn btn--primary" href="/">回到首页</a>
+        <a class="btn btn--outline" href="/archives/">看看文章</a>
       </div>
-    </header>
-
-    
-      <div class="post-article__tags">
-        
-          <span class="tag">项目日志</span>
-        
-      </div>
-    
-
-    <div class="post-article__layout">
-      <div class="post-article__body">
-        
-<div class="post-hero">
-  <h2>这次不是从 Figma 开始了</h2>
-  <p>Plocr-chef 从 Figma 设计稿出发，而「碎片」（Fragments）的起点更原始——一张手绘草图。</p>
-</div>
-
-<blockquote>纸笔画出首页布局，拍照，描述给 AI。然后开始一个漫长的循环：截图 → 描述问题 → AI 改代码 → 再看 → 再截图……</blockquote>
-
-<hr>
-
-<h2>第一步：纸和笔</h2>
-
-<p>「碎片」是一个生活记录小程序，灵感来自 Claude Monet 的印象派色调。最初的想法是一叠卡片的交互形式——首页展示一张大卡片，左右露出相邻卡片的边缘，底部有导航点。</p>
-
-<p>我在纸上画了这张草稿：中间一张大卡片（带内容），左右各露出半张卡片的边缘，底部三个导航图标加一个滑动指示器。</p>
-
-<div class="post-callout">
-  <strong>✏️ 手绘草图 vs Figma</strong>
-  <p>手绘的优点：快，10 分钟画完，不需要打开任何软件。缺点：不能精确描述颜色、间距、动画。这意味着 AI 需要更多轮次的「看图改图」才能接近预期的效果。</p>
-</div>
-
-<hr>
-
-<h2>第二步：描述给 AI，生成 HTML 线稿</h2>
-
-<p>把手绘草图的照片发给 AI，口头描述交互逻辑：</p>
-
-<ul>
-  <li>一套卡片叠放布局，当前卡片居中放大</li>
-  <li>左右可滑动切换</li>
-  <li>每张卡片不同类型（体重、心情、愿望、笔记）</li>
-  <li>底部导航栏有三个入口</li>
-  <li>莫奈风格的色彩</li>
-</ul>
-
-<p>AI 生成了一份完整的 HTML 页面，用纯 CSS 实现了卡片叠放、玻璃态效果、滑动切换。这个 HTML 就是在浏览器里看的样子——和微信小程序还有很大距离，但交互概念验证够了。</p>
-
-<hr>
-
-<h2>第三步：漫长的手工调试循环</h2>
-
-<p>HTML 验证了概念后，开始在微信开发者工具里建项目。这里开始了一个极其磨人的循环：</p>
-
-<pre><code>截图 → 发给 AI 描述问题 → AI 改代码 → 粘贴 → 再看 → 新截图 → 再描述 → 再改</code></pre>
-
-<p>这个循环里踩了无数微信小程序的坑，值得单独列出来：</p>
-
-<div class="post-callout post-callout--warning">
-  <strong>⚠️ 记住这个列表，以后可能还会遇到</strong>
-</div>
-
-<h3>踩坑记录</h3>
-
-<table>
-  <tr><th>问题</th><th>原因</th><th>解决</th></tr>
-  <tr><td><code>&lt;nav&gt;</code> 标签不渲染</td><td>微信小程序不支持 <code>&lt;nav&gt;</code>，只能用 <code>&lt;view&gt;</code></td><td>全部换成 <code>&lt;view&gt;</code></td></tr>
-  <tr><td><code>inset: 0</code> 无效</td><td>小程序 CSS 不支持 <code>inset</code> 简写属性</td><td>分别写 <code>top/right/bottom/left: 0</code></td></tr>
-  <tr><td>模板里 <code>}}rpx</code> 解析失败</td><td>WXML 会把 <code>}}rpx</code> 的 <code>rpx</code> 当成模板语法一部分</td><td>用 <code>}}</code> 闭合后加空格再接 <code>rpx</code></td></tr>
-  <tr><td>卡片上出现「true」文字</td><td>WXML <code>wx:if</code> 布尔值渲染 bug</td><td>数据在 JS 中预计算后在模版渲染</td></tr>
-  <tr><td>玻璃态元素看不见</td><td>背景透明度初始设太低（0.18），在莫奈渐变背景上消失</td><td>透明度从 0.18 提到 0.34~0.48</td></tr>
-  <tr><td><code>page-container</code> 无效</td><td>微信 webview 模式不支持该组件</td><td>改用纯 CSS overlay 方案</td></tr>
-</table>
-
-<p>这些坑没有一个是「读文档能提前知道的」——大部分是跑起来之后才发现的。这也是为什么 vibe coding 到中期需要大量人力介入调试。</p>
-
-<hr>
-
-<h2>第四步：手绘 vs Figma 的取舍思考</h2>
-
-<p>做完两个项目后，对手绘草图和 Figma 两种路径有了实际体会：</p>
-
-<table>
-  <tr><th></th><th>手绘草图</th><th>Figma</th></tr>
-  <tr><td>启动速度</td><td>10 分钟</td><td>2-3 小时</td></tr>
-  <tr><td>精确度</td><td>低，需要大量调试</td><td>高，AI 可直接照着实现</td></tr>
-  <tr><td>适合场景</td><td>探索期、快速试错</td><td>设计已定、追求还原度</td></tr>
-  <tr><td>与 AI 协作效率</td><td>需要更多轮次「看图改图」</td><td>一次性描述即可生成</td></tr>
-</table>
-
-<p>「碎片」走的是手绘路线，因为它是一个更偏实验性的项目——设计风格在开发过程中不断调整（莫奈色调是后来才定下来的）。如果一开始就用 Figma 画死，反而会限制很多后来才想到的好点子。</p>
-
-<div class="post-ending">
-  <p>下一篇写「碎片」的完整设计系统：莫奈色卡、玻璃态组件体系、卡片翻转机制和 8 色笔记循环。</p>
-</div>
-
-      </div>
-      <nav class="post-toc" id="postToc" aria-label="文章目录" hidden></nav>
-    </div>
-
-    <nav class="post-article__nav">
-      <div class="post-nav__prev">
-        
-          <a href="/2026/06/23/fragments-design-system/">
-            <span class="post-nav__label">← 上一篇</span>
-            <span class="post-nav__title">「碎片」设计系统：莫奈色卡 × 玻璃态 × 卡片翻转</span>
-          </a>
-        
-      </div>
-      <div class="post-nav__next">
-        
-          <a href="/2026/06/23/plocr-chef-tech-stack/">
-            <span class="post-nav__label">下一篇 →</span>
-            <span class="post-nav__title">Plocr-chef 技术实现：Supabase + FLIP 动画 + Lottie + 液态玻璃 UI</span>
-          </a>
-        
-      </div>
-    </nav>
-
-    <!-- Giscus Comments -->
-    <div class="post-comments" id="post-comments">
-      <div class="giscus"
-        data-repo="Plocr/Plocr.github.io"
-        data-repo-id="R_kgDOJgG_Zg"
-        data-category="Announcements"
-        data-category-id="DIC_kwDOJgG_Zs4C8wYj"
-        data-mapping="pathname"
-        data-strict="0"
-        data-reactions-enabled="1"
-        data-emit-metadata="0"
-        data-input-position="bottom"
-        data-theme="https://www.plocr.online/css/giscus-light.css"
-        data-lang="zh-CN"
-        crossorigin="anonymous"
-        async>
-      </div>
-      <script src="https://giscus.app/client.js"
-        data-repo="Plocr/Plocr.github.io"
-        data-repo-id="R_kgDOJgG_Zg"
-        data-category="Announcements"
-        data-category-id="DIC_kwDOJgG_Zs4C8wYj"
-        data-mapping="pathname"
-        data-strict="0"
-        data-reactions-enabled="1"
-        data-emit-metadata="0"
-        data-input-position="bottom"
-        data-theme="https://www.plocr.online/css/giscus-light.css"
-        data-lang="zh-CN"
-        crossorigin="anonymous"
-        async>
-      </script>
-      <noscript>请启用 JavaScript 来查看评论。</noscript>
     </div>
   </div>
 </article>

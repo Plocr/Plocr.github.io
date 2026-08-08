@@ -53,31 +53,20 @@
   background: var(--accent-subtle);
 }
 
-/* Footer stats */
-.footer__stats {
-  display: flex;
-  gap: var(--space-5);
+/* Footer note (human sentence instead of stat chips) */
+.footer__note {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  line-height: 1.8;
+  color: var(--text-secondary);
+  max-width: 34ch;
+  margin-top: var(--space-3);
 }
 
-.footer-stat {
-  display: flex;
-  flex-direction: column;
-  gap: 1px;
-}
-
-.footer-stat__value {
+.footer__note strong {
   font-family: var(--font-display);
-  font-size: 1rem;
   font-weight: 700;
   color: var(--text-primary);
-}
-
-.footer-stat__label {
-  font-family: var(--font-display);
-  font-size: 0.65rem;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
 }
 
 /* Footer columns */

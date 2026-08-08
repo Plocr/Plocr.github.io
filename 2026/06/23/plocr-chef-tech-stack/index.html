@@ -7,6 +7,17 @@
   <meta name="description" content="Plocr的个人博客"/>
   <meta name="author" content="Plocr"/>
 
+  <!-- Open Graph (social share previews) -->
+  <meta property="og:site_name" content="Plocrの小窝"/>
+  <meta property="og:type" content="article"/>
+  <meta property="og:title" content="Plocr-chef 技术实现：Supabase + FLIP 动画 + Lottie + 液态玻璃 UI"/>
+  <meta property="og:description" content="Plocr的个人博客"/>
+  <meta property="og:url" content="https://www.plocr.online/2026/06/23/plocr-chef-tech-stack/"/>
+  <meta property="og:image" content="https://www.plocr.online/img/WZTB.png"/>
+  <meta name="twitter:card" content="summary"/>
+  <meta name="twitter:title" content="Plocr-chef 技术实现：Supabase + FLIP 动画 + Lottie + 液态玻璃 UI"/>
+  <meta name="twitter:description" content="Plocr的个人博客"/>
+
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,6 +27,7 @@
   <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cn-fontsource-xiaolai-mono-sc-regular/font.css"></noscript>
 
   <link rel="shortcut icon" href="/img/WZTB.png">
+  <link rel="alternate" type="application/atom+xml" title="Plocrの小窝" href="/atom.xml">
   <link rel="stylesheet" href="/css/claude.css"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 <meta name="generator" content="Hexo 8.1.1"></head>
@@ -138,7 +150,7 @@
         <time datetime="2026-06-23T16:00:00.000Z">2026-06-24</time>
         
           <span class="meta-sep">·</span>
-          <span>更新于 2026-08-05</span>
+          <span>更新于 2026-08-08</span>
         
         <span class="meta-sep">·</span>
         <span><i class="far fa-eye"></i> <span id="busuanzi_value_page_pv"></span> 阅读</span>
@@ -153,8 +165,9 @@
       </div>
     
 
-    <div class="post-article__body">
-      
+    <div class="post-article__layout">
+      <div class="post-article__body">
+        
 <div class="post-hero">
   <h2>上一篇写了流程，这篇写代码</h2>
   <p>Plocr-chef 是一个有 11 个页面的微信小程序，后端用 Supabase 免费计划，前端全是原生 WXML/WXSS/JS，没有用任何 UI 框架。这篇记录它的技术实现要点。</p>
@@ -291,6 +304,8 @@ wishlist  — id, dish_name, who, note, status</code></pre>
   <p>下一篇开始写另一个项目「碎片」——手绘草图到代码的设计之旅。</p>
 </div>
 
+      </div>
+      <nav class="post-toc" id="postToc" aria-label="文章目录" hidden></nav>
     </div>
 
     <nav class="post-article__nav">
@@ -368,19 +383,8 @@ wishlist  — id, dish_name, who, note, status</code></pre>
             
           
         </div>
-        <div class="footer__stats">
-          <div class="footer-stat">
-            <span class="footer-stat__value">9</span>
-            <span class="footer-stat__label">文章</span>
-          </div>
-          <div class="footer-stat">
-            <span class="footer-stat__value">2023</span>
-            <span class="footer-stat__label">始于</span>
-          </div>
-          <div class="footer-stat">
-            <span class="footer-stat__value">Plocr</span>
-            <span class="footer-stat__label">作者</span>
-          </div>
+        <div class="footer__note">
+          写了 <strong>9</strong> 篇，从 <strong>2023</strong> 年折腾到现在。这里没有算法推荐，只有我挑过的内容。
         </div>
       </div>
 
