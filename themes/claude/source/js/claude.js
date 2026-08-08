@@ -512,6 +512,16 @@
     const body = document.querySelector('.post-article__body');
     if (!toc || !body) return;
 
+    // Wrap bare tables so wide ones can scroll horizontally on small screens
+    body.querySelectorAll('table').forEach(function(tbl) {
+      if (!tbl.closest('.table-wrap')) {
+        const wrap = document.createElement('div');
+        wrap.className = 'table-wrap';
+        tbl.parentNode.insertBefore(wrap, tbl);
+        wrap.appendChild(tbl);
+      }
+    });
+
     const headings = body.querySelectorAll('h2, h3');
     if (headings.length < 2) return; // not worth a TOC
 

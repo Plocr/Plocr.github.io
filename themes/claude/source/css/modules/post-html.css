@@ -1,11 +1,82 @@
 /* ===== Post HTML Components ===== */
+/* ===== Tables (paper-like, Morandi palette) ===== */
+.post-article__body table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: var(--space-6) 0;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.post-article__body th,
+.post-article__body td {
+  padding: var(--space-3) var(--space-4);
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--border);
+}
+
+.post-article__body th {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.03em;
+  color: var(--text-primary);
+  background: var(--accent-subtle);
+  border-bottom: 1.5px solid var(--border);
+  white-space: nowrap;
+}
+
+.post-article__body tbody tr:last-child td,
+.post-article__body tr:last-child td {
+  border-bottom: none;
+}
+
+.post-article__body tbody tr:nth-child(even),
+.post-article__body tr:nth-child(even) {
+  background: rgba(0, 0, 0, 0.015);
+}
+
+[data-theme="dark"] .post-article__body tbody tr:nth-child(even),
+[data-theme="dark"] .post-article__body tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.post-article__body table code {
+  font-size: 0.8em;
+}
+
+/* Narrow screens: table scrolls horizontally instead of squishing */
+.post-article__body .table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: var(--space-6) 0;
+}
+
+.post-article__body .table-wrap table {
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .post-article__body table {
+    font-size: 0.8125rem;
+  }
+
+  .post-article__body th,
+  .post-article__body td {
+    padding: var(--space-2) var(--space-3);
+  }
+}
+
 .post-hero {
   background: var(--accent-subtle);
   border: 1.5px solid var(--border);
   border-radius: var(--radius);
   padding: var(--space-8) var(--space-6);
   margin-bottom: var(--space-8);
-  text-align: center;
 }
 
 .post-hero h2 {
@@ -16,8 +87,7 @@
 
 .post-hero p {
   color: var(--text-secondary);
-  max-width: 500px;
-  margin: 0 auto;
+  max-width: 600px;
   line-height: 1.7;
 }
 
@@ -36,7 +106,6 @@
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-2);
-  justify-content: center;
   margin-bottom: var(--space-4);
 }
 
