@@ -30,8 +30,11 @@
       </div>
     <% } %>
 
-    <div class="post-article__body">
-      <%- page.content %>
+    <div class="post-article__layout">
+      <div class="post-article__body">
+        <%- page.content %>
+      </div>
+      <nav class="post-toc" id="postToc" aria-label="文章目录" hidden></nav>
     </div>
 
     <nav class="post-article__nav">

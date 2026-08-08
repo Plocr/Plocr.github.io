@@ -84,6 +84,13 @@ ignore:
 # Extensions
 theme: claude
 
+# Feed (RSS)
+feed:
+  enable: true
+  type: atom
+  path: atom.xml
+  limit: 20
+
 # Sitemap
 sitemap:
   path: sitemap.xml

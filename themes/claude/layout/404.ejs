@@ -1,0 +1,37 @@
+<article class="page-article error-page">
+  <div class="container">
+    <div class="error-page__inner">
+      <!-- Hand-drawn lost cat -->
+      <svg viewBox="0 0 320 220" xmlns="http://www.w3.org/2000/svg" class="error-page__art" role="img" aria-label="一只迷路的小猫插画">
+        <defs>
+          <filter id="err-rough" x="-10%" y="-10%" width="120%" height="120%">
+            <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="4" result="noise"/>
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.5" xChannelSelector="R" yChannelSelector="G"/>
+          </filter>
+        </defs>
+        <ellipse cx="160" cy="196" rx="70" ry="14" fill="#6B5B4E" opacity="0.25" filter="url(#err-rough)"/>
+        <circle cx="160" cy="120" r="55" fill="none" stroke="#2C2C2C" stroke-width="2" filter="url(#err-rough)"/>
+        <polygon points="112,76 118,30 148,62" fill="none" stroke="#2C2C2C" stroke-width="2" stroke-linejoin="round" filter="url(#err-rough)"/>
+        <polygon points="208,76 202,30 172,62" fill="none" stroke="#2C2C2C" stroke-width="2" stroke-linejoin="round" filter="url(#err-rough)"/>
+        <circle cx="144" cy="114" r="4" fill="#2C2C2C" filter="url(#err-rough)"/>
+        <circle cx="176" cy="114" r="4" fill="#2C2C2C" filter="url(#err-rough)"/>
+        <path d="M156 128 Q160 134 164 128" fill="none" stroke="#2C2C2C" stroke-width="1.5" stroke-linecap="round" filter="url(#err-rough)"/>
+        <path d="M126 104 L112 100 M126 112 L110 110" stroke="#2C2C2C" stroke-width="1.2" stroke-linecap="round" filter="url(#err-rough)"/>
+        <path d="M194 104 L208 100 M194 112 L210 110" stroke="#2C2C2C" stroke-width="1.2" stroke-linecap="round" filter="url(#err-rough)"/>
+        <path d="M132 152 Q160 160 188 152" fill="none" stroke="#B0B8A8" stroke-width="1.5" stroke-linecap="round" filter="url(#err-rough)"/>
+        <path d="M160 175 Q168 190 160 205 Q152 190 160 175 Z" fill="#D97757" opacity="0.35" filter="url(#err-rough)"/>
+        <circle cx="48" cy="70" r="4" fill="#D97757" opacity="0.6" filter="url(#err-rough)"/>
+        <circle cx="272" cy="90" r="5" fill="#8D9A7F" opacity="0.5" filter="url(#err-rough)"/>
+        <path d="M20 210 Q100 202 160 208 Q240 214 300 206" fill="none" stroke="#B0B8A8" stroke-width="1.5" stroke-linecap="round" opacity="0.6" filter="url(#err-rough)"/>
+      </svg>
+
+      <p class="error-page__code">404</p>
+      <h1 class="error-page__title">这里什么都没有</h1>
+      <p class="error-page__desc">页面走丢了，可能被我删了，也可能从来不存在。就像我家那只假装迷路的猫。</p>
+      <div class="error-page__actions">
+        <a class="btn btn--primary" href="/">回到首页</a>
+        <a class="btn btn--outline" href="/archives/">看看文章</a>
+      </div>
+    </div>
+  </div>
+</article>

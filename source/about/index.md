@@ -36,7 +36,6 @@ updated: 2025-05-05
 
 ### API 与数据
 
-- **[一言 (Hitokoto)](https://hitokoto.cn/)** — 首页名言随机展示
 - **[TMDB](https://www.themoviedb.org/)** — 电影封面图源
 - **[jsDelivr](https://www.jsdelivr.com/)** — 开源 CDN 加速服务
 
