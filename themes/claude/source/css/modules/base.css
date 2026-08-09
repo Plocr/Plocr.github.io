@@ -82,7 +82,8 @@ body {
 .post-article__back,
 .post-article__nav {
   max-width: 720px;
-  margin: 0 auto;
+  margin-left: 0;
+  margin-right: auto;
 }
 
 /* Post body + TOC: two-column layout on wide screens */
