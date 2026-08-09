@@ -379,44 +379,38 @@
     `<svg viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg"><defs><filter id="cv18"><feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="3" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2" xChannelSelector="R" yChannelSelector="G"/></filter></defs><rect width="320" height="180" fill="${COLORS.sand}"/><polygon points="160,40 220,82 160,124 100,82" fill="none" stroke="${COLORS.charcoal}" stroke-width="2" stroke-linejoin="round" filter="url(#cv18)"/><line x1="160" y1="40" x2="160" y2="124" stroke="${COLORS.charcoal}" stroke-width="1" filter="url(#cv18)"/><line x1="100" y1="82" x2="220" y2="82" stroke="${COLORS.charcoal}" stroke-width="1" filter="url(#cv18)"/><path d="M160 124 Q168 150 158 172" fill="none" stroke="${COLORS.charcoal}" stroke-width="1.2" stroke-dasharray="4 3" filter="url(#cv18)"/><path d="M158 172 Q166 176 174 172" fill="none" stroke="${COLORS.clay}" stroke-width="2" stroke-linecap="round" filter="url(#cv18)"/><circle cx="255" cy="45" r="10" fill="${COLORS.sage}" opacity="0.5" filter="url(#cv18)"/><path d="M50 60 Q60 56 70 60" fill="none" stroke="${COLORS.stone}" stroke-width="1.3" stroke-linecap="round" filter="url(#cv18)"/></svg>`,
   ];
 
-  // Category → cover theme mapping. 分类优先,否则标题 hash 兜底。
-  // 每组内按文章数轮换,让同类文章封面不完全重复。
-  var CATEGORY_COVER_MAP = {
-    '项目日志': [5, 10, 0, 6, 16],   // code, globe, mountain, compass, sailboat
-    '工作流分享': [2, 7, 11, 12],    // coffee, palette, lightbulb, cat
-    '随笔': [4, 1, 3, 13, 14, 15],   // stars, book, plant, umbrella, moon, teapot
-    '影音推荐': [9, 8, 17]           // headphones, camera, kite
-  };
-
-  // Pick a deterministic cover: category-first, then title hash fallback
-  function getCoverForPost(title, tags, index) {
-    if (!title && tags === undefined && index === undefined) return null;
-    if (!title) return COVERS[index % COVERS.length];
-
-    // Category mapping (stable per post by hashing title into the group)
-    if (tags && tags.length) {
-      var cat = null;
-      for (var i = 0; i < tags.length; i++) {
-        if (CATEGORY_COVER_MAP[tags[i]]) { cat = tags[i]; break; }
-      }
-      if (cat) {
-        var group = CATEGORY_COVER_MAP[cat];
-        var h = 0;
-        for (var j = 0; j < title.length; j++) {
-          h = ((h << 5) - h) + title.charCodeAt(j);
-          h |= 0;
-        }
-        return COVERS[group[Math.abs(h) % group.length]];
-      }
+  // Deterministic shuffled cover assignment:
+  // 18 covers, shuffled once with a fixed seed, then dealt to posts in
+  // stable (date-desc) order — no repeats until all 18 are used.
+  // Rebuilds/refreshes never change a post's cover.
+  var COVER_ORDER = (function() {
+    var seed = 20260809;
+    function rnd() {
+      seed = (seed * 1103515245 + 12345) & 0x7fffffff;
+      return seed / 0x7fffffff;
     }
-
-    // Fallback: plain title hash
-    let hash = 0;
-    for (let i = 0; i < title.length; i++) {
-      hash = ((hash << 5) - hash) + title.charCodeAt(i);
-      hash |= 0;
+    var order = [];
+    for (var i = 0; i < COVERS.length; i++) order.push(i);
+    // Fisher–Yates with the fixed-seed PRNG
+    for (var i = order.length - 1; i > 0; i--) {
+      var j = Math.floor(rnd() * (i + 1));
+      var tmp = order[i]; order[i] = order[j]; order[j] = tmp;
     }
-    return COVERS[Math.abs(hash) % COVERS.length];
+    return order;
+  })();
+
+  // Pick a deterministic cover: stable index into the shuffled deck.
+  // Falls back to title-hash when no index is available.
+  function getCoverForPost(title, index) {
+    if (title && (index === undefined || index === null || isNaN(index))) {
+      let hash = 0;
+      for (let i = 0; i < title.length; i++) {
+        hash = ((hash << 5) - hash) + title.charCodeAt(i);
+        hash |= 0;
+      }
+      index = Math.abs(hash);
+    }
+    return COVERS[COVER_ORDER[((index || 0) % COVER_ORDER.length + COVER_ORDER.length) % COVER_ORDER.length]];
   }
 
   window.__claudeCovers = COVERS;
@@ -468,10 +462,8 @@
     const placeholders = document.querySelectorAll('.post-card__cover-placeholder');
     placeholders.forEach(function(el) {
       const title = el.getAttribute('data-title') || '';
-      const tagsAttr = el.getAttribute('data-tags') || '';
-      const tags = tagsAttr ? tagsAttr.split(',') : [];
-      const index = parseInt(el.getAttribute('data-index') || '0', 10);
-      const svg = getCoverForPost(title, tags, index);
+      const idx = parseInt(el.getAttribute('data-idx') || '0', 10);
+      const svg = getCoverForPost(title, idx);
       el.innerHTML = svg;
       // If it's hidden (image fallback mode), keep hidden until onerror triggers
       if (el.style.display === 'none') {

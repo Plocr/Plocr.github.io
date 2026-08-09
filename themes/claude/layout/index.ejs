@@ -48,7 +48,7 @@
     </div>
     <% if (site.posts && site.posts.length > 0) { %>
       <div class="posts-grid">
-        <% site.posts.sort('date', -1).each(function(post) { %>
+        <% site.posts.sort('date', -1).each(function(post, idx) { %>
           <article class="post-card" onclick="window.location='<%= url_for(post.path) %>'">
               <div class="post-card__thumb">
                 <%
@@ -61,9 +61,9 @@
                 %>
                 <% if (firstImg) { %>
                   <img src="<%= firstImg %>" alt="<%= post.title %>" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
-                  <div class="post-card__cover-placeholder" data-title="<%= post.title %>" data-tags="<%= post.tags ? post.tags.map(function(t){return t.name}).join(',') : '' %>" data-index="<%= post.__index || post._id || Math.floor(Math.random() * 1000) %>" style="display:none"></div>
+                  <div class="post-card__cover-placeholder" data-title="<%= post.title %>" data-idx="<%= idx %>" style="display:none"></div>
                 <% } else { %>
-                  <div class="post-card__cover-placeholder" data-title="<%= post.title %>" data-tags="<%= post.tags ? post.tags.map(function(t){return t.name}).join(',') : '' %>" data-index="<%= post.__index || post._id || Math.floor(Math.random() * 1000) %>"></div>
+                  <div class="post-card__cover-placeholder" data-title="<%= post.title %>" data-idx="<%= idx %>"></div>
                 <% } %>
               </div>
             <div class="post-card__body">
