@@ -82,8 +82,19 @@ body {
 .post-article__back,
 .post-article__nav {
   max-width: 720px;
-  margin-left: 0;
+  margin-left: auto;
   margin-right: auto;
+}
+
+/* Wide screens: align header with the body column (left edge of the 720px column inside the 1100px centered layout) */
+@media (min-width: 1025px) {
+  .post-article__header,
+  .post-article__tags,
+  .post-article__back,
+  .post-article__nav {
+    margin-left: max(0px, calc((100% - 1100px) / 2));
+    margin-right: auto;
+  }
 }
 
 /* Post body + TOC: two-column layout on wide screens */
