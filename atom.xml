@@ -10,7 +10,22 @@
   <rights>All rights reserved 2026, Plocr</rights>
   <subtitle>Plocr的个人博客</subtitle>
   <title>Plocrの小窝</title>
-  <updated>2026-08-08T12:44:25.814Z</updated>
+  <updated>2026-08-09T06:48:53.077Z</updated>
+  <entry>
+    <author>
+      <name>Plocr</name>
+    </author>
+    <category term="项目日志" scheme="https://www.plocr.online/tags/%E9%A1%B9%E7%9B%AE%E6%97%A5%E5%BF%97/"/>
+    <content>
+      <![CDATA[<div class="post-hero">  <h2>技术方案的关键词：极简</h2>  <p>「碎片」的架构可以概括为一句话：一个云函数 + 一个注册页面 + 一个边缘数据库 + 四个自定义组件。但这套极简架构背后，解决了不少实际问题。</p></div><blockquote>app.json 里只注册了一个页面 pages/home/home，另外两个视图（时间线、设置）全是 CSS Overlay。</blockquote><hr><h2>一、从多页到单页：消除白屏闪烁</h2><p>最初「碎片」和普通小程序一样，每个视图一个独立页面。但微信小程序的页面切换在 webview 模式下有白屏闪烁——哪怕用了动画过渡，切换时还是会闪一下。</p><p>解决方案：把所有视图放在一个页面里，用 CSS 控制显示隐藏。app.json 只注册一个页面：</p><pre><code>// app.json&#123;  "pages": ["pages/home/home"],  "renderer": "webview"&#125;</code></pre><p>时间线和设置面板是 CSS overlay 浮层，从右侧滑入：</p><pre><code>&lt;view class="overlay-mask" bind:tap="closeTimeline"&gt;&lt;/view&gt;&lt;view class="overlay-panel panel-slide-in" wx:if="&#123;&#123;showTimeline&#125;&#125;"&gt;  &lt;timeline-view&gt;&lt;/timeline-view&gt;&lt;/view&gt;</code></pre><p>CSS：</p><pre><code>.overlay-panel &#123;  position: fixed;  right: 0;  top: 0;  width: 85%;  height: 100vh;  z-index: 100;  transform: translateX(100%);  transition: transform 280ms ease-out;&#125;.panel-slide-in &#123; transform: translateX(0); &#125;</code></pre><div class="post-callout post-callout--warning">  <strong>🐛 坑：page-container 不能用</strong>  <p>微信小程序原生有个 page-container 组件专门做这种 overlay 效果，但它只在「客户端渲染」模式下生效。在 webview 模式下（为了用 Turso 等非微信云服务），page-container 完全不工作。纯 CSS overlay 是唯一解法。</p></div><hr><h2>二、Turso 边缘数据库 + 云函数代理</h2><p>数据库选的是 <strong>Turso</strong>——一个基于 libSQL（SQLite 的 fork）的边缘数据库。每个查询路由到离用户最近的只读副本，延迟很低。</p><p>但微信小程序不能直连 Turso（不支持 libSQL 的 HTTP2 协议），所以中间加了一层 <strong>腾讯云函数</strong> 做代理。</p><p>整个后端只有一个云函数 <code>tursoProxy/index.js</code>（357 行），负责所有操作：</p><table>  <tr><th>路由</th><th>功能</th></tr>  <tr><td><code>POST /auth/wechat</code></td><td>JWT 登录（HMAC-SHA256，30 天有效期）</td></tr>  <tr><td><code>GET /api/cards</code></td><td>获取所有卡片</td></tr>  <tr><td><code>PUT /api/cards</code></td><td>更新单张卡片</td></tr>  <tr><td><code>DELETE /api/cards</code></td><td>删除卡片</td></tr>  <tr><td><code>GET /api/records</code></td><td>获取时间线记录</td></tr>  <tr><td><code>POST /api/records</code></td><td>新建记录</td></tr>  <tr><td><code>POST /api/weight-history</code></td><td>新增体重记录</td></tr>  <tr><td><code>POST /api/wish-items/:cardId</code></td><td>新增愿望项</td></tr>  <tr><td><code>POST /api/user/sync</code></td><td>用户信息同步</td></tr>  <tr><td><code>POST /api/danger/delete-my-data</code></td><td>一键注销（含确认流程）</td></tr></table><p>云函数通过 <code>cloud.getWXContext()</code> 获取用户的 openid，零配置实现用户身份识别。</p><hr><h2>三、缓存优先策略</h2><p>为了让用户打开页面「秒看内容」，实现了双层缓存：</p><pre><code>读取: 内存 → wx.getStorageSync → 显示（立即）写入: 内存 + wx.setStorageSync（同时）网络: 后台静默拉取最新数据，更新缓存</code></pre><p>三个缓存桶：</p><ul>  <li><code>__fg_cache_cards__</code> — 卡片列表</li>  <li><code>__fg_cache_records__</code> — 时间线记录</li>  <li><code>__fg_cache_weight__</code> — 体重历史</li></ul><p>效果：即使手机刚开机第一次打开小程序，也是立即看到上次的数据，1-2 秒后如果网络数据更新了会自动替换。</p><hr><h2>四、JWT Token 失效自动恢复</h2><p>登录用 JWT（30 天有效期），但总有过期的时候。在 API 请求中，如果捕获到 Token 错误，自动调用 <code>auth.login()</code> 刷新 Token，然后重试失败的请求。调用方完全无感知。</p><p>这个机制在 <code>home.js</code> 的 <code>loadWeightHistory()</code> 中实现：</p><pre><code>if (err.code === 'TOKEN_EXPIRED') &#123;  await auth.login()  return await api.records() // 自动重试&#125;</code></pre><hr><h2>五、styleIsolation 陷阱</h2><p>自定义组件默认样式隔离（styleIsolation: isolated），但时间线组件需要继承全局的 <code>.paper-sheet</code>、<code>.chip-glass</code> 等样式类。解决方案是显式声明：</p><pre><code>&#123;  "component": true,  "styleIsolation": "apply-shared"&#125;</code></pre><p>这样组件既能使用全局样式，又能覆盖自己特有的样式。</p><hr><h2>六、数据库：5 张表 + 7 个索引</h2><p>Turso 上建了 5 张表：</p><ul>  <li><code>users</code> — 用户信息（openid 为 PK）</li>  <li><code>cards</code> — 卡片数据（type, title, content, colors, data JSON 等）</li>  <li><code>records</code> — 时间线记录（关联 card_id）</li>  <li><code>weight_history</code> — 体重历史（始终存 kg，前端显示时转换斤/公斤）</li>  <li><code>wish_items</code> — 愿望列表（关联 card_id，级联删除）</li></ul><hr><h2>七、免费方案总结</h2><table>  <tr><th>服务</th><th>方案</th><th>费用</th></tr>  <tr><td>数据库</td><td>Turso 免费计划（边缘 SQLite）</td><td>免费</td></tr>  <tr><td>后端</td><td>微信云函数（tursoProxy 代理）</td><td>免费额度内</td></tr>  <tr><td>前端</td><td>微信小程序（不上架）</td><td>免费</td></tr>  <tr><td>AI 编码</td><td>AI 对话生成代码</td><td>按量付费</td></tr></table><div class="post-ending">  <p>这个项目让我学到最多的是「架构取舍」——用一个云函数替代整个后端、用 CSS overlay 替代官方组件、用缓存优先替代实时数据。每一条都是因为真实遇到的问题才做的选择，不是为了炫技。</p>  <p>两个项目的 5 篇日志写完了，希望对想做 vibe coding 的人有一点参考价值。</p></div>]]>
+    </content>
+    <id>https://www.plocr.online/2026/06/23/fragments-architecture/</id>
+    <link href="https://www.plocr.online/2026/06/23/fragments-architecture/"/>
+    <published>2026-06-23T16:00:00.000Z</published>
+    <summary>如何用一个云函数、一个注册页面、一个边缘数据库搭建一个秒开的微信小程序。纯 CSS Overlay 替代 page-container、缓存优先策略、JWT 自动续期。</summary>
+    <title>「碎片」架构：单页 SPA + Turso 边缘数据库 + 云函数 + 缓存优先</title>
+    <updated>2026-08-09T06:48:53.077Z</updated>
+  </entry>
   <entry>
     <author>
       <name>Plocr</name>
@@ -24,7 +39,7 @@
     <published>2026-06-23T16:00:00.000Z</published>
     <summary>从莫奈的《睡莲》《日本桥》提取调色板，构建一套完整的玻璃态组件体系，再加上卡片堆叠位置算法和翻转机制。</summary>
     <title>「碎片」设计系统：莫奈色卡 × 玻璃态 × 卡片翻转</title>
-    <updated>2026-08-08T12:44:25.814Z</updated>
+    <updated>2026-08-09T06:48:53.077Z</updated>
   </entry>
   <entry>
     <author>
@@ -39,22 +54,7 @@
     <published>2026-06-23T16:00:00.000Z</published>
     <summary>纸笔画出首页布局 → 拍照给 AI → 生成 HTML 线稿 → 截屏反馈改代码 → 再截屏再改……一个完全由「看图说话」驱动的小程序开发过程。</summary>
     <title>从手绘草图到微信小程序：「碎片」的诞生记</title>
-    <updated>2026-08-08T12:44:25.814Z</updated>
-  </entry>
-  <entry>
-    <author>
-      <name>Plocr</name>
-    </author>
-    <category term="项目日志" scheme="https://www.plocr.online/tags/%E9%A1%B9%E7%9B%AE%E6%97%A5%E5%BF%97/"/>
-    <content>
-      <![CDATA[<div class="post-hero">  <h2>技术方案的关键词：极简</h2>  <p>「碎片」的架构可以概括为一句话：一个云函数 + 一个注册页面 + 一个边缘数据库 + 四个自定义组件。但这套极简架构背后，解决了不少实际问题。</p></div><blockquote>app.json 里只注册了一个页面 pages/home/home，另外两个视图（时间线、设置）全是 CSS Overlay。</blockquote><hr><h2>一、从多页到单页：消除白屏闪烁</h2><p>最初「碎片」和普通小程序一样，每个视图一个独立页面。但微信小程序的页面切换在 webview 模式下有白屏闪烁——哪怕用了动画过渡，切换时还是会闪一下。</p><p>解决方案：把所有视图放在一个页面里，用 CSS 控制显示隐藏。app.json 只注册一个页面：</p><pre><code>// app.json&#123;  "pages": ["pages/home/home"],  "renderer": "webview"&#125;</code></pre><p>时间线和设置面板是 CSS overlay 浮层，从右侧滑入：</p><pre><code>&lt;view class="overlay-mask" bind:tap="closeTimeline"&gt;&lt;/view&gt;&lt;view class="overlay-panel panel-slide-in" wx:if="&#123;&#123;showTimeline&#125;&#125;"&gt;  &lt;timeline-view&gt;&lt;/timeline-view&gt;&lt;/view&gt;</code></pre><p>CSS：</p><pre><code>.overlay-panel &#123;  position: fixed;  right: 0;  top: 0;  width: 85%;  height: 100vh;  z-index: 100;  transform: translateX(100%);  transition: transform 280ms ease-out;&#125;.panel-slide-in &#123; transform: translateX(0); &#125;</code></pre><div class="post-callout post-callout--warning">  <strong>🐛 坑：page-container 不能用</strong>  <p>微信小程序原生有个 page-container 组件专门做这种 overlay 效果，但它只在「客户端渲染」模式下生效。在 webview 模式下（为了用 Turso 等非微信云服务），page-container 完全不工作。纯 CSS overlay 是唯一解法。</p></div><hr><h2>二、Turso 边缘数据库 + 云函数代理</h2><p>数据库选的是 <strong>Turso</strong>——一个基于 libSQL（SQLite 的 fork）的边缘数据库。每个查询路由到离用户最近的只读副本，延迟很低。</p><p>但微信小程序不能直连 Turso（不支持 libSQL 的 HTTP2 协议），所以中间加了一层 <strong>腾讯云函数</strong> 做代理。</p><p>整个后端只有一个云函数 <code>tursoProxy/index.js</code>（357 行），负责所有操作：</p><table>  <tr><th>路由</th><th>功能</th></tr>  <tr><td><code>POST /auth/wechat</code></td><td>JWT 登录（HMAC-SHA256，30 天有效期）</td></tr>  <tr><td><code>GET /api/cards</code></td><td>获取所有卡片</td></tr>  <tr><td><code>PUT /api/cards</code></td><td>更新单张卡片</td></tr>  <tr><td><code>DELETE /api/cards</code></td><td>删除卡片</td></tr>  <tr><td><code>GET /api/records</code></td><td>获取时间线记录</td></tr>  <tr><td><code>POST /api/records</code></td><td>新建记录</td></tr>  <tr><td><code>POST /api/weight-history</code></td><td>新增体重记录</td></tr>  <tr><td><code>POST /api/wish-items/:cardId</code></td><td>新增愿望项</td></tr>  <tr><td><code>POST /api/user/sync</code></td><td>用户信息同步</td></tr>  <tr><td><code>POST /api/danger/delete-my-data</code></td><td>一键注销（含确认流程）</td></tr></table><p>云函数通过 <code>cloud.getWXContext()</code> 获取用户的 openid，零配置实现用户身份识别。</p><hr><h2>三、缓存优先策略</h2><p>为了让用户打开页面「秒看内容」，实现了双层缓存：</p><pre><code>读取: 内存 → wx.getStorageSync → 显示（立即）写入: 内存 + wx.setStorageSync（同时）网络: 后台静默拉取最新数据，更新缓存</code></pre><p>三个缓存桶：</p><ul>  <li><code>__fg_cache_cards__</code> — 卡片列表</li>  <li><code>__fg_cache_records__</code> — 时间线记录</li>  <li><code>__fg_cache_weight__</code> — 体重历史</li></ul><p>效果：即使手机刚开机第一次打开小程序，也是立即看到上次的数据，1-2 秒后如果网络数据更新了会自动替换。</p><hr><h2>四、JWT Token 失效自动恢复</h2><p>登录用 JWT（30 天有效期），但总有过期的时候。在 API 请求中，如果捕获到 Token 错误，自动调用 <code>auth.login()</code> 刷新 Token，然后重试失败的请求。调用方完全无感知。</p><p>这个机制在 <code>home.js</code> 的 <code>loadWeightHistory()</code> 中实现：</p><pre><code>if (err.code === 'TOKEN_EXPIRED') &#123;  await auth.login()  return await api.records() // 自动重试&#125;</code></pre><hr><h2>五、styleIsolation 陷阱</h2><p>自定义组件默认样式隔离（styleIsolation: isolated），但时间线组件需要继承全局的 <code>.paper-sheet</code>、<code>.chip-glass</code> 等样式类。解决方案是显式声明：</p><pre><code>&#123;  "component": true,  "styleIsolation": "apply-shared"&#125;</code></pre><p>这样组件既能使用全局样式，又能覆盖自己特有的样式。</p><hr><h2>六、数据库：5 张表 + 7 个索引</h2><p>Turso 上建了 5 张表：</p><ul>  <li><code>users</code> — 用户信息（openid 为 PK）</li>  <li><code>cards</code> — 卡片数据（type, title, content, colors, data JSON 等）</li>  <li><code>records</code> — 时间线记录（关联 card_id）</li>  <li><code>weight_history</code> — 体重历史（始终存 kg，前端显示时转换斤/公斤）</li>  <li><code>wish_items</code> — 愿望列表（关联 card_id，级联删除）</li></ul><hr><h2>七、免费方案总结</h2><table>  <tr><th>服务</th><th>方案</th><th>费用</th></tr>  <tr><td>数据库</td><td>Turso 免费计划（边缘 SQLite）</td><td>免费</td></tr>  <tr><td>后端</td><td>微信云函数（tursoProxy 代理）</td><td>免费额度内</td></tr>  <tr><td>前端</td><td>微信小程序（不上架）</td><td>免费</td></tr>  <tr><td>AI 编码</td><td>AI 对话生成代码</td><td>按量付费</td></tr></table><div class="post-ending">  <p>这个项目让我学到最多的是「架构取舍」——用一个云函数替代整个后端、用 CSS overlay 替代官方组件、用缓存优先替代实时数据。每一条都是因为真实遇到的问题才做的选择，不是为了炫技。</p>  <p>两个项目的 5 篇日志写完了，希望对想做 vibe coding 的人有一点参考价值。</p></div>]]>
-    </content>
-    <id>https://www.plocr.online/2026/06/23/fragments-architecture/</id>
-    <link href="https://www.plocr.online/2026/06/23/fragments-architecture/"/>
-    <published>2026-06-23T16:00:00.000Z</published>
-    <summary>如何用一个云函数、一个注册页面、一个边缘数据库搭建一个秒开的微信小程序。纯 CSS Overlay 替代 page-container、缓存优先策略、JWT 自动续期。</summary>
-    <title>「碎片」架构：单页 SPA + Turso 边缘数据库 + 云函数 + 缓存优先</title>
-    <updated>2026-08-08T12:44:25.814Z</updated>
+    <updated>2026-08-09T06:48:53.077Z</updated>
   </entry>
   <entry>
     <author>
@@ -69,7 +69,7 @@
     <published>2026-06-23T16:00:00.000Z</published>
     <summary>11 个页面的微信小程序，从 Supabase REST API 封装到纯前端 FLIP 动画，从 Lottie 状态反馈到 26+ CSS 变量的设计系统。</summary>
     <title>Plocr-chef 技术实现：Supabase + FLIP 动画 + Lottie + 液态玻璃 UI</title>
-    <updated>2026-08-08T12:44:25.814Z</updated>
+    <updated>2026-08-09T06:48:53.077Z</updated>
   </entry>
   <entry>
     <author>
@@ -84,7 +84,7 @@
     <published>2026-06-23T16:00:00.000Z</published>
     <summary>用 Figma 画设计图 → 导出 PDF → AI 生成文件树 → 手动建文件粘贴代码 → Claude Code + DeepSeek API 优化。一个完全由 AI 辅助「聊」出来的微信小程序。</summary>
     <title>从 Figma 到微信小程序：Plocr-chef 的 vibe coding 完整流程</title>
-    <updated>2026-08-08T12:44:25.814Z</updated>
+    <updated>2026-08-09T06:48:53.077Z</updated>
   </entry>
   <entry>
     <author>

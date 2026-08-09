@@ -35,6 +35,15 @@
   border-bottom: none;
 }
 
+[data-theme="dark"] .post-article__body th,
+[data-theme="dark"] .post-article__body td {
+  border-bottom-color: rgba(255, 255, 255, 0.12);
+}
+
+[data-theme="dark"] .post-article__body th {
+  border-bottom-color: rgba(255, 255, 255, 0.22);
+}
+
 .post-article__body tbody tr:nth-child(even),
 .post-article__body tr:nth-child(even) {
   background: rgba(0, 0, 0, 0.015);
