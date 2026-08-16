@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DSH Desktop | Plocrの小窝</title>
+  <meta name="description" content="DSH Desktop —— DeepSeek Harness 桌面工作台。Electron 原生壳 + 内嵌 harness 运行时，离线、免装 Node，Windows 与 macOS 一键下载。"/>
+  <meta name="author" content="Plocr"/>
+
+  <!-- Open Graph (social share previews) -->
+  <meta property="og:site_name" content="Plocrの小窝"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:title" content="DSH Desktop"/>
+  <meta property="og:description" content="DSH Desktop —— DeepSeek Harness 桌面工作台。Electron 原生壳 + 内嵌 harness 运行时，离线、免装 Node，Windows 与 macOS 一键下载。"/>
+  <meta property="og:url" content="https://www.plocr.online/harness/index.html"/>
+  <meta property="og:image" content="https://www.plocr.online/img/WZTB.png"/>
+  <meta name="twitter:card" content="summary"/>
+  <meta name="twitter:title" content="DSH Desktop"/>
+  <meta name="twitter:description" content="DSH Desktop —— DeepSeek Harness 桌面工作台。Electron 原生壳 + 内嵌 harness 运行时，离线、免装 Node，Windows 与 macOS 一键下载。"/>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Fantasque+Sans+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fantasque+Sans+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"></noscript>
+  <link rel="preload" href="/fonts/xiaolai-subset.woff2" as="font" type="font/woff2" crossorigin>
+  <noscript><link rel="stylesheet" href="/css/xiaolai.css"></noscript>
+  <link rel="stylesheet" href="/css/xiaolai.css">
+
+  <link rel="shortcut icon" href="/img/WZTB.png">
+  <link rel="alternate" type="application/atom+xml" title="Plocrの小窝" href="/atom.xml">
+  <link rel="stylesheet" href="/css/claude.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<meta name="generator" content="Hexo 8.1.1"></head>
+<body>
+
+<!-- Noise texture overlay -->
+<div class="noise-overlay"></div>
+<button class="back-top" id="backTop" aria-label="回到顶部">
+  <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+    <path d="M3 12L9 6L15 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+</button>
+
+<!-- Navigation -->
+<nav class="nav">
+  <div class="nav__inner">
+    <a class="nav__logo" href="/">
+      <span class="nav__logo-dot"></span>
+      Plocrの小窝
+    </a>
+    <div class="nav__links">
+      <a href="/" class="">首页</a>
+      <div class="nav__dropdown">
+        <a href="javascript:void(0)" class="nav__dropdown-trigger ">
+          文章
+          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" class="nav__dropdown-arrow"><path d="M2 3.5L5 6.5L8 3.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+        </a>
+        <div class="nav__dropdown-menu">
+          <a href="/archives/#项目日志">01 项目日志</a>
+          <a href="/archives/#工作流分享">02 工作流分享</a>
+          <a href="/archives/#随笔">03 说些乱七八糟的</a>
+          <a href="/archives/#影音推荐">04 影音推荐</a>
+          <a href="/archives/#时间轴">05 时间轴</a>
+        </div>
+      </div>
+      <div class="nav__dropdown">
+        <a href="javascript:void(0)" class="nav__dropdown-trigger">
+          发现
+          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" class="nav__dropdown-arrow"><path d="M2 3.5L5 6.5L8 3.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+        </a>
+        <div class="nav__dropdown-menu">
+          <a href="/ai/">AI 导航</a>
+          <a href="https://omnihub.plocr.online/" target="_blank" rel="noopener">工具聚合 ↗</a>
+        </div>
+      </div>
+      <a href="/harness/" class="active">DSH Desktop</a>
+      <a href="/about/" class="">关于</a>
+    </div>
+    <div class="nav__actions">
+      <button class="theme-toggle" id="themeToggle" aria-label="切换主题">
+        <svg class="sun-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <circle cx="8" cy="8" r="3.5" stroke="currentColor" stroke-width="1.3"/>
+          <path d="M8 1V3M8 13V15M1 8H3M13 8H15M3.05 3.05L4.46 4.46M11.54 11.54L12.95 12.95M12.95 3.05L11.54 4.46M4.46 11.54L3.05 12.95" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+        </svg>
+        <svg class="moon-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" style="display:none">
+          <path d="M13.5 9.5C12.5 12 9.5 13.5 6.5 12.5C3.5 11.5 2 8.5 3 5.5C3.5 4 4.5 3 5.5 2.5C3 3.5 1.5 6.5 2.5 9.5C3.5 12.5 6.5 14 9.5 13C11 12.5 12.5 11 13.5 9.5Z" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <button class="menu-toggle" id="menuToggle" aria-label="菜单">
+        <span class="menu-toggle__line"></span>
+        <span class="menu-toggle__line"></span>
+        <span class="menu-toggle__line"></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile Menu Drawer (outside nav for correct stacking) -->
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu__overlay"></div>
+  <div class="mobile-menu__panel">
+    <div class="mobile-menu__header">
+      <span class="nav__logo">
+        <span class="nav__logo-dot"></span>
+        Plocrの小窝
+      </span>
+      <button class="menu-close" id="menuClose" aria-label="关闭菜单">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+          <path d="M4 4L14 14M14 4L4 14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+    <div class="mobile-menu__body">
+      <a href="/" class="mobile-menu__link"><span class="mobile-menu__link-text">首页</span></a>
+      <a href="/archives/" class="mobile-menu__link"><span class="mobile-menu__link-text">文章</span></a>
+      <div class="mobile-menu__group-title" style="padding-left:var(--space-5);padding-bottom:var(--space-1);font-size:0.75rem;color:var(--text-muted);font-family:var(--font-display);text-transform:uppercase;letter-spacing:0.06em;">发现</div>
+      <a href="/ai/" class="mobile-menu__sublink2">AI 导航</a>
+      <a href="https://omnihub.plocr.online/" target="_blank" rel="noopener" class="mobile-menu__sublink2">工具聚合 ↗</a>
+      <a href="/harness/" class="mobile-menu__link"><span class="mobile-menu__link-text">DSH Desktop</span></a>
+      <a href="/about/" class="mobile-menu__link"><span class="mobile-menu__link-text">关于</span></a>
+    </div>
+    <div class="mobile-menu__footer">
+      <button class="theme-toggle mobile-theme-toggle" id="mobileThemeToggle" aria-label="切换主题">
+        <svg class="sun-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <circle cx="8" cy="8" r="3.5" stroke="currentColor" stroke-width="1.3"/>
+          <path d="M8 1V3M8 13V15M1 8H3M13 8H15M3.05 3.05L4.46 4.46M11.54 11.54L12.95 12.95M12.95 3.05L11.54 4.46M4.46 11.54L3.05 12.95" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+        </svg>
+        <svg class="moon-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" style="display:none">
+          <path d="M13.5 9.5C12.5 12 9.5 13.5 6.5 12.5C3.5 11.5 2 8.5 3 5.5C3.5 4 4.5 3 5.5 2.5C3 3.5 1.5 6.5 2.5 9.5C3.5 12.5 6.5 14 9.5 13C11 12.5 12.5 11 13.5 9.5Z" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>切换主题</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<main class="main">
+  <!-- ============================================================
+  DSH Desktop 页面（参考 deepseek.com/harness 的信息架构）
+  结构：Hero → 核心理念 → 三大能力卡 → 设计思路 → 功能特性 → 下载 → 开源生态
+============================================================ -->
+<section class="harness-page">
+
+  <!-- ========== Hero ========== -->
+  <div class="harness-hero">
+    <div class="container">
+      <div class="harness-hero__badge">DSH Desktop · 桌面工作台</div>
+      <h1 class="harness-hero__title">
+        桌面端的
+        <span class="harness-hero__accent">DeepSeek Harness</span>
+      </h1>
+      <p class="harness-hero__subtitle">Electron 原生壳 + 内嵌 harness 运行时。离线、免装 Node、免全局 dsh，双击即可开始。</p>
+      <p class="harness-hero__desc">
+        壳只保留桌面原生能力（窗口、托盘、全局快捷键、深链、自动更新），加载官方 Web UI；
+        与 harness 之间仅通过一个桥接插件通信——不注入 UI、不持有面板代码。
+      </p>
+
+      <div class="harness-hero__actions">
+        <a class="btn btn--primary" target="_blank" rel="noopener" href="https://github.com/Plocr/dsh-desktop/releases/download/v0.4.1/DSH.Desktop-0.4.1-setup.exe">
+          <i class="fa-brands fa-windows"></i> 下载 Windows 版
+        </a>
+        <a class="btn btn--primary" target="_blank" rel="noopener" href="https://github.com/Plocr/dsh-desktop/releases/download/v0.4.1/DSH.Desktop-0.4.1-arm64.dmg">
+          <i class="fa-brands fa-apple"></i> 下载 macOS 版
+        </a>
+      </div>
+
+      <div class="harness-hero__links">
+        <a href="https://github.com/Plocr/dsh-desktop" target="_blank" rel="noopener">查看 GitHub</a>
+        <a href="https://github.com/Plocr/dsh-desktop/releases" target="_blank" rel="noopener">全部版本</a>
+        <a href="https://github.com/deepseek-ai/deepseek-harness" target="_blank" rel="noopener">DeepSeek Harness</a>
+      </div>
+
+      <div class="harness-hero__meta">
+        <span>v0.4.1</span>
+        <span>自包含安装包</span>
+        <span>无需 Node.js</span>
+        <span>MIT 开源</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== 核心理念 ========== -->
+  <div class="harness-statement">
+    <div class="container container--narrow">
+      <h2 class="harness-statement__title">Agent = Model + Harness</h2>
+      <p class="harness-statement__lead">DSH Desktop = Shell + Harness</p>
+      <p class="harness-statement__body">
+        模型是 Agent 的灵魂，Harness 给予 Agent 理解环境、使用工具、在真实场景中持续工作的能力。
+        DSH Desktop 把这些能力装进一个桌面壳里：本地启动 harness 运行时，加载官方 Web UI，
+        再补上全局快捷键、托盘、深链这些「桌面才有的」体验。
+      </p>
+    </div>
+  </div>
+
+  <!-- ========== 三大能力卡 ========== -->
+  <div class="harness-cards">
+    <div class="container">
+      <div class="harness-cards__grid">
+        <div class="harness-card">
+          <div class="harness-card__label">NATIVE SHELL</div>
+          <h3 class="harness-card__title">原生桌面能力</h3>
+          <p class="harness-card__desc">窗口、托盘、系统通知、任务栏徽标、开机自启。壳只负责桌面原生部分，不持有任何 UI 代码。</p>
+        </div>
+        <div class="harness-card">
+          <div class="harness-card__label">EMBEDDED RUNTIME</div>
+          <h3 class="harness-card__title">内嵌 harness 运行时</h3>
+          <p class="harness-card__desc">安装包内置便携 Node 与 dsh 运行时，首次启动自动解压并创建 desktop profile，离线即可使用。</p>
+        </div>
+        <div class="harness-card">
+          <div class="harness-card__label">BRIDGE PLUGIN</div>
+          <h3 class="harness-card__title">桥接插件通信</h3>
+          <p class="harness-card__desc">壳与 harness 之间仅通过 dsh-desktop-bridge 插件通信：后台任务与审批事件转成系统通知与徽标。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== 设计思路 ========== -->
+  <div class="harness-philosophy">
+    <div class="container">
+      <h2 class="harness-section__title">设计思路：能力各归其位，体验无缝衔接</h2>
+      <div class="harness-philosophy__grid">
+        <div class="harness-philosophy__col">
+          <h3>壳 + Harness</h3>
+          <p>
+            壳以 <code>dsh --profile desktop --patch &lt;overlay&gt; --port 0</code> 拉起运行时并加载官方 Web UI（会话、工作区、插件、设置），
+            端口自动分配，无冲突。专用的 desktop profile 位于 <code>$DSH_HOME/profiles/desktop</code>，与 Web / CLI 共享同一份 <code>~/.dsh</code> 数据。
+          </p>
+        </div>
+        <div class="harness-philosophy__col">
+          <h3>每一次唤出都有迹可循</h3>
+          <p>
+            任意界面按 <code>Ctrl+Shift+Space</code> 全局唤出/隐藏窗口；点击 <code>dsh://</code> 深链可直接聚焦、新建会话或打开指定会话。
+            关闭窗口默认最小化到托盘，右键托盘可切换工作区、重启 Harness、查看日志、检查更新。
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== 功能特性 ========== -->
+  <div class="harness-features">
+    <div class="container">
+      <h2 class="harness-section__title">开箱即用的桌面体验</h2>
+      <div class="harness-features__grid">
+        <div class="harness-feature">
+          <div class="harness-feature__icon">🪟</div>
+          <h3>原生窗口</h3>
+          <p>加载官方 Web UI，<code>--port 0</code> 自动分配端口，无端口冲突。</p>
+        </div>
+        <div class="harness-feature">
+          <div class="harness-feature__icon">⌨️</div>
+          <h3>全局快捷键</h3>
+          <p>默认 <code>Ctrl+Shift+Space</code>，任意界面一键唤出。</p>
+        </div>
+        <div class="harness-feature">
+          <div class="harness-feature__icon">🔗</div>
+          <h3>深链唤起</h3>
+          <p><code>dsh://</code> 聚焦、<code>dsh://new</code> 新建、<code>dsh://session/&lt;id&gt;</code> 打开会话。</p>
+        </div>
+        <div class="harness-feature">
+          <div class="harness-feature__icon">🗂️</div>
+          <h3>托盘常驻</h3>
+          <p>关闭即最小化，托盘右键管理工作区、日志与更新。</p>
+        </div>
+        <div class="harness-feature">
+          <div class="harness-feature__icon">⬆️</div>
+          <h3>自动更新</h3>
+          <p>内置自动更新，新版本静默下载、重启生效。</p>
+        </div>
+        <div class="harness-feature">
+          <div class="harness-feature__icon">🛡️</div>
+          <h3>崩溃自愈</h3>
+          <p>运行时异常自动拉起，托盘常驻不打扰。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== 下载 ========== -->
+  <div class="harness-download">
+    <div class="container">
+      <h2 class="harness-section__title">下载 DSH Desktop</h2>
+      <p class="harness-download__desc">
+        选择你的平台。安装包自包含：内置便携 Node 与 dsh 运行时，无需预先安装 Node.js 或全局 dsh。
+        首次启动会自动解压内置运行时（约 40 秒，二次启动免解压）。
+      </p>
+
+      <div class="harness-download__grid">
+        <!-- Windows -->
+        <div class="harness-download-card">
+          <div class="harness-download-card__head">
+            <span class="harness-download-card__icon"><i class="fa-brands fa-windows"></i></span>
+            <div>
+              <h3>Windows</h3>
+              <span class="harness-download-card__ver">NSIS 安装包 · x64</span>
+            </div>
+          </div>
+          <p class="harness-download-card__file">DSH.Desktop-0.4.1-setup.exe</p>
+          <p class="harness-download-card__size">≈ 190 MB</p>
+          <a class="btn btn--primary" target="_blank" rel="noopener" href="https://github.com/Plocr/dsh-desktop/releases/download/v0.4.1/DSH.Desktop-0.4.1-setup.exe">
+            <i class="fa-solid fa-download"></i> 下载
+          </a>
+        </div>
+
+        <!-- macOS Apple Silicon -->
+        <div class="harness-download-card">
+          <div class="harness-download-card__head">
+            <span class="harness-download-card__icon"><i class="fa-brands fa-apple"></i></span>
+            <div>
+              <h3>macOS · Apple Silicon</h3>
+              <span class="harness-download-card__ver">dmg · arm64</span>
+            </div>
+          </div>
+          <p class="harness-download-card__file">DSH.Desktop-0.4.1-arm64.dmg</p>
+          <p class="harness-download-card__size">≈ 223 MB</p>
+          <a class="btn btn--primary" target="_blank" rel="noopener" href="https://github.com/Plocr/dsh-desktop/releases/download/v0.4.1/DSH.Desktop-0.4.1-arm64.dmg">
+            <i class="fa-solid fa-download"></i> 下载
+          </a>
+        </div>
+
+        <!-- macOS Intel -->
+        <div class="harness-download-card">
+          <div class="harness-download-card__head">
+            <span class="harness-download-card__icon"><i class="fa-brands fa-apple"></i></span>
+            <div>
+              <h3>macOS · Intel</h3>
+              <span class="harness-download-card__ver">dmg · x64</span>
+            </div>
+          </div>
+          <p class="harness-download-card__file">DSH.Desktop-0.4.1-x64.dmg</p>
+          <p class="harness-download-card__size">≈ 225 MB</p>
+          <a class="btn btn--primary" target="_blank" rel="noopener" href="https://github.com/Plocr/dsh-desktop/releases/download/v0.4.1/DSH.Desktop-0.4.1-x64.dmg">
+            <i class="fa-solid fa-download"></i> 下载
+          </a>
+        </div>
+      </div>
+
+      <p class="harness-download__more">
+        <a href="https://github.com/Plocr/dsh-desktop/releases" target="_blank" rel="noopener">查看所有版本与更新日志 ↗</a>
+      </p>
+    </div>
+  </div>
+
+  <!-- ========== 开源生态 ========== -->
+  <div class="harness-ecosystem">
+    <div class="container container--narrow">
+      <h2 class="harness-ecosystem__title">开源 · MIT</h2>
+      <p class="harness-ecosystem__desc">
+        DSH Desktop 基于 <a href="https://github.com/deepseek-ai/deepseek-harness" target="_blank" rel="noopener">DeepSeek Harness</a> 构建，代码完全开源。
+        欢迎提出 Issue、贡献代码，或者 Fork 一份做出你自己的桌面工作台。
+      </p>
+      <div class="harness-ecosystem__links">
+        <a class="btn btn--outline" href="https://github.com/Plocr/dsh-desktop" target="_blank" rel="noopener">
+          <i class="fa-brands fa-github"></i> GitHub 仓库
+        </a>
+        <a class="btn btn--outline" href="https://github.com/Plocr/dsh-desktop/releases" target="_blank" rel="noopener">
+          <i class="fa-solid fa-tag"></i> Releases
+        </a>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__inner">
+      <!-- 01: Brand + Stats -->
+      <div class="footer__col footer__col--brand">
+        <div class="footer__logo">
+          <span class="nav__logo-dot"></span> Plocrの小窝
+        </div>
+        <p class="footer__desc">个人博客，记录技术与生活的点滴</p>
+        <div class="footer__social">
+          
+            
+              <a href="https://github.com/Plocr" target="_blank" rel="noopener">GitHub</a>
+            
+          
+        </div>
+        <div class="footer__note">
+          写了 <strong>9</strong> 篇，从 <strong>2023</strong> 年折腾到现在。这里没有算法推荐，只有我挑过的内容。
+        </div>
+      </div>
+
+      <!-- 02: Navigation -->
+      <div class="footer__col footer__col--nav">
+        <h4 class="footer__col-title">导航</h4>
+        
+          
+            <a href="/" class="footer__link">首页</a>
+          
+            <a href="/archives/" class="footer__link">文章</a>
+          
+            <a href="/ai/" class="footer__link">AI</a>
+          
+            <a href="/about/" class="footer__link">关于</a>
+          
+        
+      </div>
+
+      <!-- 03: Info -->
+      <div class="footer__col footer__col--info">
+        <h4 class="footer__col-title">信息</h4>
+        <a href="/archives/" class="footer__link">归档（9）</a>
+      </div>
+    </div>
+    <div class="footer__copyright">
+      &copy; 2020 - 2026 By Plocr
+    </div>
+  </div>
+</footer>
+
+<script src="/js/claude.js"></script>
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</body>
+</html>
