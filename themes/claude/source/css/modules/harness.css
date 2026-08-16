@@ -1,0 +1,442 @@
+/* ============================================================
+   DSH Desktop 页面样式（参考 deepseek.com/harness 信息架构）
+   ============================================================ */
+
+.harness-page {
+  padding-bottom: var(--space-16);
+}
+
+/* ===== Hero ===== */
+.harness-hero {
+  padding: var(--space-16) 0 var(--space-12);
+  text-align: center;
+  position: relative;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.harness-hero__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--accent);
+  background: var(--accent-subtle);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: var(--space-1) var(--space-4);
+  margin-bottom: var(--space-6);
+}
+
+.harness-hero__title {
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin-bottom: var(--space-5);
+}
+
+.harness-hero__accent {
+  color: var(--accent);
+}
+
+.harness-hero__subtitle {
+  font-size: 1.05rem;
+  color: var(--text-primary);
+  max-width: 640px;
+  margin: 0 auto var(--space-3);
+  line-height: 1.7;
+}
+
+.harness-hero__desc {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  max-width: 560px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+.harness-hero__actions {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-3);
+  margin-top: var(--space-8);
+  flex-wrap: wrap;
+}
+
+.harness-hero__actions .btn {
+  min-width: 200px;
+  justify-content: center;
+}
+
+.harness-hero__links {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-5);
+  margin-top: var(--space-5);
+  flex-wrap: wrap;
+}
+
+.harness-hero__links a {
+  font-family: var(--font-ui);
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+  padding: var(--space-1) var(--space-2);
+  border-bottom: 1px dashed var(--border);
+  transition: all var(--transition);
+}
+
+.harness-hero__links a:hover {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+.harness-hero__meta {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-4);
+  margin-top: var(--space-8);
+  flex-wrap: wrap;
+}
+
+.harness-hero__meta span {
+  font-family: var(--font-code);
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 2px var(--space-3);
+}
+
+/* ===== Statement（核心理念） ===== */
+.harness-statement {
+  padding: var(--space-16) 0;
+  text-align: center;
+}
+
+.harness-statement__title {
+  font-size: 1.6rem;
+  margin-bottom: var(--space-3);
+}
+
+.harness-statement__lead {
+  font-family: var(--font-code);
+  font-size: 1rem;
+  color: var(--accent);
+  margin-bottom: var(--space-6);
+}
+
+.harness-statement__body {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+/* ===== Capability cards（三大能力卡） ===== */
+.harness-cards {
+  padding: var(--space-8) 0 var(--space-16);
+}
+
+.harness-cards__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-5);
+}
+
+.harness-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-8);
+  transition: all var(--transition-slow);
+  position: relative;
+}
+
+.harness-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--accent);
+}
+
+.harness-card__label {
+  font-family: var(--font-code);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: var(--space-4);
+}
+
+.harness-card__title {
+  font-size: 1.15rem;
+  margin-bottom: var(--space-3);
+}
+
+.harness-card__desc {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+/* ===== Philosophy（设计思路） ===== */
+.harness-philosophy {
+  padding: var(--space-12) 0 var(--space-16);
+}
+
+.harness-section__title {
+  font-size: clamp(1.4rem, 3vw, 1.9rem);
+  text-align: center;
+  margin-bottom: var(--space-10);
+}
+
+.harness-philosophy__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-8);
+}
+
+.harness-philosophy__col {
+  border-top: 2px solid var(--accent);
+  padding-top: var(--space-5);
+}
+
+.harness-philosophy__col h3 {
+  font-size: 1.05rem;
+  margin-bottom: var(--space-3);
+}
+
+.harness-philosophy__col p {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+
+/* ===== Features（功能特性） ===== */
+.harness-features {
+  padding: var(--space-12) 0 var(--space-16);
+}
+
+.harness-features__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-4);
+}
+
+.harness-feature {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: var(--space-6);
+  transition: all var(--transition-slow);
+}
+
+.harness-feature:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--accent);
+}
+
+.harness-feature__icon {
+  font-size: 1.5rem;
+  margin-bottom: var(--space-3);
+}
+
+.harness-feature h3 {
+  font-size: 0.95rem;
+  margin-bottom: var(--space-2);
+}
+
+.harness-feature p {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+/* ===== Download（下载区） ===== */
+.harness-download {
+  padding: var(--space-12) 0 var(--space-16);
+}
+
+.harness-download__desc {
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  max-width: 620px;
+  margin: 0 auto var(--space-10);
+  line-height: 1.7;
+}
+
+.harness-download__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-5);
+}
+
+.harness-download-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  transition: all var(--transition-slow);
+}
+
+.harness-download-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--accent);
+}
+
+.harness-download-card__head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.harness-download-card__icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius);
+  background: var(--accent-subtle);
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  flex-shrink: 0;
+}
+
+.harness-download-card__head h3 {
+  font-size: 1.05rem;
+}
+
+.harness-download-card__ver {
+  font-family: var(--font-code);
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+.harness-download-card__file {
+  font-family: var(--font-code);
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  background: var(--border-light);
+  border-radius: var(--radius-sm);
+  padding: var(--space-2) var(--space-3);
+  word-break: break-all;
+}
+
+.harness-download-card__size {
+  font-family: var(--font-code);
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+.harness-download-card .btn {
+  margin-top: auto;
+  justify-content: center;
+}
+
+.harness-download__more {
+  text-align: center;
+  margin-top: var(--space-8);
+}
+
+.harness-download__more a {
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.harness-download__more a:hover {
+  color: var(--accent);
+}
+
+/* ===== Ecosystem（开源生态） ===== */
+.harness-ecosystem {
+  padding: var(--space-12) 0;
+  text-align: center;
+  border-top: 1px solid var(--border-light);
+}
+
+.harness-ecosystem__title {
+  font-size: 1.3rem;
+  margin-bottom: var(--space-4);
+}
+
+.harness-ecosystem__desc {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  max-width: 560px;
+  margin: 0 auto var(--space-8);
+  line-height: 1.8;
+}
+
+.harness-ecosystem__links {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 900px) {
+  .harness-cards__grid,
+  .harness-features__grid,
+  .harness-download__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .harness-philosophy__grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+}
+
+@media (max-width: 768px) {
+  .harness-hero {
+    padding: var(--space-12) 0 var(--space-10);
+  }
+
+  .harness-hero__title {
+    font-size: clamp(1.7rem, 6vw, 2.4rem);
+  }
+
+  .harness-hero__actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .harness-hero__actions .btn {
+    width: 100%;
+  }
+
+  .harness-hero__links {
+    gap: var(--space-3);
+  }
+
+  .harness-cards__grid,
+  .harness-features__grid,
+  .harness-download__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .harness-card {
+    padding: var(--space-6);
+  }
+
+  .harness-statement {
+    padding: var(--space-12) 0;
+  }
+
+  .harness-section__title {
+    margin-bottom: var(--space-8);
+  }
+}
